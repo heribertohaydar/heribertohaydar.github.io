@@ -1,1 +1,135 @@
-Hello World! mkd is comming up
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">  
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="style.css" />
+  <title>MDK</title>
+  <script src="https://code.jquery.com/jquery-2.2.3.min.js"></script>
+  <script src="https://mdkv10-85fe.restdb.io/rest/_jsapi.js"></script>
+  <script src="https://mdkv10-85fe.restdb.io/assets/js/eventsource.min.js"></script>
+  <script src="https://www.youtube.com/iframe_api"></script>
+  <script src="mdk.js"></script>
+</head>
+
+<body>
+  <div class="menu">
+    <ul class="menu-wrap">
+      <li class="fa fa-wrench item1"><i>home</i></li>
+      <li class="fa fa-code item2"><i>live</i></li>
+      <li class="fa fa-line-chart  item4"><i>trending</i></li>
+      <li class="fa fa-pencil item5"><i>events</i></li>
+      <li class="fa fa-lightbulb-o item6"><i>suggestions</i></li>
+      <li class="fa fa-stack-overflow item3"><i>staff</i></li>
+      <li class="fa fa-question item7"><i>help</i></li>
+      <li class="item9">
+        <i class="twitter">
+          <a href="https://twitter.com/hhaydar">
+            <svg version="1.1" id="Twitter" xmlns="http://www.w3.org/2000/svg"
+              xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 128 128"
+              enable-background="new 0 0 128 128" xml:space="preserve">
+              <g>
+                <circle id="twitter-back" fill="#55ACEE" cx="64" cy="64" r="64" />
+                <path id="twitter-twitter" fill="#FFFFFF" d="M99.8398,41.7695c-2.6367,1.17-5.4707,1.96-8.4462,2.3155
+                            c3.0351-1.8204,5.3681-4.7022,6.4658-8.1363c-2.8408,1.6851-5.9883,2.9097-9.3379,3.5689
+                            c-2.6826-2.8584-6.5049-4.6436-10.7344-4.6436c-8.123,0-14.7065,6.584-14.7065,14.7051c0,1.1533,0.1303,2.2754,0.3808,3.3516
+                            c-12.2221-0.6133-23.0581-6.4678-30.311-15.3648c-1.2661,2.1714-1.9912,4.6978-1.9912,7.3931c0,5.1015,2.5962,9.6025,6.542,12.2397
+                            c-2.4107-0.0757-4.6783-0.7378-6.6607-1.8393c-0.0014,0.0615-0.0014,0.123-0.0014,0.1855c0,7.125,5.0693,13.0684,11.7968,14.4199
+                            c-1.2343,0.336-2.5337,0.5157-3.8745,0.5157c-0.9477,0-1.8691-0.0928-2.7671-0.2637c1.8716,5.8418,7.3023,10.0937,13.7378,10.2119
+                            c-5.0332,3.9453-11.374,6.2959-18.2646,6.2959c-1.187,0-2.357-0.0693-3.5073-0.2051c6.5083,4.1729,14.2377,6.6065,22.5429,6.6065
+                            c27.0498,0,41.8418-22.4082,41.8418-41.8418c0-0.6377-0.0146-1.2715-0.0429-1.9024C95.375,47.3086,97.8691,44.7188,99.8398,41.7695
+                            z" />
+              </g>
+            </svg>
+          </a>
+        </i>
+      </li>
+    </ul>
+  </div>
+  <div class="sections">
+    <section class="firstSection">
+      <li><i>latest added songs</i></li>
+
+      <div class="article">
+        <p class="title">Omega, Eto eh Pa' baila</p>
+        <p class="posted">Added by: <i>Someone</i></p>
+        <!-- <p class="score">Modaka Score: 17</p> -->
+        <a href="#">Play</a>
+      </div>
+
+      <div class="article ar2">
+        <p class="title">Jimmy Sabater, Cuero na'ma</p>
+        <p class="posted">Added by: <i>Someone</i></p>
+        <!-- <p class="score">Modaka Score: 17</p> -->
+        <a href="#">Play</a>
+      </div>
+
+      <div class="article ar3">
+        <p class="title">Paul Simon, I know what I know</p>
+        <p class="posted">Added by: <i>Someone</i></p>
+        <!-- <p class="score">Modaka Score: 17</p> -->
+        <a href="#">Play</a>
+      </div>
+
+    </section>
+
+    <section class="secondSection">
+        <li><i>playlist</i></li>
+        <ul class="links">
+            <div id="video-placeholder"></div>
+        </ul>
+        <div class="time">
+            <label>Paste youtube's link here: 
+                <input id="urlSong" type="url">
+                <button id="addSong" onclick="addNewSong()">Add new song to playlist</button>
+            </label>
+                <p class="purple">
+                <i class="fa fa-bell"></i> This is not a commercial site, it's just for fun with music and friends.
+            </p>
+            <p class="orange">
+                <i class="fa fa-times-circle"></i> Mondak estero la emisora que te pega.
+            </p>
+        </div>
+    </section>
+
+    <section class="thirdSection">
+      <li><i>NEW RELEASES</i></li>
+      <p class="gitlab">continuous music deployment</p>
+      <p class="subTitle">
+        <i class="st">SOLO</i> <i class="nd"> AQUÍ EN MONDAK</i>
+      </p>
+      <div class="repos">
+        <div class="repo">
+          <div class="repoTitle">Song: slipknot/spit&out</div>
+          <div class="issue">Comment #120</div>
+          <p class="issueDetail">
+            Muy fuerte, pa'l domingo.
+          </p>
+        </div>
+        <div class="repo">
+          <p class="repoTitle">Song: Daniel Diaz/Avisale a mi contrario</p>
+          <p class="issue">Comment #21</p>
+          <p class="issueDetail">
+            Pa'comenza a prepar el almuerzo
+          </p>
+        </div>
+      </div>
+      <div class="ads">
+        <div class="cont">
+          <!--<img src="img/ads.jpg" alt="ads image" />-->
+          <p>Bug #1: some videos are unavailable, need to be watched on youtube.</p>
+        </div>
+        <p class="comment">last release: 20210501.V0.90</p>
+        <p class="comment">next realse date: Jun.06.2021</p>
+      </div>
+    </section>
+  </div>
+
+  <script src="index.js"></script>
+</body>
+
+</html>
