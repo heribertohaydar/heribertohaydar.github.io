@@ -21,10 +21,54 @@ function getRandomInt(max) {
     return Math.floor(Math.random() * max);
 }
 
-function onYouTubeIframeAPIReady() {
 
+function loadLatestAddedSongs() {
+    var hints = {"$max": 5, "$orderby": {"_id": -1}};
+    db.playlist.find({}, hints, function(err, res){
+        if (!err){
+            for (const r of res) {
+                let element = document.getElementById('latestAddedSongSection');
+                let div = document.createElement('div');
+                let pTitle = document.createElement('p');
+                let pPosted = document.createElement('p');
+                let i = document.createElement('i');
+                let br = document.createElement('br');
+                let nodeTitle = document.createTextNode(r.dateAdded.substring(0,10));
+                let nodePosted = document.createTextNode("Added by: ");
+                let iText = document.createTextNode(r.uploader);
+                let aText = document.createTextNode("Play");
+
+                let ahref = document.createElement('a');
+                ahref.href="javascript:playLatestAddedSong('" + r.idYoutubeVideo + "');"
+                ahref.appendChild(aText);
+
+                i.appendChild(iText);
+
+                div.classList.add('article');
+
+
+                pTitle.classList.add('title');
+                pPosted.classList.add('posted');
+
+                pTitle.appendChild(nodeTitle);
+                pPosted.appendChild(nodePosted);
+                pPosted.appendChild(i);
+
+
+                div.appendChild(br);
+                div.appendChild(pTitle);
+                div.appendChild(pPosted);
+                div.appendChild(ahref);
+                element.appendChild(div);
+
+            }
+        }});
+}
+
+function onYouTubeIframeAPIReady() {
     db.playlist.find(query, hints, function(err, res){
     if (!err){
+        res.sort(() => Math.random() - 0.5);
         listVideos = JSON.stringify(res.map(e => e.idYoutubeVideo)).replace("[","").replace("]","").replace(/\"/g, "");
         initialVideo = res[getRandomInt(res.length)]['idYoutubeVideo'];
         player = new YT.Player('video-placeholder', {
@@ -32,17 +76,20 @@ function onYouTubeIframeAPIReady() {
         height: 400,
         videoId: initialVideo,
         playerVars: {
-            color: 'white',
             controls: 1,
-            autoplay: 1,
+            showinfo: 1,
+            playlist: listVideos,
+            enablejsapi: 1,
             loop: 1,
             modestbranding: 1,
-            theme: "light",
-            showinfo: 0,
-            playlist: listVideos
+            origin: "127.0.0.1"
         },
         });
     }});
+}
+
+function pad2(n) {
+    return (n < 10 ? '0' : '') + n;
 }
 
 function validVideoId(id) {
@@ -54,7 +101,14 @@ function validVideoId(id) {
             console.log("The following video doesn't exist on Youtube database. " + id);
         } else {
             console.log("The following video exists on Youtube database. " + id);
-            var jsondata = {"idYoutubeVideo": id};
+            var uploader_text = $('#uploader').val();
+            if (uploader_text == "") uploader_text="Not defined."
+            var date = new Date();
+            var month = pad2(date.getMonth()+1);//months (0-11)
+            var day = pad2(date.getDate());//day (1-31)
+            var year= date.getFullYear();
+            var formattedDate =  day+"/"+month+"/"+year;
+            var jsondata = {"idYoutubeVideo": id, "uploader": uploader_text, "dateAdded": formattedDate};
             var settings = {
             "async": true,
             "crossDomain": true,
@@ -88,7 +142,11 @@ function reloadNewSong(id) {
     db.playlist.find({}, {}, function(err, res){
     if (!err){
         t=res[0];
-        res[0]=res[res.length-1];
+        f=res[res.length-1];
+        //res[0]=res[res.length-1];
+        //res[res.length-1]=t;
+        res.sort(() => Math.random() - 0.5);
+        res[0]=f;
         res[res.length-1]=t;
         listVideos = JSON.stringify(res.map(e => e.idYoutubeVideo)).replace("[","").replace("]","").replace(/\"/g, "");
         player.loadVideoById(id);
@@ -97,6 +155,27 @@ function reloadNewSong(id) {
     }});
 
 }
+
+function reloadPlayList()  {
+    db.playlist.find({}, {}, function(err, res){
+        if (!err){
+            res.sort(() => Math.random() - 0.5);
+            listVideos = JSON.stringify(res.map(e => e.idYoutubeVideo)).replace("[","").replace("]","").replace(/\"/g, "");
+            player.cuePlaylist(listVideos);
+            console.log("Playlist was reload succesfully.");
+        }});
+}
+
+function playLatestAddedSong(id) {
+    //player.cueVideoById(id);
+     //player.cuePlaylist()
+    //player.cueVideoById(video_id);
+    id=id;
+    player.loadVideoById(id);
+    //player.cuePlaylist(listVideos);
+    console.log("Play this video. " + id);
+}
+
 
 function addNewSong() {
 

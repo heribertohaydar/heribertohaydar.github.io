@@ -51,29 +51,13 @@
     </ul>
   </div>
   <div class="sections">
-    <section class="firstSection">
+    <section id="latestAddedSongSection" class="firstSection">
       <li><i>latest added songs</i></li>
 
-      <div class="article">
-        <p class="title">Omega, Eto eh Pa' baila</p>
-        <p class="posted">Added by: <i>Someone</i></p>
-        <!-- <p class="score">Modaka Score: 17</p> -->
-        <a href="#">Play</a>
-      </div>
+      <script>
+        loadLatestAddedSongs();
+      </script>  
 
-      <div class="article ar2">
-        <p class="title">Jimmy Sabater, Cuero na'ma</p>
-        <p class="posted">Added by: <i>Someone</i></p>
-        <!-- <p class="score">Modaka Score: 17</p> -->
-        <a href="#">Play</a>
-      </div>
-
-      <div class="article ar3">
-        <p class="title">Paul Simon, I know what I know</p>
-        <p class="posted">Added by: <i>Someone</i></p>
-        <!-- <p class="score">Modaka Score: 17</p> -->
-        <a href="#">Play</a>
-      </div>
 
     </section>
 
@@ -85,14 +69,19 @@
         <div class="time">
             <label>Paste youtube's link here: 
                 <input id="urlSong" type="url">
-                <button id="addSong" onclick="addNewSong()">Add new song to playlist</button>
-            </label>
+                <label>uploader:<input id="uploader" type="text"></label>
+                <br>
+                <a href="javascript:addNewSong();" style="color: orangered">Add New Song </a>
+                <a href="javascript:reloadPlayList();" style="color: yellowgreen">Reload Playlist</a>
+              </label>
                 <p class="purple">
                 <i class="fa fa-bell"></i> This is not a commercial site, it's just for fun with music and friends.
             </p>
-            <p class="orange">
-                <i class="fa fa-times-circle"></i> Mondak estero la emisora que te pega.
-            </p>
+            <!--
+              <p class="orange">
+                  <i class="fa fa-times-circle"></i> Mondak estero la emisora que te pega.
+              </p>
+            -->
         </div>
     </section>
 
@@ -123,13 +112,15 @@
           <!--<img src="img/ads.jpg" alt="ads image" />-->
           <p>Bug #1: some videos are unavailable, need to be watched on youtube.</p>
         </div>
-        <p class="comment">last release: 20210501.V0.90</p>
-        <p class="comment">next realse date: Jun.06.2021</p>
+        <p class="comment">last release: 20210512.V0.95</p>
+        <p class="comment">next release date: May.26.2021</p>
       </div>
     </section>
   </div>
 
-  <script src="index.js"></script>
+  <!--
+    <script src="index.js"></script>
+  -->
 </body>
 
 </html>

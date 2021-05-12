@@ -17,8 +17,8 @@ function clockTick() {
     let dateString = date.toDateString().slice(4);
     dateString = dateString.slice(0, 6) + ',' + dateString.slice(6);
     //dateClass.innerHTML = `${hours}:${minutes}  <i class="ampm" style="font-size:40px; margin-left:-70px">${ampm}</i>`;
-    dateClass.innerHTML = `You've been enjoying mondak ${Difference_In_Time.toFixed(0)} min.`;
-    dateStringClass.innerHTML = `${dateString}`;
+    //dateClass.innerHTML = `You've been enjoying mondak ${Difference_In_Time.toFixed(0)} min.`;
+    //dateStringClass.innerHTML = `${dateString}`;
 
 }
 setInterval(clockTick, 1000);
@@ -33,4 +33,4 @@ function hideText() {
     purple.forEach(item => item.style.display = "none");
     localStorage.setItem("seen", true);
 }
-orange.addEventListener('click', hideText);
+//orange.addEventListener('click', hideText);
