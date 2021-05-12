@@ -161,7 +161,7 @@ i {
   margin-left: 12px;
   position: absolute;
   bottom: 100px;
-  background: url(img/grayLogo.png) no-repeat;
+  background: url(img/clock.png) no-repeat;
   background-position: center;
 
   transition: all 0.2s cubic-bezier(0.42, 0, 0.09, 2.2);
@@ -169,7 +169,7 @@ i {
 }
 
 .menu .logo:hover.item8 {
-  background: url(img/yellowLogo.png) no-repeat;
+  background: url(img/clock.png) no-repeat;
 
   background-position: center;
 }
@@ -196,7 +196,7 @@ i {
 }
 
 .menu .reddit {
-  background: url(img/redLogo.png);
+  background: url(img/clock.png);
   width: 25px;
   height: 26px;
   background-size: cover;
