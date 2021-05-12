@@ -16,6 +16,7 @@ var query = {}; // get all records
 var hints = {}; // top ten, sort by creation id in descending order
 var listVideos;
 var initialVideo;
+var dataSpotify;
 
 function getRandomInt(max) {
     return Math.floor(Math.random() * max);
@@ -81,11 +82,67 @@ function onYouTubeIframeAPIReady() {
             playlist: listVideos,
             enablejsapi: 1,
             loop: 1,
-            modestbranding: 1,
-            origin: "127.0.0.1"
+            modestbranding: 1
         },
         });
     }});
+}
+
+function getNewReleasesFromSpotify() {
+    var url = "https://api.spotify.com/v1/browse/new-releases?country=CO&limit=5&offset=5";
+
+    var req = new XMLHttpRequest();
+    req.open("GET", url);
+    
+    req.setRequestHeader("Accept", "application/json");
+    req.setRequestHeader("Content-Type", "application/json");
+    req.setRequestHeader("Authorization", "Bearer BQBBjy5rD6If5EoCk6EA1SA-ZKx1VC01VdxFtjtUeTmvm2WsviwpGLDs2N0cexzrq9cn7xOfwJg9oKF1oSNjAwxVlXRO8z4XtTNXd_iIwIhruAS9p7E0KD5P_WIp7Zgbec9RNnQs9HDHEmgDrlQE8Th0R6KXucE");
+
+    req.send();
+
+    req.onload=function(){
+        dataSpotify=JSON.parse(req.responseText);
+        for (const album of dataSpotify.albums.items) {
+            buildSopotifyElements(album.name, 
+                album.artists[0].name, 
+                album.release_date, 
+                album.artists[0].external_urls.spotify)
+        }
+    };
+}
+
+function buildSopotifyElements(song, artist, date, link) {
+
+    let element = document.getElementById('newSpotifyReleases');
+    let divSong = document.createElement('div');
+    let divArtist = document.createElement('div');
+    let divDate = document.createElement('div');
+    let a = document.createElement('a');
+    let aText = document.createTextNode("Listen to Spotify");
+    let divSongText = document.createTextNode(song);
+    let divArtistText = document.createTextNode(artist);
+    let divDateText = document.createTextNode("Release on: " + date);
+    let br = document.createElement('br');
+
+    a.href=link;
+    a.appendChild(aText);
+    
+    divSong.classList.add('repo');
+    divSong.appendChild(divSongText);
+    
+    divArtist.classList.add('repoTitle');
+    divArtist.appendChild(divArtistText);
+    
+    divDate.classList.add('issue');
+    divDate.appendChild(divDateText);
+    
+    divSong.appendChild(divArtist);
+    divSong.appendChild(divDate);
+    divDate.appendChild(br);
+    divDate.appendChild(a);
+    
+    element.appendChild(divSong);
+
 }
 
 function pad2(n) {

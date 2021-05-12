@@ -53,12 +53,29 @@
   <div class="sections">
     <section id="latestAddedSongSection" class="firstSection">
       <li><i>latest added songs</i></li>
-
       <script>
         loadLatestAddedSongs();
       </script>  
-
-
+      <!--
+            <div class="article">
+              <p class="title">Dread Mar I, Así fue</p>
+              <p class="posted">Added by: <i>hhaydar</i></p>
+              <p class="score">Modaka Score: 17</p>
+              <a href="#">Play</a>
+            </div>
+            <div class="article ar2">
+              <p class="title">Jimmy Sabater, Cuero na'ma</p>
+              <p class="posted">Added by: <i>Someone</i></p>
+              <p class="score">Modaka Score: 17</p>
+              <a href="#">Play</a>
+            </div>
+            <div class="article ar3">
+              <p class="title">Paul Simon, I know what I know</p>
+              <p class="posted">Added by: <i>Someone</i></p>
+              <p class="score">Modaka Score: 17</p>
+              <a href="#">Play</a>
+            </div>
+      -->
     </section>
 
     <section class="secondSection">
@@ -91,8 +108,12 @@
       <p class="subTitle">
         <i class="st">SOLO</i> <i class="nd"> AQUÍ EN MONDAK</i>
       </p>
-      <div class="repos">
-        <div class="repo">
+      <div class="repos" id="newSpotifyReleases">
+        <script>
+          getNewReleasesFromSpotify();
+        </script>  
+         <!--
+       <div class="repo">
           <div class="repoTitle">Song: slipknot/spit&out</div>
           <div class="issue">Comment #120</div>
           <p class="issueDetail">
@@ -106,6 +127,7 @@
             Pa'comenza a prepar el almuerzo
           </p>
         </div>
+        -->
       </div>
       <div class="ads">
         <div class="cont">
