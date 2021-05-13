@@ -232,7 +232,6 @@ function reloadNewSong(id) {
             let element = document.getElementById('latestAddedSongSection');
             removeAllChildNodes(element);
             loadLatestAddedSongs();
-
         }
     });
 
@@ -245,6 +244,9 @@ function reloadPlayList() {
             listVideos = JSON.stringify(res.map(e => e.idYoutubeVideo)).replace("[", "").replace("]", "").replace(/\"/g, "");
             player.cuePlaylist(listVideos);
             sendMessage("Playlist reloaded successfuly.");
+            let element = document.getElementById('latestAddedSongSection');
+            removeAllChildNodes(element);
+            loadLatestAddedSongs();
         }
     });
 }
