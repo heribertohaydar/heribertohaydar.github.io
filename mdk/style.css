@@ -257,7 +257,7 @@ i {
 }
 
 .firstSection .article {
-  border-left: 3px solid #44475a;
+  border-left: 0px solid #44475a;
   top: 100px;
   position: relative;
   cursor: pointer;
@@ -642,11 +642,13 @@ i {
   position: relative;
   top: 500px;
   font-size: 12px;
-  line-height: 20px;
+  line-height: 30px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   text-align: center;
+  
+ 
 }
 
 .dynamic-time {

@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-  <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">  
+  <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta http-equiv="X-UA-Compatible" content="ie=edge" />
@@ -51,11 +51,12 @@
     </ul>
   </div>
   <div class="sections">
-    <section id="latestAddedSongSection" class="firstSection">
+    <section class="firstSection">
       <li><i>latest added songs</i></li>
       <script>
         loadLatestAddedSongs();
-      </script>  
+      </script>
+      <div id="latestAddedSongSection">
       <!--
             <div class="article">
               <p class="title">Dread Mar I, Así fue</p>
@@ -76,30 +77,26 @@
               <a href="#">Play</a>
             </div>
       -->
+    </div>
     </section>
 
     <section class="secondSection">
-        <li><i>playlist</i></li>
-        <ul class="links">
-            <div id="video-placeholder"></div>
-        </ul>
-        <div class="time">
-            <label>Paste youtube's link here: 
-                <input id="urlSong" type="url">
-                <label>uploader:<input id="uploader" type="text"></label>
-                <br>
-                <a href="javascript:addNewSong();" style="color: orangered">Add New Song </a>
-                <a href="javascript:reloadPlayList();" style="color: yellowgreen">Reload Playlist</a>
-              </label>
-                <p class="purple">
-                <i class="fa fa-bell"></i> This is not a commercial site, it's just for fun with music and friends.
-            </p>
-            <!--
-              <p class="orange">
-                  <i class="fa fa-times-circle"></i> Mondak estero la emisora que te pega.
-              </p>
-            -->
-        </div>
+      <li><i>playlist</i></li>
+      <ul class="links">
+        <div id="video-placeholder"></div>
+      </ul>
+      <div class="time">
+        <label>Paste youtube's link here:
+          <input id="urlSong" type="url">
+          <label>uploader:<input id="uploader" type="text"></label>
+          <br>
+          <a href="javascript:addNewSong();" style="color: orangered">Add New Song </a>
+          <a href="javascript:reloadPlayList();" style="color: yellowgreen">Reload Playlist</a>
+        </label>
+        <p id="MKD.message" class="orange" hidden>
+          <i class=""></i>
+        </p>
+</div>
     </section>
 
     <section class="thirdSection">
@@ -111,8 +108,8 @@
       <div class="repos" id="newSpotifyReleases">
         <script>
           getNewReleasesFromSpotify();
-        </script>  
-         <!--
+        </script>
+        <!--
        <div class="repo">
           <div class="repoTitle">Song: slipknot/spit&out</div>
           <div class="issue">Comment #120</div>
