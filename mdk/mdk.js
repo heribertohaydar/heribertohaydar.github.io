@@ -23,7 +23,7 @@ function getRandomInt(max) {
 }
 
 
-function loadLatestAddedSongs() {
+async function loadLatestAddedSongs() {
     var hints = {"$max": 5, "$orderby": {"_id": -1}};
     db.playlist.find({}, hints, function(err, res){
         if (!err){
@@ -89,17 +89,31 @@ function onYouTubeIframeAPIReady() {
 }
 
 function getNewReleasesFromSpotify() {
-    var url = "https://api.spotify.com/v1/browse/new-releases?country=CO&limit=5&offset=5";
+    var url = "https://accounts.spotify.com/api/token";
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", url);
+    xhr.setRequestHeader("Authorization", "Basic OWRiYmEwNmE1ZDFmNDU2Mjk2MWNhNjEyYjVkMjRjN2E6YTk4Yjg5YTc1ZDI4NGE4NWJkOGM4ODA3ZTI5MTg4MmI=");
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    var data = "grant_type=client_credentials";
+    xhr.send(data);
+    var tokenSpotify;
+    xhr.onload=function(){
+        tokenSpotify="Bearer " + JSON.parse(xhr.responseText).access_token;
+        console.log("Token Spotify: " + tokenSpotify);
+        getAuthorizedListSpotify(tokenSpotify);
+        };
+    
+}
 
+
+function getAuthorizedListSpotify(token) {
+    var url = "https://api.spotify.com/v1/browse/new-releases?country=CO&limit=7&offset=5";
     var req = new XMLHttpRequest();
     req.open("GET", url);
-    
     req.setRequestHeader("Accept", "application/json");
     req.setRequestHeader("Content-Type", "application/json");
-    req.setRequestHeader("Authorization", "Bearer BQBBjy5rD6If5EoCk6EA1SA-ZKx1VC01VdxFtjtUeTmvm2WsviwpGLDs2N0cexzrq9cn7xOfwJg9oKF1oSNjAwxVlXRO8z4XtTNXd_iIwIhruAS9p7E0KD5P_WIp7Zgbec9RNnQs9HDHEmgDrlQE8Th0R6KXucE");
-
+    req.setRequestHeader("Authorization", token);
     req.send();
-
     req.onload=function(){
         dataSpotify=JSON.parse(req.responseText);
         for (const album of dataSpotify.albums.items) {
@@ -118,22 +132,23 @@ function buildSopotifyElements(song, artist, date, link) {
     let divArtist = document.createElement('div');
     let divDate = document.createElement('div');
     let a = document.createElement('a');
-    let aText = document.createTextNode("Listen to Spotify");
+    let aText = document.createTextNode("Listen");
     let divSongText = document.createTextNode(song);
     let divArtistText = document.createTextNode(artist);
     let divDateText = document.createTextNode("Release on: " + date);
     let br = document.createElement('br');
 
     a.href=link;
+    a.style="color: pink"
     a.appendChild(aText);
     
-    divSong.classList.add('repo');
+    divSong.classList.add('ads');
     divSong.appendChild(divSongText);
     
     divArtist.classList.add('repoTitle');
     divArtist.appendChild(divArtistText);
     
-    divDate.classList.add('issue');
+    divDate.classList.add('issueDetail');
     divDate.appendChild(divDateText);
     
     divSong.appendChild(divArtist);

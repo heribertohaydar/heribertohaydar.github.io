@@ -387,7 +387,7 @@ i {
   height: 400px;
   position: absolute;
   top: 90px;
-  border-bottom: 1px solid #44475a;
+  /*border-bottom: 1px solid #44475a;*/
 }
 
 .secondSection .links li {
@@ -507,10 +507,11 @@ i {
   /*   background-color: pink; */
   margin-left: 20px;
   position: relative;
-  height: 400px;
+  height: 500px;
   width: inherit;
-  border-bottom: 1px solid #44475a;
+  /*border-bottom: 1px solid #44475a;*/
 }
+
 
 .thirdSection .repo {
   /* background-color: gray; */
@@ -527,23 +528,23 @@ i {
 }
 
 .thirdSection .repo:nth-of-type(1) {
-  top: 10px;
+  top: 5px;
 }
 
 .thirdSection .repo:nth-of-type(2) {
-  top: 150px;
+  top: 70px;
 }
 
 .thirdSection .repo:nth-of-type(3) {
-  top: 290px;
+  top: 130px;
 }
 
 .thirdSection .repoTitle,
 .issue,
 .issueDetail {
   margin-left: 10px;
-  margin-bottom: 10px;
-  font-size: 14px;
+  margin-bottom: 0px;
+  font-size: 12px;
   margin-right: 20px;
 }
 
@@ -562,10 +563,10 @@ i {
 .ads {
   position: relative;
   cursor: pointer;
-  top: 145px;
-  width: 260px;
+  top: 0px;
+  width: 270px;
   height: 15%;
-  border-left: 3px solid #44475a;
+  border-left: 0px solid #44475a;
   transition: all 0.3s ease-in-out;
   font-size: 14px;
 }
