@@ -139,6 +139,7 @@ function buildSopotifyElements(song, artist, date, link) {
     let br = document.createElement('br');
 
     a.href=link;
+    a.target="_blank";
     a.style="color: pink"
     a.appendChild(aText);
     
