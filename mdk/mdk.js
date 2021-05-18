@@ -38,25 +38,21 @@ function loadLatestAddedSongs() {
         let pPosted = document.createElement("p");
         let i = document.createElement("i");
         let br = document.createElement("br");
-        let nodeTitle = document.createTextNode(r.dateAdded.substring(0, 10));
-        let nodePosted = document.createTextNode("Added by: ");
-        let iText = document.createTextNode(r.uploader);
-        let aText = document.createTextNode("Play");
-
         let ahref = document.createElement("a");
+
         ahref.href =
           "javascript:playLatestAddedSong('" + r.idYoutubeVideo + "');";
-        ahref.appendChild(aText);
+        ahref.innerText="Play";
 
-        i.appendChild(iText);
+        i.innerText=r.uploader;
 
         div.classList.add("article");
 
         pTitle.classList.add("title");
         pPosted.classList.add("posted");
 
-        pTitle.appendChild(nodeTitle);
-        pPosted.appendChild(nodePosted);
+        pTitle.innerText=r.dateAdded.substring(0, 10);
+        pPosted.innerText="Added by: ";
         pPosted.appendChild(i);
 
         div.appendChild(br);
@@ -141,7 +137,6 @@ function buildSopotifyElements(song, artist, date, link) {
   let divArtist = document.createElement("div");
   let divDate = document.createElement("div");
   let a = document.createElement("a");
-  let aText = document.createTextNode("Listen");
   let divSongText = document.createTextNode(song);
   let divArtistText = document.createTextNode(artist);
   let divDateText = document.createTextNode("Release on: " + date);
@@ -150,7 +145,7 @@ function buildSopotifyElements(song, artist, date, link) {
   a.href = link;
   a.target = "_blank";
   a.style = "color: pink";
-  a.appendChild(aText);
+  a.innerText="Listen"
 
   divSong.classList.add("ads");
   divSong.appendChild(divSongText);
@@ -176,7 +171,6 @@ function pad2(n) {
 function validVideoId(id) {
   var img = new Image();
   img.src = "http://img.youtube.com/vi/" + id + "/0.jpg";
-  id = id; // I don't get it how this works!!!! but when copy id value .. inner function works
   img.onload = function () {
     if (this.width < 320) {
       sendMessage(
@@ -222,7 +216,6 @@ function reloadNewSong(id) {
   //player.cueVideoById(id);
   //player.cuePlaylist()
   //player.cueVideoById(video_id);
-  id = id;
   db.playlist.find({}, {}, function (err, res) {
     if (!err) {
       t = res[0];
