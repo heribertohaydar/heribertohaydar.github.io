@@ -1,8 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Inconsolata&display=swap');
-
-
-
-
+@import url("https://fonts.googleapis.com/css?family=Inconsolata&display=swap");
 
 * {
   padding: 0;
@@ -17,7 +13,7 @@
   --main-purple-color: #bd93f9;
   --main-white-color: #f8f8f2;
   --main-yellow-color: #e6db74;
-  --main-font-family: 'Inconsolata', monospace;
+  --main-font-family: "Inconsolata", monospace;
   --main-opacPurple-color: #6272a4;
 }
 
@@ -65,7 +61,7 @@ li {
 
 i {
   font-style: normal;
-  font-family: 'Inconsolata', monospace;
+  font-family: "Inconsolata", monospace;
   font-weight: 100;
 }
 
@@ -512,7 +508,6 @@ i {
   /*border-bottom: 1px solid #44475a;*/
 }
 
-
 .thirdSection .repo {
   /* background-color: gray; */
   height: max-content;
@@ -647,8 +642,6 @@ i {
   flex-direction: column;
   justify-content: center;
   text-align: center;
-  
- 
 }
 
 .dynamic-time {
