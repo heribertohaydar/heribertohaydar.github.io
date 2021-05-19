@@ -3,19 +3,19 @@
  * Functions to manage youtube music
  */
 
-var player;
-var options = {
+let player;
+let options = {
   url: "",
   logging: false,
   realtime: false,
   jwt: false,
 };
-var db = new restdb("6091adf3f2fc22523a42c81f", options);
-var query = {}; // get all records
-var hints = {}; // top ten, sort by creation id in descending order
-var listVideos;
-var initialVideo;
-var dataSpotify;
+let db = new restdb("6091adf3f2fc22523a42c81f", options);
+let query = {}; // get all records
+let hints = {}; // top ten, sort by creation id in descending order
+let listVideos;
+let initialVideo;
+let dataSpotify;
 
 function getRandomInt(max) {
   return Math.floor(Math.random() * max);
@@ -28,7 +28,7 @@ function removeAllChildNodes(parent) {
 }
 
 function loadLatestAddedSongs() {
-  var hints = { $max: 7, $orderby: { _id: -1 } };
+  let hints = { $max: 7, $orderby: { _id: -1 } };
   db.playlist.find({}, hints, function (err, res) {
     if (!err) {
       for (const r of res) {
@@ -92,17 +92,17 @@ function onYouTubeIframeAPIReady() {
 }
 
 function getNewReleasesFromSpotify() {
-  var url = "https://accounts.spotify.com/api/token";
-  var xhr = new XMLHttpRequest();
+  let url = "https://accounts.spotify.com/api/token";
+  let xhr = new XMLHttpRequest();
   xhr.open("POST", url);
   xhr.setRequestHeader(
     "Authorization",
     "Basic OWRiYmEwNmE1ZDFmNDU2Mjk2MWNhNjEyYjVkMjRjN2E6YTk4Yjg5YTc1ZDI4NGE4NWJkOGM4ODA3ZTI5MTg4MmI="
   );
   xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-  var data = "grant_type=client_credentials";
+  let data = "grant_type=client_credentials";
   xhr.send(data);
-  var tokenSpotify;
+  let tokenSpotify;
   xhr.onload = function () {
     tokenSpotify = "Bearer " + JSON.parse(xhr.responseText).access_token;
     getAuthorizedListSpotify(tokenSpotify);
@@ -110,9 +110,9 @@ function getNewReleasesFromSpotify() {
 }
 
 function getAuthorizedListSpotify(token) {
-  var url =
+  let url =
     "https://api.spotify.com/v1/browse/new-releases?country=CO&limit=7&offset=5";
-  var req = new XMLHttpRequest();
+  let req = new XMLHttpRequest();
   req.open("GET", url);
   req.setRequestHeader("Accept", "application/json");
   req.setRequestHeader("Content-Type", "application/json");
@@ -169,7 +169,7 @@ function pad2(n) {
 }
 
 function validVideoId(id) {
-  var img = new Image();
+  let img = new Image();
   img.src = "http://img.youtube.com/vi/" + id + "/0.jpg";
   img.onload = function () {
     if (this.width < 320) {
@@ -177,19 +177,19 @@ function validVideoId(id) {
         "The song pasted doesn't exist on youtube database, please verify your url."
       );
     } else {
-      var uploader_text = $("#uploader").val();
+      let uploader_text = $("#uploader").val();
       if (uploader_text == "") uploader_text = "mdk.";
-      var date = new Date();
-      var month = pad2(date.getMonth() + 1); //months (0-11)
-      var day = pad2(date.getDate()); //day (1-31)
-      var year = date.getFullYear();
-      var formattedDate = day + "/" + month + "/" + year;
-      var jsondata = {
+      let date = new Date();
+      let month = pad2(date.getMonth() + 1); //months (0-11)
+      let day = pad2(date.getDate()); //day (1-31)
+      let year = date.getFullYear();
+      let formattedDate = day + "/" + month + "/" + year;
+      let jsondata = {
         idYoutubeVideo: id,
         uploader: uploader_text,
         dateAdded: formattedDate,
       };
-      var settings = {
+      let settings = {
         async: true,
         crossDomain: true,
         url: "https://mdkv10-85fe.restdb.io/rest/playlist",
@@ -272,16 +272,16 @@ function playLatestAddedSong(id) {
 
 function addNewSong() {
   sendMessage("Adding new song to MDK playlist, please wait.");
-  var url = $("#urlSong").val();
+  let url = $("#urlSong").val();
   $("#urlSong").val("");
-  var video_id = url.split("v=")[1];
+  let video_id = url.split("v=")[1];
   if (video_id == null) {
     video_id = url.split(".be/")[1];
   }
   if (video_id == null) {
     return;
   }
-  var ampersandPosition = video_id.indexOf("&");
+  let ampersandPosition = video_id.indexOf("&");
   if (ampersandPosition != -1) {
     video_id = video_id.substring(0, ampersandPosition);
   }
