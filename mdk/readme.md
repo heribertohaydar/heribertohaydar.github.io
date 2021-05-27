@@ -1,1 +1,1 @@
-# Repo for mondak
+# Repo for mdk radiostation
