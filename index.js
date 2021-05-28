@@ -15,7 +15,12 @@ let Typer = {
     /*
     This site 
     https://www.freeformatter.com/javascript-escape.html
-    allows to escape and unscape text
+    allows to escape and unescape text
+    */
+
+    /*
+    remember uncomment line 10 you need to include ajax
+    or replace the below code with a vanilla one.
     */
     /*
     $.get(Typer.file, function (data) {
@@ -30,7 +35,7 @@ let Typer = {
     Typer.index += Typer.speed
     let text = Typer.text.substring(0, Typer.index)
     let rtn = new RegExp("\n", "g")
-    $("#console").html(text.replace(rtn, "<br/>"))
+    document.querySelector("#console").innerHTML= text.replace(rtn, "<br/>");
     window.scrollBy(0, 50)
   },
 };
