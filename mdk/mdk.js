@@ -31,39 +31,38 @@ function loadLatestAddedSongs() {
   let hints = { $max: 7, $orderby: { _id: -1 } };
   db.playlist.find({}, hints, function (err, res) {
     if (!err) {
+      let element = document.getElementById("latestAddedSongSection");
       for (const r of res) {
-        let element = document.getElementById("latestAddedSongSection");
-        let div = document.createElement("div");
-        let pTitle = document.createElement("p");
-        let pPosted = document.createElement("p");
-        let i = document.createElement("i");
-        let br = document.createElement("br");
-        let ahref = document.createElement("a");
+        let tr = document.createElement("tr");
+        let td_date = document.createElement("td");
+        let td_addedby = document.createElement("td");
+        let td_link = document.createElement("td");
+        let a = document.createElement("a");
+        a.href = "javascript:playLatestAddedSong('" + r.idYoutubeVideo + "');";
+        a.innerText = "Play";
+        td_date.setAttribute("data-th", "Added On");
+        td_addedby.setAttribute("data-th", "Added By");
+        td_link.setAttribute("data-th", "Listen");
 
-        ahref.href =
-          "javascript:playLatestAddedSong('" + r.idYoutubeVideo + "');";
-        ahref.innerText="Play";
+        td_addedby.appendChild(
+          document.createTextNode(r.uploader)
+        );
+        td_date.appendChild(
+          document.createTextNode(r.dateAdded.substring(0, 10))
+        );
+        td_link.appendChild(a);
 
-        i.innerText=r.uploader;
-
-        div.classList.add("article");
-
-        pTitle.classList.add("title");
-        pPosted.classList.add("posted");
-
-        pTitle.innerText=r.dateAdded.substring(0, 10);
-        pPosted.innerText="Added by: ";
-        pPosted.appendChild(i);
-
-        div.appendChild(br);
-        div.appendChild(pTitle);
-        div.appendChild(pPosted);
-        div.appendChild(ahref);
-        element.appendChild(div);
+        tr.appendChild(td_date);
+        tr.appendChild(td_addedby);
+        tr.appendChild(td_link);
+        element.appendChild(tr);
+        //divSong.classList.add("ads");
       }
     }
   });
 }
+
+
 
 function onYouTubeIframeAPIReady() {
   db.playlist.find(query, hints, function (err, res) {
@@ -75,8 +74,8 @@ function onYouTubeIframeAPIReady() {
         .replace(/\"/g, "");
       initialVideo = res[getRandomInt(res.length)]["idYoutubeVideo"];
       player = new YT.Player("video-placeholder", {
-        width: 600,
-        height: 400,
+        width: screen.width < 600 ? 300 : 600,
+        height: screen.height < 300 ? 100 : 300,
         videoId: initialVideo,
         playerVars: {
           controls: 1,
@@ -132,36 +131,31 @@ function getAuthorizedListSpotify(token) {
 }
 
 function buildSopotifyElements(song, artist, date, link) {
-  let element = document.getElementById("newSpotifyReleases");
-  let divSong = document.createElement("div");
-  let divArtist = document.createElement("div");
-  let divDate = document.createElement("div");
+  let element = document.getElementById("SpotifyTable");
+  let tr = document.createElement("tr");
+  let td_song = document.createElement("td");
+  let td_artist = document.createElement("td");
+  let td_date = document.createElement("td");
+  let td_link = document.createElement("td");
   let a = document.createElement("a");
-  let divSongText = document.createTextNode(song);
-  let divArtistText = document.createTextNode(artist);
-  let divDateText = document.createTextNode("Release on: " + date);
-  let br = document.createElement("br");
-
   a.href = link;
   a.target = "_blank";
   a.style = "color: pink";
-  a.innerText="Listen"
-
-  divSong.classList.add("ads");
-  divSong.appendChild(divSongText);
-
-  divArtist.classList.add("repoTitle");
-  divArtist.appendChild(divArtistText);
-
-  divDate.classList.add("issueDetail");
-  divDate.appendChild(divDateText);
-
-  divSong.appendChild(divArtist);
-  divSong.appendChild(divDate);
-  divDate.appendChild(br);
-  divDate.appendChild(a);
-
-  element.appendChild(divSong);
+  a.innerText = "Listen";
+  td_song.setAttribute("data-th", "Song");
+  td_artist.setAttribute("data-th", "Artist");
+  td_date.setAttribute("data-th", "Date");
+  td_link.setAttribute("data-th", "Spotify");
+  td_song.appendChild(document.createTextNode(song));
+  td_artist.appendChild(document.createTextNode(artist));
+  td_date.appendChild(document.createTextNode(date));
+  td_link.appendChild(a);
+  tr.appendChild(td_song);
+  tr.appendChild(td_artist);
+  tr.appendChild(td_date);
+  tr.appendChild(td_link);
+  element.appendChild(tr);
+  //divSong.classList.add("ads");
 }
 
 function pad2(n) {
@@ -186,7 +180,7 @@ function validVideoId(id) {
       let formattedDate = day + "/" + month + "/" + year;
       let jsondata = {
         idYoutubeVideo: id,
-        uploader: uploader_text,
+        uploader: uploader_text.substring(0, 20),
         dateAdded: formattedDate,
       };
       let settings = {
