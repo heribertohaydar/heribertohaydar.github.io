@@ -3,12 +3,8 @@
   <head>
     <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <link
-      rel="stylesheet"
-      href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"
-    />
     <link rel="stylesheet" href="style.css" />
     <title>MDK</title>
     <script src="https://code.jquery.com/jquery-2.2.3.min.js"></script>
@@ -21,42 +17,41 @@
   <body>
     <div class="container">
       <div class="grid-1 callout primary">
-        <section class="">
-          <li><i>playlist</i></li>
-          <div id="video-placeholder"></div>
-          <div class="center">
-            <label>
-              Paste youtube's link here:
-              <input id="urlSong" type="url" size="12" />
-              <label>uploader:<input
-                  id="uploader"
-                  type="text"
-                  maxlength="20"
-                  size="12"
-              /></label>
-            </label>
-          </div>
-          <div class="center">
-            <a
-              href="javascript:addNewSong();"
-              style="
-                color: cyan;
-                text-decoration: none;
-                font-size: 1.5em;
-                padding-right: 1em;
-              "
-              >Add
-            </a>
-            <a
-              href="javascript:reloadPlayList();"
-              style="color: yellow; text-decoration: none; font-size: 1.5em"
-              >Reload</a
-            >
-          </div>
-          <div class="center">
-              <p id="MKD.message" class="orange" hidden><i class=""></i></p>
-          </div>
-        </section>
+        <li><i>playlist</i></li>
+        <div id="video-placeholder" style="padding-left: 2em"></div>
+        <div class="center">
+          <label>
+            Paste youtube's link here:
+            <input id="urlSong" type="url" size="12" />
+            <label
+              >uploader:<input
+                id="uploader"
+                type="text"
+                maxlength="20"
+                size="12"
+            /></label>
+          </label>
+        </div>
+        <div class="center">
+          <a
+            href="javascript:addNewSong();"
+            style="
+              color: cyan;
+              text-decoration: none;
+              font-size: 1.5em;
+              padding-right: 1em;
+            "
+            >Add
+          </a>
+          <a
+            href="javascript:reloadPlayList();"
+            style="color: yellow; text-decoration: none; font-size: 1.5em"
+            >Reload</a
+          >
+        </div>
+        <div class="center">
+          <p id="MKD.message" class="orange" hidden><i class=""></i></p>
+        </div>
       </div>
 
       <div class="grid-2 callout warning">
