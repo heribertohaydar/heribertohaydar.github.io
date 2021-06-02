@@ -160,3 +160,11 @@ td {
   align-items: center;
   justify-content: center;
 }
+
+.orange {
+  color: darkorange;
+}
+
+.YTDiv {
+  padding-left: 1em;
+}
