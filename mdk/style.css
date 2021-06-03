@@ -25,9 +25,18 @@ body {
 }
 
 a {
+  color: #8be9fd;
+  background-color: transparent;
   text-decoration: none;
 }
 
+.linkEmisora {
+  font-size: 25px;
+  color: #ff79c6;
+  background-color: transparent;
+  text-decoration: none;
+  padding-top: 5em;
+}
 
 li {
   list-style: none;
@@ -144,3 +153,6 @@ td {
 .YTDiv {
   padding-left: 1em;
 }
+
+
+
