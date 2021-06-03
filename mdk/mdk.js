@@ -65,8 +65,6 @@ function loadLatestAddedSongs() {
 
 
 function onYouTubeIframeAPIReady() {
-  window.frames[0].stop()
-  console.dir(frames[0])
   db.playlist.find(query, hints, function (err, res) {
     if (!err) {
       res.sort(() => Math.random() - 0.5);
