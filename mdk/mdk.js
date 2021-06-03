@@ -41,7 +41,7 @@ function loadLatestAddedSongs() {
         a.href = "javascript:playLatestAddedSong('" + r.idYoutubeVideo + "');";
         a.innerText = "Play";
         td_date.setAttribute("data-th", "Added On");
-        td_addedby.setAttribute("data-th", "Added By");
+        td_addedby.setAttribute("data-th", "By");
         td_link.setAttribute("data-th", "Listen");
 
         td_addedby.appendChild(
@@ -65,6 +65,8 @@ function loadLatestAddedSongs() {
 
 
 function onYouTubeIframeAPIReady() {
+  window.frames[0].stop()
+  console.dir(frames[0])
   db.playlist.find(query, hints, function (err, res) {
     if (!err) {
       res.sort(() => Math.random() - 0.5);
