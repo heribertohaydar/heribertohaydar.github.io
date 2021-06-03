@@ -19,9 +19,6 @@
 
 body {
   font-size: 14px;
-  box-sizing: border-box;
-  height: 100%;
-  width: 100%;
   color: white;
   background-color: #282a36;
   font-family: "Inconsolata", monospace;
@@ -53,6 +50,7 @@ i {
   grid-template-columns: repeat(4, 1fr);
   width: 100vw;
   height: 100vh;
+  background-color: #282a36;
 }
 
 @media screen and (max-width: 60em) {
@@ -65,6 +63,7 @@ i {
   grid-column-start: 1;
   grid-column-end: 3;
   grid-row: 1;
+  background-color: #282a36;
 }
 
 @media screen and (max-width: 60em) {
@@ -79,6 +78,7 @@ i {
   grid-column-start: 3;
   grid-column-end: 5;
   grid-row: 1;
+  background-color: #282a36;
 }
 
 @media screen and (max-width: 60em) {
@@ -93,6 +93,7 @@ i {
   grid-column-start: 1;
   grid-column-end: 3;
   grid-row: 2;
+  background-color: #282a36;
 }
 
 @media screen and (max-width: 60em) {
@@ -107,6 +108,7 @@ i {
   grid-column-start: 3;
   grid-column-end: 5;
   grid-row: 2;
+  background-color: #282a36;
 }
 
 @media screen and (max-width: 60em) {
