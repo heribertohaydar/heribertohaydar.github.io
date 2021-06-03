@@ -41,7 +41,7 @@ function loadLatestAddedSongs() {
         a.href = "javascript:playLatestAddedSong('" + r.idYoutubeVideo + "');";
         a.innerText = "Play";
         td_date.setAttribute("data-th", "Added On");
-        td_addedby.setAttribute("data-th", "By");
+        td_addedby.setAttribute("data-th", "Uploader");
         td_link.setAttribute("data-th", "Listen");
 
         td_addedby.appendChild(
@@ -140,7 +140,6 @@ function buildSopotifyElements(song, artist, date, link) {
   let a = document.createElement("a");
   a.href = link;
   a.target = "_blank";
-  a.style = "color: pink";
   a.innerText = "Listen";
   td_song.setAttribute("data-th", "Song");
   td_artist.setAttribute("data-th", "Artist");
