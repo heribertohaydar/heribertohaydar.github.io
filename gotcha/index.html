@@ -2,44 +2,32 @@
 <html>
   <head>
     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Just load url-image and click on it" />
+    <link rel="stylesheet" href="styles.css" />
     <title>Gotcha!</title>
   </head>
   <body>
-    <h2>Convert URL-Image to URL-Clickable</h2>
-    <div>
-      <div class="inputoutput">
-        <img
-          id="imageSrc"
-          alt="No image added, please use the button below to upload one."
-        />
-        <div class="caption">
-          <input type="file" id="fileInput" name="file" />
-        </div>
+    <div class="splash-container">
+      <div class="splash">
+        <img src="" id="imageSrc" />
+        <p class="splash-subhead">
+          Upload a image containing the url you want to be clickable
+        </p>
+        <p>
+          <input type="file" id="fileInput" name="file" class="" />
+        </p>
+        <a
+          id="convertedUrl"
+          href=""
+          target="_blank"
+          class="pure-button pure-button-primary"
+          >Your url will appear here when recognition ends</a
+        >
       </div>
     </div>
-    <div>
-      <div>
-        <label><b>Your URL-Clickable is: </b></label>
-      </div>
-      <div>
-        <a id="convertedUrl" href="" target="_blank"></a>
-      </div>
-    </div>
+
     <script src="https://unpkg.com/tesseract.js@v2.1.0/dist/tesseract.min.js"></script>
-    <script type="text/javascript">
-      let imgElement = document.getElementById("imageSrc");
-      let inputElement = document.getElementById("fileInput");
-      inputElement.addEventListener("change", recognizeText);
-      async function recognizeText({ target: { files } }) {
-        imgElement.src = URL.createObjectURL(files[0]);
-        Tesseract.recognize(files[0], "eng", {
-          logger: (m) => console.log(m),
-        }).then(({ data: { text } }) => {
-          console.log(text);
-          document.getElementById("convertedUrl").href = text;
-          document.getElementById("convertedUrl").textContent = text;
-        });
-      }
-    </script>
+    <script src="index.js"></script>
   </body>
 </html>
