@@ -8,6 +8,7 @@ function recognizeText(file) {
   }).then(({ data: { text } }) => {
     document.getElementById("convertedUrl").href = text;
     document.getElementById("convertedUrl").textContent = text;
+    document.getElementById("convertedUrl").style.display = "block";
   });
 }
 
