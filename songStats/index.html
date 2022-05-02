@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en" class="h-100">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <script type="text/javascript" src="props.js"></script>
+    <title>Song.Stats</title>
+</head>
+
+<body class="h-100" style="overflow: hidden; background-color: whitesmoke">
+    <div class="container h-100">
+        <div class="row justify-content-center align-items-center h-100">
+            <div class="col">
+                <h1 class="text-dark text-center display-1" style="font-family: 'Roboto'">Song.Stats</h1>
+                <h5 class="text-dark text-center">Know your spotify liked songs stats</h5>
+                <div class=" mt-4 text-center">
+                    <a class="btn btn-success text-white" id="login-button">Log in with your spotify account</a>
+                </div>
+            </div>
+        </div>
+        <script>
+        (function() {
+            function makeid(length) {
+                var result           = ''
+                var characters       = properties.ID_UNIQUE_CHARS
+                var charactersLength = characters.length
+                for ( var i = 0; i < length; i++ ) {
+                    result += characters.charAt(Math.floor(Math.random() * charactersLength))
+                }
+                return result
+            }            
+
+            function callback(req) {
+                var client_id = properties.SPOTIFY_CLIENT_ID
+                var redirect_uri = properties.SPOTIFY_API_REDIRECT_URI
+                var scope = properties.SPOTIFY_SCOPE_USER_DATA
+
+                var url = properties.SPOTIFY_API_URL
+                url += '?response_type=token'
+                url += '&client_id=' + encodeURIComponent(client_id)
+                url += '&scope=' + encodeURIComponent(scope)
+                url += '&redirect_uri=' + encodeURIComponent(redirect_uri)
+                url += '&state=' + encodeURIComponent(makeid(16))
+                window.location = url
+            }
+
+            document.getElementById('login-button').addEventListener('click', function() {
+                callback()
+            }, false);
+        })();
+        </script>
+</body>
+
+</html>

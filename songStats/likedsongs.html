@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.17.1/dist/bootstrap-table.min.css">
+    <script src="https://unpkg.com/bootstrap-table@1.17.1/dist/bootstrap-table.min.js"></script>
+    <script type="text/javascript" src="props.js"></script>
+    <script type="text/javascript" src="common.js"></script>
+    <script type="text/javascript" src="likedsongs.js"></script>
+    <title>Song.Stats | Liked Songs</title>
+</head>
+
+<body style="background-color: whitesmoke">
+    <div id="content" style="background-color: whitesmoke">
+        <div class="container-fluid mx-md-auto px-md-auto">
+            <div class="row m-0" id="playlist">
+                <div class="pt-1 px-0 col-lg-12 col-md-12">
+                    <div class="display-3 text-md-left font-weight-bolder ml-md-0 mx-auto my-auto">
+                        <h5 class="">
+                            <span id="playlist_name"></span>
+                            <span id="number-of-songs" style="color: #1DB954;"></span>
+                        </h5>
+                    </div>
+                    <div id="tablediv">
+                        <table id="table" data-show-columns-toggle-all="true" data-show-fullscreen="true" data-search="true" data-search-highlight="true" data-show-columns="true" data-loading-template="loadingTemplate" data-sort-reset="true" data-sortable="true" data-buttons-class="buttons" data-toggle="table" data-classes="table table-sm table-borderless w-100">
+                            <thead>
+                                <tr>
+                                    <th data-sortable="true" data-field="track.name">Title</th>
+                                    <th data-sortable="true" data-field="track.artists.0.name">Artist</th>
+                                    <th data-sortable="true" data-field="track.duration_ms">Duration</th>
+                                    <th data-sortable="true" data-field="track.popularity">Popularity</th>
+                                    <th data-sortable="true" data-field="added_at">Date Added</th>
+                                    <th data-sortable="true" data-field="added_time_at">Time Added</th>
+                                    <th data-sortable="true" data-field="track.genre_list">Genres</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <style type="text/css">
+        .fixed-table-body {
+            max-height: 300px;
+            background-color: whitesmoke;
+        }
+    </style>
+</body>
+
+</html>
