@@ -18,8 +18,3 @@ Personal fun project - working with Spotify data
 country, explicit-content, year, H24 time added, AM/PM, Album release year
 5. Genre map explorer
 6. AM/PM which part of the day you usally add more songs to your liked playlist
-
-https://stackoverflow.com/questions/55650422/d3-js-csv-to-html-table-header-average-chart
-https://bl.ocks.org/d3noob/473f0cf66196a008cf99
-https://observablehq.com/@d3/gallery
-

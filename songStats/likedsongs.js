@@ -36,14 +36,13 @@ function displayData(playlist_songs) {
                     for (i in response["items"]) {
                         response["items"][i]["track"]["genres"] = { ...features["artists"][i]["genres"] }
                         data.push(response["items"][i])
-                    }
+                        }
                     j = j + increment
                     properties.ENV == 'dev' ? getData(null, increment) : getData(response["next"], increment)
                 }, 1)
             }, 1)
         } else {
             formatted_data = doFeatureEngineering(data)
-            console.dir(formatted_data)
             $table.bootstrapTable('load', formatted_data)
             $table.bootstrapTable('hideLoading')
         }
@@ -59,7 +58,8 @@ function doFeatureEngineering(data) {
             year: 'numeric',
             month: 'short',
             day: 'numeric'
-        };
+        }
+
         song["added_at_non_conversion"] = song["added_at"]
         song["added_year_at"] = convertDate(song["added_at"]).toLocaleString('en-US', {year: 'numeric'})
         song["added_time_at"] = convertDate(song["added_at"]).toLocaleString('en-US', {hour: '2-digit', minute:'2-digit'})
