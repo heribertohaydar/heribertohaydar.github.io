@@ -15,7 +15,7 @@ Personal fun project - working with Spotify data
 2. Longest and shortest song
 3. Popularity average
 4. Bar/Stacked Chart -> Songs by : added date/time, artist, genre, popularity, 
-country, explicit-content, year, AM/PM, Album release year
+country, explicit-content, year, H24 time added, AM/PM, Album release year
 5. Genre map explorer
 6. AM/PM which part of the day you usally add more songs to your liked playlist
 

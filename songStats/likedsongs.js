@@ -64,6 +64,7 @@ function doFeatureEngineering(data) {
         song["added_year_at"] = convertDate(song["added_at"]).toLocaleString('en-US', {year: 'numeric'})
         song["added_time_at"] = convertDate(song["added_at"]).toLocaleString('en-US', {hour: '2-digit', minute:'2-digit'})
         song["added_h24_at"] = convertDate(song["added_at"]).toLocaleString('en-US', {hour12: false, hour: '2-digit'})
+        song["am_pm_at"] = song["added_h24_at"] > 12 ? "PM" : "AM"
         song["added_at"] = convertDate(song["added_at"]).toLocaleString('en-US', date_options)
         song = song["track"]
         song["duration_ms_non_conversion"] = song["duration_ms"]
