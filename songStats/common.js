@@ -102,6 +102,11 @@ function dismissAlert(id) {
     id ? $('#' + id).alert('close') : $('.alert').alert('close')
 }
 
+function getShortGenre(arr) {
+    return arr.reduce((a, b, i, arr) => arr[i].length < b.length ? arr[i] : b, "-");
+}
+
+  
 function addLoadEvent(func) {
     var oldonload = window.onload
     if (typeof window.onload != 'function') {

@@ -43,6 +43,7 @@ function displayData(playlist_songs) {
             }, 1)
         } else {
             formatted_data = doFeatureEngineering(data)
+            console.dir(formatted_data)
             $table.bootstrapTable('load', formatted_data)
             $table.bootstrapTable('hideLoading')
         }
@@ -60,12 +61,19 @@ function doFeatureEngineering(data) {
             day: 'numeric'
         };
         song["added_at_non_conversion"] = song["added_at"]
+        song["added_year_at"] = convertDate(song["added_at"]).toLocaleString('en-US', {year: 'numeric'})
         song["added_time_at"] = convertDate(song["added_at"]).toLocaleString('en-US', {hour: '2-digit', minute:'2-digit'})
+        song["added_h24_at"] = convertDate(song["added_at"]).toLocaleString('en-US', {hour12: false, hour: '2-digit'})
         song["added_at"] = convertDate(song["added_at"]).toLocaleString('en-US', date_options)
         song = song["track"]
         song["duration_ms_non_conversion"] = song["duration_ms"]
         song["duration_ms"] = convertMS(song["duration_ms"])
         song["genre_list"] = Object.values(song["genres"]).join(", ")
+        song["explicit"] = song["explicit"] ? "Yes" : "No"
+        song["album_name"] = song["album"]["name"]
+        song["relase_date"] = song["album"]["release_date"].substring(0,4)
+        song["total_tracks"] = song["album"]["total_tracks"]
+        song["genre"] = getShortGenre(song["genre_list"].split(", "))
     }
     return data;
 }
