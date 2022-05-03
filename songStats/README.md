@@ -7,7 +7,7 @@ Personal fun project - working with Spotify data
 # Feature Engineering
 1. Date : extract--> Day/Night, Hour without minutes, Year, Month, long-day
 2. Duration : round to -> Minute without seconds
-3. Genres : empty -> 'Not Defined'
+3. Genres : empty -> 'undefined'
 4. Genres : new feature 'genre' only one from genres list (use shortest name genre)
 5. Country
 # TODO - Stats

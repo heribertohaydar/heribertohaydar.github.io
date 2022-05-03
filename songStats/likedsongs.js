@@ -73,7 +73,8 @@ function doFeatureEngineering(data) {
         song["album_name"] = song["album"]["name"]
         song["relase_date"] = song["album"]["release_date"].substring(0,4)
         song["total_tracks"] = song["album"]["total_tracks"]
-        song["genre"] = getShortGenre(song["genre_list"].split(", "))
+        song["genre"] = song["genre_list"].replace(/\s/g, '').length < 3 ? 'undefined' : getShortGenre(song["genre_list"].split(", "))
+
     }
     return data;
 }
