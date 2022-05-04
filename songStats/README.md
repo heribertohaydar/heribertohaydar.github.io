@@ -13,7 +13,7 @@ Personal fun project - working with Spotify data
     API reference <https://danfo.jsdata.org/api-reference>
 
     Example report:
-    <https://hhaydar.github.io/songStats/example-report/Spotify-dataanalysis.pdf>
+    <https://github.com/hhaydar/hhaydar.github.io/blob/main/songStats/example-report/Spotify-dataanalysis.pdf>
 
 # Feature Engineering
 1. Date : extract--> Day/Night, Hour without minutes, Year, Month, long-day
