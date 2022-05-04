@@ -14,6 +14,7 @@
     <script src="https://cdn.jsdelivr.net/npm/danfojs@1.1.0/lib/bundle.min.js"></script>
     
     <script type="text/javascript" src="props.js"></script>
+    <script type="text/javascript" src="plotting.js"></script>
     <script type="text/javascript" src="common.js"></script>
     <script type="text/javascript" src="likedsongs.js"></script>
     <title>Song.Stats | Liked Songs</title>
@@ -34,26 +35,40 @@
                         <table id="table" data-show-columns-toggle-all="true" data-show-fullscreen="true" data-search="true" data-search-highlight="true" data-show-columns="true" data-loading-template="loadingTemplate" data-sort-reset="true" data-sortable="true" data-buttons-class="buttons" data-toggle="table" data-classes="table table-sm table-borderless w-100">
                             <thead>
                                 <tr>
-                                    <th data-sortable="true" data-field="track.name">Title</th>
-                                    <th data-sortable="true" data-field="track.artists.0.name">Artist</th>
-                                    <th data-sortable="true" data-field="track.genre">Genre</th>
-                                    <th data-sortable="true" data-field="track.album_name">Album</th>
-                                    <th data-sortable="true" data-field="track.relase_date">Release Year</th>
-                                    <th data-sortable="true" data-field="track.total_tracks">Total Tracks</th>
-                                    <th data-sortable="false" data-field="track.duration_ms">Duration</th>
-                                    <th data-sortable="true" data-field="track.duration_ms_non_conversion">ms</th>
-                                    <th data-sortable="true" data-field="track.popularity">Popularity</th>
+                                    <th data-sortable="true" data-field="track_name">Title</th>
+                                    <th data-sortable="true" data-field="artist_name">Artist</th>
+                                    <th data-sortable="true" data-field="genre">Genre</th>
+                                    <th data-sortable="true" data-field="album_name">Album</th>
+                                    <th data-sortable="true" data-field="relase_date">Release Year</th>
+                                    <th data-sortable="true" data-field="song_age">Song Age</th>
+                                    <th data-sortable="true" data-field="song_age_range">Age Range</th>
+                                    <th data-sortable="true" data-field="total_tracks">Total Tracks</th>
+                                    <th data-sortable="false" data-field="duration_ms">Duration</th>
+                                    <th data-sortable="false" data-field="duration_range">Duration Range</th>
+                                    <th data-sortable="true" data-field="duration_ms_non_conversion">ms</th>
+                                    <th data-sortable="true" data-field="popularity">Popularity</th>
                                     <th data-sortable="true" data-field="added_at">Date Added</th>
                                     <th data-sortable="true" data-field="added_year_at">Year Added</th>
                                     <th data-sortable="true" data-field="added_time_at">Time Added</th>
                                     <th data-sortable="true" data-field="added_h24_at">H24 Added</th>
                                     <th data-sortable="true" data-field="am_pm_at">AM/PM</th>
-                                    <th data-sortable="true" data-field="track.explicit">Explicit</th>
+                                    <th data-sortable="true" data-field="explicit">Explicit</th>
                                 </tr>
                             </thead>
                         </table>
+                        <div></div>
+                        <div>Exploration</div>
+                        <div></div>
                         <div id="plot_div"></div>
                         <div id="plot_div2"></div>
+                        <div id="plot_div3"></div>
+                        <div id="plot_div4"></div>
+                        <div id="plot_div5"></div>
+                        <div id="plot_div6"></div>
+                        <div id="plot_div7"></div>
+                        <div id="plot_div8"></div>
+                        <div id="plot_div9"></div>
+                        <div id="plot_div10"></div>
                     </div>
                 </div>
             </div>

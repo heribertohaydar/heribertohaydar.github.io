@@ -106,7 +106,68 @@ function getShortGenre(arr) {
     return arr.reduce((a, b, i, arr) => arr[i].length < b.length ? arr[i] : b, "-");
 }
 
-  
+function timeShit(time) {
+    if (time >= 6 && time < 12) {
+        return "Morning"
+    } else if (time >= 12 && time < 18) {
+        return "Afternoon"
+    } else if (time >= 18 && time < 24) {
+        return "Evening"
+    } else if (time >= 0 && time < 6) {
+        return "Night"
+    } else if (time == 24) {
+        return "Midnight"
+    }
+    return "Unknown"
+}
+
+function songAgeRange(age) {
+    if (age < 3) {
+        return "New"
+    } else if (age < 6) {
+        return "Young"
+    } else if (age < 12) {
+        return "Middle"
+    } else if (age < 18) {
+        return "Old"
+    } else if (age < 24) {
+        return "Very Old"
+    } else if (age < 36) {
+        return "Ancient"
+    } else if (age < 48) {
+        return "Very Ancient"
+    } else if (age < 60) {
+        return "Eon"
+    } else if (age < 72) { 
+        return "Very Eon"
+    } else if (age < 84) {
+        return "Eternity"
+    } else if (age < 96) {
+        return "Very Eternity"
+    } else {
+        return "Eternal"
+    }
+}
+
+function convertMsToMin(ms) {
+    return Math.floor(ms / 1000 / 60)
+}
+
+function durationRange(duration) {
+    duration = (duration / (1000 * 60)) % 60
+    duration = Math.floor(duration)
+
+    if (duration < 1) {
+        return "Short"
+    } else if (duration < 4) {
+        return "Medium"
+    } else if (duration < 7) {
+        return "Long"
+    } else {
+        return "Very Long"
+    }
+}
+
 function addLoadEvent(func) {
     var oldonload = window.onload
     if (typeof window.onload != 'function') {

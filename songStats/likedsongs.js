@@ -46,60 +46,8 @@ function displayData(playlist_songs) {
             $table.bootstrapTable('load', formatted_data)
             $table.bootstrapTable('hideLoading')
 
-            //Plot: Liked songs added by year
-                let plot_data = {
-                    Year: formatted_data.map(x => x.added_year_at)
-                }
-                let layout = {
-                    title: "Liked songs added by year",
-                    xaxis: {
-                      title: "Added year"
-                    },
-                    yaxis: {
-                      title: "Count"
-                    }
-                  }
-                let config = {
-                    columns: ["Year_count"]
-                }
-                let df = new dfd.DataFrame(plot_data)
-                df.groupby(["Year"])
-                    .col(["Year"])
-                    .count()
-                    .setIndex({ column: "Year" })
-                    .plot("plot_div")
-                    .line({ config, layout })
-
-            //Plot: Genre distribution
-            plot_data = {
-                Genre: formatted_data.map(x => x.track.genre)
-            }
-            const headerStyle = {
-                align: "center",
-                fill: { color: ["gray"] },
-                font: { family: "Roboto", size: 15, color: "white" },
-                columnwidth: 200
-              }
-            const cellStyle = {
-                align: ["center"],
-                line: { color: "gray", width: 1 }
-              }
-
-            layout = {
-                title: "Genre distribution"
-              }
-            config = {
-                tableHeaderStyle: headerStyle,
-                tableCellStyle: cellStyle
-            }
-            df = new dfd.DataFrame(plot_data)
-            df = df.groupby(["Genre"])
-                .col(["Genre"])
-                .count()
-                .sortValues("Genre_count", { ascending: false})
-                
-            df.plot("plot_div2")
-                .table({ config, layout })
+            //Plot data
+            plot(formatted_data)
                 
         }
     }
@@ -107,6 +55,7 @@ function displayData(playlist_songs) {
 }
 
 function doFeatureEngineering(data) {
+
     for (song of data) {
         var date_options = {
             timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone,
@@ -120,18 +69,141 @@ function doFeatureEngineering(data) {
         song["added_year_at"] = convertDate(song["added_at"]).toLocaleString('en-US', {year: 'numeric'})
         song["added_time_at"] = convertDate(song["added_at"]).toLocaleString('en-US', {hour: '2-digit', minute:'2-digit'})
         song["added_h24_at"] = convertDate(song["added_at"]).toLocaleString('en-US', {hour12: false, hour: '2-digit'})
-        song["am_pm_at"] = song["added_h24_at"] > 12 ? "PM" : "AM"
+        song["am_pm_at"] = timeShit(song["added_h24_at"])
         song["added_at"] = convertDate(song["added_at"]).toLocaleString('en-US', date_options)
-        song = song["track"]
-        song["duration_ms_non_conversion"] = song["duration_ms"]
-        song["duration_ms"] = convertMS(song["duration_ms"])
-        song["genre_list"] = Object.values(song["genres"]).join(", ")
-        song["explicit"] = song["explicit"] ? "Yes" : "No"
-        song["album_name"] = song["album"]["name"]
-        song["relase_date"] = song["album"]["release_date"].substring(0,4)
-        song["total_tracks"] = song["album"]["total_tracks"]
+        song["duration_ms_non_conversion"] = song["track"]["duration_ms"]
+        song["duration_range"] = durationRange(song["track"]["duration_ms"])
+        song["duration_ms"] = convertMS(song["track"]["duration_ms"])
+        song["duration_min"] = convertMsToMin(song["track"]["duration_ms"])
+        song["genre_list"] = Object.values(song["track"]["genres"]).join(", ")
+        song["explicit"] = song["track"]["explicit"] ? "Yes" : "No"
+        song["track_name"] = song["track"]["name"]
+        song["artist_name"] = song["track"]["artists"][0]["name"]
+        song["album_name"] = song["track"]["album"]["name"]
+        song["popularity"] = song["track"]["popularity"]
+        song["relase_date"] = song["track"]["album"]["release_date"].substring(0,4)
+        song["total_tracks"] = song["track"]["album"]["total_tracks"]
         song["genre"] = song["genre_list"].replace(/\s/g, '').length < 3 ? 'undefined' : getShortGenre(song["genre_list"].split(", "))
-
+        song["song_age"] = new Date().getFullYear() - song["relase_date"]
+        song["song_age_range"] = songAgeRange(song["song_age"])
+        
+        delete song.track // remove track object
     }
+
     return data;
+}
+
+function plot(data) {
+
+        //Plot: Liked songs added by year
+            plotGroupbyLine(
+                { Year: data.map(x => x.added_year_at) },
+                "Liked songs added by year",
+                "Added year",
+                "Count",
+                ["Year_count"],
+                ["Year"],
+                ["Year"],
+                { column: "Year" },
+                "plot_div"
+            )
+
+        //Plot: Genre distribution
+            plotGroupbyTable(
+                { Genre: data.map(x => x.genre) },
+                "Genre distribution",
+                ["Genre"],
+                ["Genre"],
+                "Genre_count",
+                false,
+                "plot_div2"
+            )
+
+        //Plot: Liked songs added by time of day
+            plotGroupbyPie(
+                { AM_PM: data.map(x => x.am_pm_at) },
+                "Liked songs added at Day/Night",
+                ["AM_PM"],
+                ["AM_PM"],
+                "AM_PM",
+                "AM_PM_count",
+                "plot_div3"
+            )
+
+        //Plot: Liked songs added by time of day
+            plotHist(
+                { Hour: data.map(x => x.added_h24_at) },
+                "Liked songs added by hour",
+                "Added hour",
+                "Freq",
+                "Hour",
+                "plot_div4"
+            )
+
+        //Plot: Liked songs by explicit content
+        plotGroupbyPie(
+            { Explicit: data.map(x => x.explicit) },
+            "Liked songs by explicit content",
+            ["Explicit"],
+            ["Explicit"],
+            "Explicit",
+            "Explicit_count",
+            "plot_div5"
+        )
+        //Plot: Liked songs added by release year
+        plotHist(
+            { Year: data.map(x => x.relase_date) },
+            "Liked songs by album - release year",
+            "Release year",
+            "Freq",
+            "Year",
+            "plot_div6"
+        )
+
+        //Plot: Relationship between song age and popularity
+        plotScatter(
+            { Age: data.map(x => x.song_age),
+              Popularity: data.map(x => x.popularity)
+            },
+            "Relationship between song age and popularity",
+            "Song Age - form release year until now",
+            "Popularity",
+            "Age",
+            "Popularity",
+            "plot_div7"
+        )
+
+        //Plot: Liked songs by song age from released year
+        plotGroupbyPie(
+            { Age: data.map(x => x.song_age_range) },
+            "Liked songs by song age",
+            ["Age"],
+            ["Age"],
+            "Age",
+            "Age_count",
+            "plot_div8"
+        )
+
+        //Plot: Artist liked songs distribution
+        plotGroupbyTable(
+            { Artist: data.map(x => x.artist_name) },
+            "Artist liked songs distribution",
+            ["Artist"],
+            ["Artist"],
+            "Artist_count",
+            false,
+            "plot_div9"
+        )
+
+        //Plot: Relationship between song age, popularity and durantion(ms)
+        plotScatterNCols(
+            { Duration: data.map(x => x.duration_min),
+              Popularity: data.map(x => x.popularity/10)
+              
+            },
+            "Relationship between song age, popularity and durantion(ms)",
+            "plot_div10"
+        )
+
+
 }
