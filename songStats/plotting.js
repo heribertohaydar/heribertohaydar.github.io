@@ -1,3 +1,44 @@
+
+
+//Table Styles
+const headerStyle = {
+  align: "center",
+  fill: { color: ["gray"] },
+  font: { family: "Roboto", size: 15, color: "white" },
+  columnwidth: 200
+}
+const cellStyle = {
+  align: ["center"],
+  line: { color: "gray", width: 1 },
+  font: { family: "Roboto", size: 15, color: "gray" }
+}
+
+function plotGroupAggArtist(data, layout_title, div_id) {
+
+  let layout = {
+    title: layout_title
+  }
+  let config = {
+      tableHeaderStyle: headerStyle,
+      tableCellStyle: cellStyle
+  }
+
+  let df = new dfd.DataFrame(data)
+  let grp = df.groupby(["Artist"])
+  grp.agg({ Song_Age:"mean",
+            Release_Year:"max",
+            Popularity:"mean",
+            Song_Duration:"mean" }).sortValues("Artist", { ascending: true})
+    .plot(div_id).table({ config, layout })
+            
+
+}
+
+function plotBar(data, index, div_id) {
+  const df = new dfd.DataFrame(data, index)
+        df.plot(div_id).bar()
+}
+
 function plotScatterNCols(data,
   layout_title,
   div_id
@@ -102,17 +143,6 @@ function plotGroupbyTable(data,
     div_id
     ) {
 
-        const headerStyle = {
-            align: "center",
-            fill: { color: ["gray"] },
-            font: { family: "Roboto", size: 15, color: "white" },
-            columnwidth: 200
-          }
-        const cellStyle = {
-            align: ["center"],
-            line: { color: "gray", width: 1 },
-            font: { family: "Roboto", size: 15, color: "gray" }
-          }
 
         let layout = {
             title: layout_title

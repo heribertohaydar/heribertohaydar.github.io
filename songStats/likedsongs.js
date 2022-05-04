@@ -205,5 +205,15 @@ function plot(data) {
             "plot_div10"
         )
 
-
+        //Plot: Artist song stats 
+        plotGroupAggArtist(
+            {   Song_Age: data.map(x => x.song_age),
+                Release_Year: data.map(x => x.relase_date),
+                Popularity: data.map(x => x.popularity),
+                Song_Duration: data.map(x => x.duration_min),
+                Artist: data.map(x => x.artist_name)
+            },
+            "Artist song stats",
+            "plot_div11"
+        )
 }
