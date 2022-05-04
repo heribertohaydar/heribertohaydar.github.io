@@ -45,6 +45,62 @@ function displayData(playlist_songs) {
             formatted_data = doFeatureEngineering(data)
             $table.bootstrapTable('load', formatted_data)
             $table.bootstrapTable('hideLoading')
+
+            //Plot: Liked songs added by year
+                let plot_data = {
+                    Year: formatted_data.map(x => x.added_year_at)
+                }
+                let layout = {
+                    title: "Liked songs added by year",
+                    xaxis: {
+                      title: "Added year"
+                    },
+                    yaxis: {
+                      title: "Count"
+                    }
+                  }
+                let config = {
+                    columns: ["Year_count"]
+                }
+                let df = new dfd.DataFrame(plot_data)
+                df.groupby(["Year"])
+                    .col(["Year"])
+                    .count()
+                    .setIndex({ column: "Year" })
+                    .plot("plot_div")
+                    .line({ config, layout })
+
+            //Plot: Genre distribution
+            plot_data = {
+                Genre: formatted_data.map(x => x.track.genre)
+            }
+            const headerStyle = {
+                align: "center",
+                fill: { color: ["gray"] },
+                font: { family: "Roboto", size: 15, color: "white" },
+                columnwidth: 200
+              }
+            const cellStyle = {
+                align: ["center"],
+                line: { color: "gray", width: 1 }
+              }
+
+            layout = {
+                title: "Genre distribution"
+              }
+            config = {
+                tableHeaderStyle: headerStyle,
+                tableCellStyle: cellStyle
+            }
+            df = new dfd.DataFrame(plot_data)
+            df = df.groupby(["Genre"])
+                .col(["Genre"])
+                .count()
+                .sortValues("Genre_count", { ascending: false})
+                
+            df.plot("plot_div2")
+                .table({ config, layout })
+                
         }
     }
     getData(properties.SPOTIFY_LIKED_SONGS_ENDPOINT_INCREMENTAL, j)

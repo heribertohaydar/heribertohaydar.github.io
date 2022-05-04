@@ -4,6 +4,14 @@ Personal fun project - working with Spotify data
 # DONE Stats 
 1. Track list showing "genre list"
 
+# Library
+
+1. Bootstrap
+2. Data Analysis 
+    <https://danfo.jsdata.org/>
+    Danfo.js is heavily inspired by the Pandas library and provides a similar interface and API. This means users familiar with the Pandas API can easily use Danfo.js.
+    API reference <https://danfo.jsdata.org/api-reference>
+
 # Feature Engineering
 1. Date : extract--> Day/Night, Hour without minutes, Year, Month, long-day
 2. Duration : round to -> Minute without seconds

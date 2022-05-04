@@ -1,7 +1,7 @@
 const properties = new Object();
 
-//Environment 'dev' or 'prod' -> 'dev' load first 50 tracks only
-properties.ENV = 'dev'
+//Environment 'dev', 'qua' or 'prod' -> 'dev' load first 50 tracks only
+properties.ENV = 'prod'
 
 properties.HOME_URL_DEV = 'http://localhost:5500/'
 properties.HOME_URL_PROD = 'https://hhaydar.github.io/songStats'
@@ -28,12 +28,12 @@ properties.ID_UNIQUE_CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwx
 
 
 //Set dev/prod accordingly
-if (properties.ENV == 'dev') {
-    properties.HOME_URL = properties.HOME_URL_DEV
-    properties.SPOTIFY_API_REDIRECT_URI = properties.SPOTIFY_API_REDIRECT_URI_DEV
-    properties.SPOTIFY_CLIENT_ID = properties.SPOTIFY_CLIENT_ID_DEV
-} else {
+if (properties.ENV == 'prod') {
     properties.HOME_URL = properties.HOME_URL_PROD
     properties.SPOTIFY_API_REDIRECT_URI = properties.SPOTIFY_API_REDIRECT_URI_PROD
     properties.SPOTIFY_CLIENT_ID = properties.SPOTIFY_CLIENT_ID_PROD
+} else {
+    properties.HOME_URL = properties.HOME_URL_DEV
+    properties.SPOTIFY_API_REDIRECT_URI = properties.SPOTIFY_API_REDIRECT_URI_DEV
+    properties.SPOTIFY_CLIENT_ID = properties.SPOTIFY_CLIENT_ID_DEV
 }
