@@ -12,6 +12,9 @@ Personal fun project - working with Spotify data
     Danfo.js is heavily inspired by the Pandas library and provides a similar interface and API. This means users familiar with the Pandas API can easily use Danfo.js.
     API reference <https://danfo.jsdata.org/api-reference>
 
+    Example report:
+    <https://hhaydar.github.io/songStats/example-report/Spotify-dataanalysis.pdf>
+
 # Feature Engineering
 1. Date : extract--> Day/Night, Hour without minutes, Year, Month, long-day
 2. Duration : round to -> Minute without seconds
