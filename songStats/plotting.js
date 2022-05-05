@@ -13,8 +13,7 @@ const cellStyle = {
   font: { family: "Roboto", size: 15, color: "gray" }
 }
 
-function plotGroupAggArtist(data, layout_title, div_id) {
-
+function plotGroupAgg(data, layout_title, column, div_id) {
   let layout = {
     title: layout_title
   }
@@ -24,11 +23,11 @@ function plotGroupAggArtist(data, layout_title, div_id) {
   }
 
   let df = new dfd.DataFrame(data)
-  let grp = df.groupby(["Artist"])
+  let grp = df.groupby(column)
   grp.agg({ Song_Age:"mean",
             Release_Year:"max",
             Popularity:"mean",
-            Song_Duration:"mean" }).sortValues("Artist", { ascending: true})
+            Song_Duration:"mean" }).sortValues(column[0], { ascending: true})
     .plot(div_id).table({ config, layout })
             
 

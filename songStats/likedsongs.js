@@ -83,7 +83,7 @@ function doFeatureEngineering(data) {
         song["popularity"] = song["track"]["popularity"]
         song["relase_date"] = song["track"]["album"]["release_date"].substring(0,4)
         song["total_tracks"] = song["track"]["album"]["total_tracks"]
-        song["genre"] = song["genre_list"].replace(/\s/g, '').length < 3 ? 'undefined' : getShortGenre(song["genre_list"].split(", "))
+        song["genre"] = unifyGenre(song["genre_list"].replace(/\s/g, '').length < 3 ? 'undefined' : getShortGenre(song["genre_list"].split(", ")))
         song["song_age"] = new Date().getFullYear() - song["relase_date"]
         song["song_age_range"] = songAgeRange(song["song_age"])
         
@@ -206,7 +206,7 @@ function plot(data) {
         )
 
         //Plot: Artist song stats 
-        plotGroupAggArtist(
+        plotGroupAgg(
             {   Song_Age: data.map(x => x.song_age),
                 Release_Year: data.map(x => x.relase_date),
                 Popularity: data.map(x => x.popularity),
@@ -214,6 +214,32 @@ function plot(data) {
                 Artist: data.map(x => x.artist_name)
             },
             "Artist song stats",
+            ["Artist"],
             "plot_div11"
         )
-}
+
+        //Plot: Genre song stats 
+        plotGroupAgg(
+            {   Song_Age: data.map(x => x.song_age),
+                Release_Year: data.map(x => x.relase_date),
+                Popularity: data.map(x => x.popularity),
+                Song_Duration: data.map(x => x.duration_min),
+                Genre: data.map(x => x.genre)
+            },
+            "Genre song stats",
+            ["Genre"],
+            "plot_div12"
+        )
+
+        //Plot: Duration range song stats
+        plotGroupbyPie(
+            { Duration: data.map(x => x.duration_range) },
+            "Duration range song stats",
+            ["Duration"],
+            ["Duration"],
+            "Duration",
+            "Duration_count",
+            "plot_div13"
+        )
+
+    }

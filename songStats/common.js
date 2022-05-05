@@ -153,6 +153,104 @@ function convertMsToMin(ms) {
     return Math.floor(ms / 1000 / 60)
 }
 
+function unifyGenre(str) {
+
+    if (str.includes('rock')){
+        str = 'rock'
+    } else if (str.includes('pop')){
+        str = 'pop'
+    } else if (str.includes('hip hop')){
+        str = 'hip hop'
+    } else if (str.includes('rap ')){
+        str = 'rap'
+    } else if (str.includes('country')){
+        str = 'country' 
+    } else if (str.includes('jazz')){
+        str = 'jazz'
+    } else if (str.includes('metal')){
+        str = 'rock'
+    } else if (str.includes('indie')){
+        str = 'indie'
+    } else if (str.includes('folk')){
+        str = 'folk'
+    } else if (str.includes('edm')){
+        str = 'edm'
+    } else if (str.includes('electronic')){
+        str = 'electronic'
+    } else if (str.includes('classical')){
+        str = 'classical'
+    } else if (str.includes('dance ')){
+        str = 'dance'
+    } else if (str.includes('disco')){ 
+        str = 'disco'
+    } else if (str.includes(' reggae')){
+        str = 'reggae'
+    } else if (str.includes('soul')){
+        str = 'soul'
+    } else if (str.includes('salsa')){
+        str = 'salsa'
+    } else if (str.includes('vallenato')){
+        str = 'vallenato'
+    } else if (str.includes('punk')){
+        str = 'punk'
+    } else if (str.includes('blues')){
+        str = 'blues'
+    } else if (str.includes('ska')){
+        str = 'ska'
+    } else if (str.includes('reggaeton')){
+        str = 'reggaeton'
+    } else if (str.includes('cumbia')){
+        str = 'cumbia'
+    } else if (str.includes('trap ')){
+        str = 'trap'
+    } else if (str.includes('house')){
+        str = 'house'
+    } else if (str.includes('techno')){
+        str = 'techno'
+    } else if (str.includes(' rap')){
+        str = 'rap'
+    } else if (str.includes('dancehall')){
+        str = 'dancehall'
+    } else if (str.includes('house')){
+        str = 'house'
+    } else if (str.includes('reggae ')){
+        str = 'reggae'
+    } else if (str.includes('wave')){
+        str = 'wave'
+    } else if (str.includes('cuba')){
+        str = 'cuba'
+    } else if (str.includes('latin')){
+        str = 'latin'
+    } else if (str.includes('funk')){
+        str = 'funk'
+    } else if (str.includes('afro')){
+        str = 'afro'
+    } else if (str.includes(' trap')){
+        str = 'trap'
+    } else if (str.includes(' dance')){
+        str = 'dance'
+    } else if (str.includes('tropical')){
+        str = 'tropical'
+    } else if (str.includes('trip hop')){
+        str = 'hip hop'
+    } else if (str.includes('samba')){
+        str = 'samba'
+    } else if (str.includes('r&b')){
+        str = 'r&b'
+    } else if (str.includes('world')){
+        str = 'world'
+    } else if (str.includes('reggae')){
+        str = 'reggae'
+    } else if (str.includes('grunge')){
+        str = 'grunge'
+    } else if (str.includes('traphall')){
+        str = 'trap'
+    } else if (str.includes('beat')){ 
+        str = 'beat'
+    }
+    return str
+
+}
 function durationRange(duration) {
     duration = (duration / (1000 * 60)) % 60
     duration = Math.floor(duration)
