@@ -196,14 +196,18 @@ function plot(data) {
         )
 
         //Plot: Relationship between song age, popularity and durantion(ms)
-        plotScatterNCols(
+        plotScatter(
             { Duration: data.map(x => x.duration_min),
-              Popularity: data.map(x => x.popularity/10)
-              
+              Popularity: data.map(x => x.popularity)
             },
             "Relationship between song age, popularity and durantion(ms)",
+            "Song Duration",
+            "Duration",
+            "Popularity",
+            "Duration",
             "plot_div10"
         )
+
 
         //Plot: Artist song stats 
         plotGroupAgg(
