@@ -246,4 +246,13 @@ function plot(data) {
             "plot_div13"
         )
 
+        //Plot: Genres & Artist
+        plotGroupbyTableJoinCol(
+            data.map(x => x.genre),
+            data.map(x => x.artist_name),
+            "Genres & Artist",
+            "plot_div14"
+        )
+
+
     }

@@ -99,8 +99,14 @@ function loadRequest(url, callbackFunction, identifier) {
 }
 
 function dismissAlert(id) {
-    id ? $('#' + id).alert('close') : $('.alert').alert('close')
-}
+    try {
+        if (id) {
+            $('#' + id).alert('close');
+        } else
+            $('.alert').alert('close');
+    } catch {
+        console.log("Auth error.");
+    }}
 
 function getShortGenre(arr) {
     return arr.reduce((a, b, i, arr) => arr[i].length < b.length ? arr[i] : b, "-");
@@ -126,24 +132,10 @@ function songAgeRange(age) {
         return "New"
     } else if (age < 6) {
         return "Young"
-    } else if (age < 12) {
+    } else if (age < 10) {
         return "Middle"
     } else if (age < 18) {
         return "Old"
-    } else if (age < 24) {
-        return "Very Old"
-    } else if (age < 36) {
-        return "Ancient"
-    } else if (age < 48) {
-        return "Very Ancient"
-    } else if (age < 60) {
-        return "Eon"
-    } else if (age < 72) { 
-        return "Very Eon"
-    } else if (age < 84) {
-        return "Eternity"
-    } else if (age < 96) {
-        return "Very Eternity"
     } else {
         return "Eternal"
     }

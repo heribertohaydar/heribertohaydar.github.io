@@ -13,6 +13,44 @@ const cellStyle = {
   font: { family: "Roboto", size: 15, color: "gray" }
 }
 
+
+function plotGroupbyTableJoinCol(arr1,arr2,
+  layout_title,
+  div_id
+  ) {
+
+
+      let layout = {
+          title: layout_title
+        }
+      let config = {
+          tableHeaderStyle: headerStyle,
+          tableCellStyle: cellStyle
+      }
+
+      let groupBy = function(xs, key, red = (acc, curr) => ([...acc, curr]), init = []) {
+        return xs.reduce(function(rv, curr) {
+          let acc = rv[curr[key]] || init;
+          return { ...rv, [curr[key]]: red(acc, curr)};
+        }, {});
+      };
+      
+      let data = arr1.reduce(function(a, v, i, arr) { a.push({'Genre': v, 'Artist':arr2[i]}); return a;}, [])
+      let aggFunc = (artists_list, a) => artists_list.concat(a.Artist,', ') 
+      let artistByGenre = groupBy(data, 'Genre', aggFunc, '')
+      Object.keys(artistByGenre).forEach((key) => (artistByGenre[key] = artistByGenre[key].slice(0,-2)), {})
+
+      obj_data = {'Genre': Object.keys(artistByGenre),
+            'Artist': Object.values(artistByGenre)
+            }
+
+      let df = new dfd.DataFrame(obj_data)
+      df = df.sortValues("Genre", { ascending: true})
+      df.plot(div_id).table({ config, layout })
+
+  }
+
+
 function plotGroupAgg(data, layout_title, column, div_id) {
   let layout = {
     title: layout_title
