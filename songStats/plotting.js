@@ -166,7 +166,8 @@ function plotGroupbyLine(data,
             columns: config_columns
         }
         let df = new dfd.DataFrame(data)
-        df.groupby(groupby_columns)
+
+        df = df.groupby(groupby_columns)
             .col(groupby_col_columns)
             .count()
             .setIndex(index_column)

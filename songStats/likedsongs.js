@@ -20,7 +20,7 @@ function displayPlaylistInfo(playlist_name, playlist_songs) {
 function displayData(playlist_songs) {
     var $table = $('#table')
     var data = []
-    var j = 50
+    var j = 0
 
     $table.bootstrapTable('showLoading')
 
@@ -38,7 +38,7 @@ function displayData(playlist_songs) {
                         data.push(response["items"][i])
                         }
                     j = j + increment
-                    properties.ENV == 'dev' ? getData(null, increment) : getData(response["next"], increment)
+                    properties.ENV == 'dev' ? getData(null, increment) : getData(response["next"], 50)
                 }, 1)
             }, 1)
         } else {
@@ -64,7 +64,14 @@ function doFeatureEngineering(data) {
             month: 'short',
             day: 'numeric'
         }
+        var date_options2 = {
+            timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+            year: 'numeric',
+            month: 'numeric',
+            day: 'numeric'
+        }
 
+        song["added_dd_mm_yyyy"] = convertDate(song["added_at"]).toLocaleString('en-US', date_options2)
         song["added_at_non_conversion"] = song["added_at"]
         song["added_year_at"] = convertDate(song["added_at"]).toLocaleString('en-US', {year: 'numeric'})
         song["added_time_at"] = convertDate(song["added_at"]).toLocaleString('en-US', {hour: '2-digit', minute:'2-digit'})
@@ -107,6 +114,19 @@ function plot(data) {
                 { column: "Year" },
                 "plot_div"
             )
+
+        //Plot: Liked songs added by day
+        plotGroupbyLine(
+            { ddmmyy: data.map(x => x.added_dd_mm_yyyy) },
+            "Liked songs added by full date",
+            "Added day",
+            "Count",
+            ["ddmmyy_count"],
+            ["ddmmyy"],
+            ["ddmmyy"],
+            { column: "ddmmyy" },
+            "plot_div1"
+        )
 
         //Plot: Genre distribution
             plotGroupbyTable(
