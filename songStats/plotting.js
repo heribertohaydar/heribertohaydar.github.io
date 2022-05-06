@@ -36,9 +36,13 @@ function plotGroupbyTableJoinCol(arr1,arr2,
       };
       
       let data = arr1.reduce(function(a, v, i, arr) { a.push({'Genre': v, 'Artist':arr2[i]}); return a;}, [])
-      let aggFunc = (artists_list, a) => artists_list.concat(a.Artist,', ') 
+      let s  = new Set()
+      let aggFunc = (artists_list, a) => artists_list.concat(a.Artist,', ')
+      //let aggFunc = (s  = new Set(), a) => s.add(a)
       let artistByGenre = groupBy(data, 'Genre', aggFunc, '')
-      Object.keys(artistByGenre).forEach((key) => (artistByGenre[key] = artistByGenre[key].slice(0,-2)), {})
+      Object.keys(artistByGenre).forEach((key) => (artistByGenre[key] = artistByGenre[key].slice(0,-2)))
+      Object.keys(artistByGenre).forEach((key) => (artistByGenre[key] = new Set(artistByGenre[key].split(', '))))
+      Object.keys(artistByGenre).forEach((key) => (artistByGenre[key] = Array.from(artistByGenre[key]).join(', ')))
 
       obj_data = {'Genre': Object.keys(artistByGenre),
             'Artist': Object.values(artistByGenre)

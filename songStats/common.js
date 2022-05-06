@@ -122,7 +122,7 @@ function timeShit(time) {
     } else if (time >= 0 && time < 6) {
         return "Night"
     } else if (time == 24) {
-        return "Midnight"
+        return "Night"
     }
     return "Unknown"
 }
