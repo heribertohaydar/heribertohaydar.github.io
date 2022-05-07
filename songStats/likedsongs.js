@@ -67,11 +67,6 @@ function displayData(playlist_songs) {
       $table.bootstrapTable("load", formatted_data)
       $table.bootstrapTable("hideLoading")
       $("#exploration_div").css("display", "block")
-      $("#plot_div2").css("display", "block")
-      $("#plot_div9").css("display", "block")
-      $("#plot_div11").css("display", "block")
-      $("#plot_div12").css("display", "block")
-      $("#plot_div14").css("display", "block")
       //Plot data
       plot(formatted_data)
     }

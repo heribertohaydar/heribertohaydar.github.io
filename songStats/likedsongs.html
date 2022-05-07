@@ -50,7 +50,10 @@
             >
               <h5 class="">
                 <span id="playlist_name"></span>
-                <span id="number-of-songs" style="color: rgb(64, 205, 22)"></span>
+                <span
+                  id="number-of-songs"
+                  style="color: rgb(64, 205, 22)"
+                ></span>
               </h5>
             </div>
             <div id="tablediv">
@@ -66,7 +69,7 @@
                 data-sortable="true"
                 data-buttons-class="buttons"
                 data-toggle="table"
-                data-classes="table table-sm table-borderless w-100"
+                data-classes="table table-sm table-borderless table-striped w-100"
               >
                 <thead>
                   <tr>
@@ -118,144 +121,167 @@
                   </tr>
                 </thead>
               </table>
-              <div></div>
-              <div id="exploration_div" style="display: none;">Exploration</div>
-              <div></div>
-              <div id="plot_div"></div>
-              <div id="plot_div1"></div>
-              <div id="plot_div2" style="display: none;">
-                <table
-                id="tableGenreCount"
-                data-show-columns-toggle-all="true"
-                data-show-fullscreen="true"
-                data-search="true"
-                data-search-highlight="true"
-                data-show-columns="true"
-                data-sort-reset="true"
-                data-sortable="true"
-                data-buttons-class="buttons"
-                data-toggle="table"
-                data-classes="table table-sm table-borderless w-100"
-              >
-              <caption style="caption-side: top; text-align: center;">Genre distribution</caption>
-              <thead>
-                  <tr>
-                    <th data-sortable="true" data-field="col1">Genre</th>
-                    <th data-sortable="true" data-field="col2">Count</th>
-                  </tr>
-                </thead>
-              </table>
-
-              </div>
-              <div id="plot_div3"></div>
-              <div id="plot_div4"></div>
-              <div id="plot_div5"></div>
-              <div id="plot_div6"></div>
-              <div id="plot_div7"></div>
-              <div id="plot_div8"></div>
-              <div id="plot_div9"  style="display: none;">
-                <table
-                id="tableArtistCount"
-                data-show-columns-toggle-all="true"
-                data-show-fullscreen="true"
-                data-search="true"
-                data-search-highlight="true"
-                data-show-columns="true"
-                data-sort-reset="true"
-                data-sortable="true"
-                data-buttons-class="buttons"
-                data-toggle="table"
-                data-classes="table table-sm table-borderless w-100"
-              >
-              <caption style="caption-side: top; text-align: center;">Artist distribution</caption>
-                <thead>
-                  <tr>
-                    <th data-sortable="true" data-field="col1">Artist</th>
-                    <th data-sortable="true" data-field="col2">Count</th>
-                  </tr>
-                </thead>
-              </table>
-
-              </div>
-              <div id="plot_div10"></div>
-              <div id="plot_div11"  style="display: none;">
-                <table
-                id="tableArtistSongStats"
-                data-show-columns-toggle-all="true"
-                data-show-fullscreen="true"
-                data-search="true"
-                data-search-highlight="true"
-                data-show-columns="true"
-                data-sort-reset="true"
-                data-sortable="true"
-                data-buttons-class="buttons"
-                data-toggle="table"
-                data-classes="table table-sm table-borderless w-100"
-              >
-              <caption style="caption-side: top; text-align: center;">Artist Song Stats</caption>
-                <thead>
-                  <tr>
-                    <th data-sortable="true" data-field="col1">Artist</th>
-                    <th data-sortable="true" data-field="col2">Song Age Mean (years)</th>
-                    <th data-sortable="true" data-field="col3">Last Release Year</th>
-                    <th data-sortable="true" data-field="col4">Popularity Mean</th>
-                    <th data-sortable="true" data-field="col5">Song Duration Mean (min)</th>
-                  </tr>
-                </thead>
-              </table>
-
-              </div>
-              <div id="plot_div12"  style="display: none;">
-                <table
-                id="tableGenreSongStats"
-                data-show-columns-toggle-all="true"
-                data-show-fullscreen="true"
-                data-search="true"
-                data-search-highlight="true"
-                data-show-columns="true"
-                data-sort-reset="true"
-                data-sortable="true"
-                data-buttons-class="buttons"
-                data-toggle="table"
-                data-classes="table table-sm table-borderless w-100"
-              >
-              <caption style="caption-side: top; text-align: center;">Genre Song Stats</caption>
-                <thead>
-                  <tr>
-                    <th data-sortable="true" data-field="col1">Genre</th>
-                    <th data-sortable="true" data-field="col2">Song Age Mean (years)</th>
-                    <th data-sortable="true" data-field="col3">Last Release Year</th>
-                    <th data-sortable="true" data-field="col4">Popularity Mean</th>
-                    <th data-sortable="true" data-field="col5">Song Duration Mean (min)</th>
-                  </tr>
-                </thead>
-              </table>
-
-              </div>
-              <div id="plot_div13"></div>
-              <div id="plot_div14"  style="display: none;">
-                <table
-                id="tableGenresArtists"
-                data-show-columns-toggle-all="true"
-                data-show-fullscreen="true"
-                data-search="true"
-                data-search-highlight="true"
-                data-show-columns="true"
-                data-sort-reset="true"
-                data-sortable="true"
-                data-buttons-class="buttons"
-                data-toggle="table"
-                data-classes="table table-sm table-borderless w-100"
-              >
-              <caption style="caption-side: top; text-align: center;">Genre / Artist Group</caption>
-                <thead>
-                  <tr>
-                    <th data-sortable="true" data-field="col1">Genre</th>
-                    <th data-sortable="true" data-field="col2">Artist</th>
-                  </tr>
-                </thead>
-              </table>
-
+              <div id="exploration_div" style="display: none">
+                <div></div>
+                <div>Exploration</div>
+                <div></div>
+                <div id="plot_div"></div>
+                <div id="plot_div1"></div>
+                <div id="plot_div2" class="d-flex justify-content-center">
+                  <table
+                    id="tableGenreCount"
+                    data-show-columns-toggle-all="true"
+                    data-show-fullscreen="true"
+                    data-search="true"
+                    data-search-highlight="true"
+                    data-show-columns="true"
+                    data-sort-reset="true"
+                    data-sortable="true"
+                    data-buttons-class="buttons"
+                    data-toggle="table"
+                    data-classes="table table-sm table-borderless table-striped"
+                  >
+                    <caption style="caption-side: top; text-align: center">
+                      Genre distribution
+                    </caption>
+                    <thead>
+                      <tr>
+                        <th data-sortable="true" data-field="col1">Genre</th>
+                        <th data-sortable="true" data-field="col2">Count</th>
+                      </tr>
+                    </thead>
+                  </table>
+                </div>
+                <div id="plot_div3"></div>
+                <div id="plot_div4"></div>
+                <div id="plot_div5"></div>
+                <div id="plot_div6"></div>
+                <div id="plot_div7"></div>
+                <div id="plot_div8"></div>
+                <div id="plot_div9" class="d-flex justify-content-center">
+                  <table
+                    id="tableArtistCount"
+                    data-show-columns-toggle-all="true"
+                    data-show-fullscreen="true"
+                    data-search="true"
+                    data-search-highlight="true"
+                    data-show-columns="true"
+                    data-sort-reset="true"
+                    data-sortable="true"
+                    data-buttons-class="buttons"
+                    data-toggle="table"
+                    data-classes="table table-sm table-borderless table-striped"
+                  >
+                    <caption style="caption-side: top; text-align: center">
+                      Artist distribution
+                    </caption>
+                    <thead>
+                      <tr>
+                        <th data-sortable="true" data-field="col1">Artist</th>
+                        <th data-sortable="true" data-field="col2">Count</th>
+                      </tr>
+                    </thead>
+                  </table>
+                </div>
+                <div id="plot_div10"></div>
+                <div id="plot_div11" class="d-flex justify-content-center">
+                  <table
+                    id="tableArtistSongStats"
+                    data-show-columns-toggle-all="true"
+                    data-show-fullscreen="true"
+                    data-search="true"
+                    data-search-highlight="true"
+                    data-show-columns="true"
+                    data-sort-reset="true"
+                    data-sortable="true"
+                    data-buttons-class="buttons"
+                    data-toggle="table"
+                    data-classes="table table-sm table-borderless table-striped"
+                  >
+                    <caption style="caption-side: top; text-align: center">
+                      Artist Song Stats
+                    </caption>
+                    <thead>
+                      <tr>
+                        <th data-sortable="true" data-field="col1">Artist</th>
+                        <th data-sortable="true" data-field="col2">
+                          Song Age Mode (years)
+                        </th>
+                        <th data-sortable="true" data-field="col3">
+                          Last Release Year
+                        </th>
+                        <th data-sortable="true" data-field="col4">
+                          Popularity Mean
+                        </th>
+                        <th data-sortable="true" data-field="col5">
+                          Song Duration Mean (min)
+                        </th>
+                      </tr>
+                    </thead>
+                  </table>
+                </div>
+                <div id="plot_div12" class="d-flex justify-content-center">
+                  <table
+                    id="tableGenreSongStats"
+                    data-show-columns-toggle-all="true"
+                    data-show-fullscreen="true"
+                    data-search="true"
+                    data-search-highlight="true"
+                    data-show-columns="true"
+                    data-sort-reset="true"
+                    data-sortable="true"
+                    data-buttons-class="buttons"
+                    data-toggle="table"
+                    data-classes="table table-sm table-borderless table-striped"
+                  >
+                    <caption style="caption-side: top; text-align: center">
+                      Genre Song Stats
+                    </caption>
+                    <thead>
+                      <tr>
+                        <th data-sortable="true" data-field="col1">Genre</th>
+                        <th data-sortable="true" data-field="col2">
+                          Song Age Mode (years)
+                        </th>
+                        <th data-sortable="true" data-field="col3">
+                          Last Release Year
+                        </th>
+                        <th data-sortable="true" data-field="col4">
+                          Popularity Mean
+                        </th>
+                        <th data-sortable="true" data-field="col5">
+                          Song Duration Mean (min)
+                        </th>
+                      </tr>
+                    </thead>
+                  </table>
+                </div>
+                <div id="plot_div13"></div>
+                <div id="plot_div14" class="d-flex justify-content-center">
+                  <table
+                    id="tableGenresArtists"
+                    data-show-columns-toggle-all="true"
+                    data-show-fullscreen="true"
+                    data-search="true"
+                    data-search-highlight="true"
+                    data-show-columns="true"
+                    data-sort-reset="true"
+                    data-sortable="true"
+                    data-buttons-class="buttons"
+                    data-toggle="table"
+                    data-classes="table table-sm table-borderless table-striped"
+                  >
+                    <caption style="caption-side: top; text-align: center">
+                      Genre / Artist Group
+                    </caption>
+                    <thead>
+                      <tr>
+                        <th data-sortable="true" data-field="col1">Genre</th>
+                        <th data-sortable="true" data-field="col2">Artist</th>
+                      </tr>
+                    </thead>
+                  </table>
+                </div>
               </div>
             </div>
           </div>
