@@ -6,7 +6,9 @@ function getParamsFromURL(new_url) {
             sessionStorage.setItem('received_state', hashParams["state"])
             sessionStorage.setItem('raw_hash', hashParams["raw_hash"])
         }
-        //window.history.replaceState({}, document.title, "/" + new_url)
+        //comment to have a full url with spotify sensitive api info like  token.
+        // for some reason under chrome it works, but not in safari iphone
+        window.history.replaceState({}, document.title, "/" + new_url)
         return true
     } catch (err) {
         console.log(err.message)
