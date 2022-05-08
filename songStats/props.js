@@ -1,7 +1,7 @@
 const properties = new Object();
 
 //Environment 'dev', 'qua' or 'prod' -> 'dev' load first 50 tracks only
-properties.ENV = "qua"
+properties.ENV = "prod"
 
 properties.HOME_URL_DEV = "http://localhost:5500/"
 properties.HOME_URL_PROD = "https://hhaydar.github.io/songStats"
