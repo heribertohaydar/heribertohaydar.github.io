@@ -1,67 +1,67 @@
 function init() {
-  getParamsFromURL(properties.PATH_URL);
+  getParamsFromURL(properties.PATH_URL)
   loadRequest(
     properties.SPOTIFY_LIKED_SONGS_ENDPOINT,
     function (req, identifier) {
       if (req.status != 401) {
-        var response = JSON.parse(req.responseText);
-        displayPlaylistInfo("Liked Songs", response["total"]);
-        displayData(response["total"]);
+        var response = JSON.parse(req.responseText)
+        displayPlaylistInfo("Liked Songs", response["total"])
+        displayData(response["total"])
       }
     },
     1
-  );
+  )
 }
 
 function loadingTemplate(message) {
-  return '<i class="fa fa-spinner fa-spin fa-fw fa-2x"></i><br><div id="loadingmessage">Getting your songs.</div>';
+  return '<i class="fa fa-spinner fa-spin fa-fw fa-2x"></i><br><div id="loadingmessage">Getting your songs.</div>'
 }
 
 function displayPlaylistInfo(playlist_name, playlist_songs) {
-  $("#playlist_name").html(playlist_name);
-  $("#number-of-songs").html(playlist_songs);
+  $("#playlist_name").html(playlist_name)
+  $("#number-of-songs").html(playlist_songs)
 }
 
 function displayData(playlist_songs) {
-  var $table = $("#table");
-  var data = [];
-  var j = 0;
+  var $table = $("#table")
+  var data = []
+  var j = 0
 
-  $table.bootstrapTable("showLoading");
+  $table.bootstrapTable("showLoading")
 
   function getData(url, increment) {
     $("#loadingmessage")[0].innerHTML =
-      "API call: getting " + j + " of " + playlist_songs + " songs";
+      "API call: getting " + j + " of " + playlist_songs + " songs"
     if (url != null) {
       loadRequest(
         url,
         function (res, identifier) {
-          response = JSON.parse(res.responseText);
-          id_list = [];
+          response = JSON.parse(res.responseText)
+          id_list = []
           response.items.forEach((element) =>
             id_list.push(element.track.artists[0].id)
-          );
+          )
           loadRequest(
             properties.SPOTIFY_ARTISTS_ENDPOINT +
               jQuery.param({ ids: id_list.join() }),
             function (feat_res) {
-              features = JSON.parse(feat_res.responseText);
+              features = JSON.parse(feat_res.responseText)
               for (i in response["items"]) {
                 response["items"][i]["track"]["genres"] = {
                   ...features["artists"][i]["genres"],
-                };
+                }
                 data.push(response["items"][i])
               }
-              j = j + increment;
+              j = j + increment
               properties.ENV == "dev"
                 ? getData(null, increment)
                 : getData(response["next"], 50)
             },
             1
-          );
+          )
         },
         1
-      );
+      )
     } else {
       formatted_data = doFeatureEngineering(data)
       $table.bootstrapTable("load", formatted_data)
@@ -71,7 +71,7 @@ function displayData(playlist_songs) {
       plot(formatted_data)
     }
   }
-  getData(properties.SPOTIFY_LIKED_SONGS_ENDPOINT_INCREMENTAL, j);
+  getData(properties.SPOTIFY_LIKED_SONGS_ENDPOINT_INCREMENTAL, j)
 }
 
 function doFeatureEngineering(data) {
@@ -82,19 +82,19 @@ function doFeatureEngineering(data) {
       year: "numeric",
       month: "short",
       day: "numeric",
-    };
+    }
     var date_options2 = {
       timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone,
       year: "numeric",
       month: "numeric",
       day: "numeric",
-    };
+    }
 
     song["added_dd_mm_yyyy"] = new Date(convertDate(song["added_at"]).toLocaleString(
       "en-US",
       date_options2
     ))
-    song["added_at_non_conversion"] = song["added_at"];
+    song["added_at_non_conversion"] = song["added_at"]
     song["added_year_at"] = Number(convertDate(song["added_at"]).toLocaleString(
       "en-US",
       { year: "numeric" }
@@ -115,7 +115,7 @@ function doFeatureEngineering(data) {
       "en-US",
       { hour12: false, hour: "2-digit" }
     ))
-    song["am_pm_at"] = timeShit(song["added_h24_at"]);
+    song["am_pm_at"] = timeShit(song["added_h24_at"])
     song["added_at"] = convertDate(song["added_at"]).toLocaleString(
       "en-US",
       date_options
@@ -136,13 +136,13 @@ function doFeatureEngineering(data) {
       song["genre_list"].replace(/\s/g, "").length < 3
         ? "undefined"
         : getShortGenre(song["genre_list"].split(", "))
-    );
-    song["song_age"] = new Date().getFullYear() - song["relase_date"];
-    song["song_age_range"] = songAgeRange(song["song_age"]);
+    )
+    song["song_age"] = new Date().getFullYear() - song["relase_date"]
+    song["song_age_range"] = songAgeRange(song["song_age"])
 
-    delete song.track; // remove track object
+    delete song.track // remove track object
   }
-  return data;
+  return data
 }
 
 function plot(data) {
@@ -157,7 +157,7 @@ function plot(data) {
     ["Year"],
     { column: "Year" },
     "plot_div"
-  );
+  )
 
    //Plot: Liked songs added by weekday
    plotGroupbyPie(
@@ -168,7 +168,7 @@ function plot(data) {
     "weekday",
     "weekday_count",
     "plot_div0"
-  );
+  )
  
    //Plot: Liked songs added by month
    plotGroupbyPie(
@@ -179,7 +179,7 @@ function plot(data) {
     "month",
     "month_count",
     "plot_div0.1"
-  );
+  )
 
   //Plot: Liked songs added by day
   plotGroupbyLine(
@@ -192,7 +192,7 @@ function plot(data) {
     ["ddmmyy"],
     { column: "ddmmyy" },
     "plot_div1"
-  );
+  )
 
   
   //Plot: Genre distribution
@@ -203,7 +203,7 @@ function plot(data) {
     "Genre_count",
     false,
     "#tableGenreCount"
-  );
+  )
 
   //Plot: Liked songs added by time of day
   plotGroupbyPie(
@@ -214,7 +214,7 @@ function plot(data) {
     "AM_PM",
     "AM_PM_count",
     "plot_div3"
-  );
+  )
 
   //Plot: Liked songs added by time of day
   plotHist(
@@ -224,7 +224,7 @@ function plot(data) {
     "Freq",
     "Hour",
     "plot_div4"
-  );
+  )
 
   //Plot: Liked songs by explicit content
   plotGroupbyPie(
@@ -235,7 +235,8 @@ function plot(data) {
     "Explicit",
     "Explicit_count",
     "plot_div5"
-  );
+  )
+
   //Plot: Liked songs added by release year
   plotHist(
     { Year: data.map((x) => x.relase_date) },
@@ -244,7 +245,7 @@ function plot(data) {
     "Freq",
     "Year",
     "plot_div6"
-  );
+  )
 
   //Plot: Relationship between song age and popularity
   plotScatter(
@@ -258,7 +259,7 @@ function plot(data) {
     "Age",
     "Popularity",
     "plot_div7"
-  );
+  )
 
   //Plot: Liked songs by song age from released year
   plotGroupbyPie(
@@ -269,7 +270,7 @@ function plot(data) {
     "Age",
     "Age_count",
     "plot_div8"
-  );
+  )
 
   //Plot: Artist liked songs distribution
   plotGroupbyTable(
@@ -279,7 +280,7 @@ function plot(data) {
     "Artist_count",
     false,
     "#tableArtistCount"
-  );
+  )
 
   //Plot: Relationship between song age, popularity and durantion(ms)
   plotScatter(
@@ -293,7 +294,7 @@ function plot(data) {
     "Popularity",
     "Duration",
     "plot_div10"
-  );
+  )
 
   //Plot: Artist song stats
   plotGroupAgg(
@@ -306,7 +307,7 @@ function plot(data) {
     },
     ["Artist"],
     "#tableArtistSongStats"
-  );
+  )
 
   //Plot: Genre song stats
   plotGroupAgg(
@@ -319,7 +320,7 @@ function plot(data) {
     },
     ["Genre"],
     "#tableGenreSongStats"
-  );
+  )
 
   //Plot: Duration range song stats
   plotGroupbyPie(
@@ -330,12 +331,12 @@ function plot(data) {
     "Duration",
     "Duration_count",
     "plot_div13"
-  );
+  )
 
   //Plot: Genres & Artist
   plotGroupbyTableJoinCol(
     data.map((x) => x.genre),
     data.map((x) => x.artist_name),
     "#tableGenresArtists"
-  );
+  )
 }
