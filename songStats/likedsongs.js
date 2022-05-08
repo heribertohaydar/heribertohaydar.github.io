@@ -1,5 +1,5 @@
 function init() {
-  getParamsFromURL("likedsongs.html");
+  getParamsFromURL(properties.PATH_URL);
   loadRequest(
     properties.SPOTIFY_LIKED_SONGS_ENDPOINT,
     function (req, identifier) {

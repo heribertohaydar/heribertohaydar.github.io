@@ -3,8 +3,11 @@ const properties = new Object();
 //Environment 'dev', 'qua' or 'prod' -> 'dev' load first 50 tracks only
 properties.ENV = "prod"
 
-properties.HOME_URL_DEV = "http://localhost:5500/"
+properties.HOME_URL_DEV = "http://localhost:5500"
 properties.HOME_URL_PROD = "https://hhaydar.github.io/songStats"
+
+properties.PATH_URL_DEV = "likedsongs.html"
+properties.PATH_URL_PROD = "songStats/likedsongs.html"
 
 //Spotify API parameters
 
@@ -35,11 +38,12 @@ properties.ID_UNIQUE_CHARS =
 //Set dev/prod accordingly
 if (properties.ENV == "prod") {
   properties.HOME_URL = properties.HOME_URL_PROD
-  properties.SPOTIFY_API_REDIRECT_URI =
-    properties.SPOTIFY_API_REDIRECT_URI_PROD
+  properties.SPOTIFY_API_REDIRECT_URI = properties.SPOTIFY_API_REDIRECT_URI_PROD
   properties.SPOTIFY_CLIENT_ID = properties.SPOTIFY_CLIENT_ID_PROD
+  properties.PATH_URL = properties.PATH_URL_PROD
 } else {
   properties.HOME_URL = properties.HOME_URL_DEV
   properties.SPOTIFY_API_REDIRECT_URI = properties.SPOTIFY_API_REDIRECT_URI_DEV
   properties.SPOTIFY_CLIENT_ID = properties.SPOTIFY_CLIENT_ID_DEV
+  properties.PATH_URL = properties.PATH_URL_DEV
 }
