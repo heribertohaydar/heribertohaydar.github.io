@@ -70,7 +70,7 @@ function plotGroupAgg(data, column, table_id) {
   //grp.agg({Song_Duration: "mean", Popularity: "mean", Song_Age: "mean", Release_Year:"max"}).print()
   grp = grp
     .agg({
-      Song_Age: "mode",
+      Song_Age: "mean",
       Release_Year: "max",
       Popularity: "mean",
       Song_Duration: "mean",

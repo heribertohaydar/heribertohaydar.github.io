@@ -151,10 +151,10 @@ function unifyGenre(str) {
         str = 'rock'
     } else if (str.includes('pop')){
         str = 'pop'
+    } else if (str.includes('mpb')){
+        str = 'mpb'
     } else if (str.includes('hip hop')){
         str = 'hip hop'
-    } else if (str.includes('rap ')){
-        str = 'rap'
     } else if (str.includes('country')){
         str = 'country' 
     } else if (str.includes('jazz')){
@@ -167,7 +167,7 @@ function unifyGenre(str) {
         str = 'folk'
     } else if (str.includes('edm')){
         str = 'edm'
-    } else if (str.includes('electronic')){
+    } else if (str.includes('electro')){
         str = 'electronic'
     } else if (str.includes('classical')){
         str = 'classical'
@@ -193,14 +193,10 @@ function unifyGenre(str) {
         str = 'reggaeton'
     } else if (str.includes('cumbia')){
         str = 'cumbia'
-    } else if (str.includes('trap ')){
-        str = 'trap'
     } else if (str.includes('house')){
         str = 'house'
     } else if (str.includes('techno')){
         str = 'techno'
-    } else if (str.includes(' rap')){
-        str = 'rap'
     } else if (str.includes('dancehall')){
         str = 'dancehall'
     } else if (str.includes('house')){
@@ -211,14 +207,14 @@ function unifyGenre(str) {
         str = 'wave'
     } else if (str.includes('cuba')){
         str = 'cuba'
+    } else if (str.includes('latino')){
+        str = 'latino'
     } else if (str.includes('latin')){
         str = 'latin'
     } else if (str.includes('funk')){
         str = 'funk'
     } else if (str.includes('afro')){
         str = 'afro'
-    } else if (str.includes(' trap')){
-        str = 'trap'
     } else if (str.includes(' dance')){
         str = 'dance'
     } else if (str.includes('tropical')){
@@ -237,9 +233,32 @@ function unifyGenre(str) {
         str = 'grunge'
     } else if (str.includes('traphall')){
         str = 'trap'
-    } else if (str.includes('beat')){ 
+    } else if (str.includes('beat')) { 
         str = 'beat'
+    } else if (str.endsWith(' trap')) { 
+        str = 'trap'
+    } else if (str.startsWith('trap ')) {
+        str = 'trap'
+    } else if (str.startsWith('rap ')) {
+        str = 'rap'
+    } else if (str.endsWith(' rap')) {
+        str = 'rap'
+    } else if (str.includes('velha guarda')) {
+        str = 'samba'
+    } else if (str.includes('musica maranhense')) {
+        str = 'mpb'
+    } else if (str.includes('pagode')) {
+        str = 'pagode'
+    } else if (str.includes('deutschrap')) {
+        str = 'rap'
+    } else if (str.includes('zouk')) {
+        str = 'soca'
+    } else if (str.includes('soukous')) {
+        str = 'soca'
+    } else if (str.includes('turntablism')) {
+        str = 'hip hop'
     }
+
     return str
 
 }

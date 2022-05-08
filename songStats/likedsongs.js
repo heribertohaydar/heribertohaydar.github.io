@@ -90,10 +90,10 @@ function doFeatureEngineering(data) {
       day: "numeric",
     };
 
-    song["added_dd_mm_yyyy"] = convertDate(song["added_at"]).toLocaleString(
+    song["added_dd_mm_yyyy"] = new Date(convertDate(song["added_at"]).toLocaleString(
       "en-US",
       date_options2
-    );
+    ))
     song["added_at_non_conversion"] = song["added_at"];
     song["added_year_at"] = Number(convertDate(song["added_at"]).toLocaleString(
       "en-US",
@@ -102,6 +102,14 @@ function doFeatureEngineering(data) {
     song["added_time_at"] = convertDate(song["added_at"]).toLocaleString(
       "en-US",
       { hour: "2-digit", minute: "2-digit" }
+    )
+    song["added_weekday_at"] = convertDate(song["added_at"]).toLocaleString(
+      "en-US",
+      { weekday: "long" }
+    )
+    song["added_month_at"] = convertDate(song["added_at"]).toLocaleString(
+      "en-US",
+      { month: "long" }
     )
     song["added_h24_at"] = Number(convertDate(song["added_at"]).toLocaleString(
       "en-US",
@@ -115,7 +123,7 @@ function doFeatureEngineering(data) {
     song["duration_ms_non_conversion"] = Number(song["track"]["duration_ms"])
     song["duration_range"] = durationRange(song["track"]["duration_ms"])
     song["duration_ms"] = convertMS(song["track"]["duration_ms"])
-    song["duration_min"] = convertMsToMin(song["track"]["duration_ms"])
+    song["duration_min"] = Number(convertMsToMin(song["track"]["duration_ms"]))
     song["genre_list"] = Object.values(song["track"]["genres"]).join(", ")
     song["explicit"] = song["track"]["explicit"] ? "Yes" : "No"
     song["track_name"] = song["track"]["name"]
@@ -123,7 +131,7 @@ function doFeatureEngineering(data) {
     song["album_name"] = song["track"]["album"]["name"]
     song["popularity"] = Number(song["track"]["popularity"])
     song["relase_date"] = Number(song["track"]["album"]["release_date"].substring(0, 4))
-    song["total_tracks"] = song["track"]["album"]["total_tracks"];
+    song["total_tracks"] = Number(song["track"]["album"]["total_tracks"])
     song["genre"] = unifyGenre(
       song["genre_list"].replace(/\s/g, "").length < 3
         ? "undefined"
@@ -151,11 +159,33 @@ function plot(data) {
     "plot_div"
   );
 
+   //Plot: Liked songs added by weekday
+   plotGroupbyPie(
+    { weekday: data.map((x) => x.added_weekday_at) },
+    "Liked songs added by weekday",
+    ["weekday"],
+    ["weekday"],
+    "weekday",
+    "weekday_count",
+    "plot_div0"
+  );
+ 
+   //Plot: Liked songs added by month
+   plotGroupbyPie(
+    { month: data.map((x) => x.added_month_at) },
+    "Liked songs added by month",
+    ["month"],
+    ["month"],
+    "month",
+    "month_count",
+    "plot_div0.1"
+  );
+
   //Plot: Liked songs added by day
   plotGroupbyLine(
     { ddmmyy: data.map((x) => x.added_dd_mm_yyyy) },
     "Liked songs added by full date",
-    "Added day",
+    "", //title
     "Count",
     ["ddmmyy_count"],
     ["ddmmyy"],
@@ -178,7 +208,7 @@ function plot(data) {
   //Plot: Liked songs added by time of day
   plotGroupbyPie(
     { AM_PM: data.map((x) => x.am_pm_at) },
-    "Liked songs added at Day/Night",
+    "Liked songs added by day shift",
     ["AM_PM"],
     ["AM_PM"],
     "AM_PM",
