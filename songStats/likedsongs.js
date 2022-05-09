@@ -1,4 +1,5 @@
 function init() {
+  return null
   getParamsFromURL(properties.PATH_URL)
   loadRequest(
     properties.SPOTIFY_LIKED_SONGS_ENDPOINT,
