@@ -1,13 +1,12 @@
 function init() {
   getParamsFromURL(properties.PATH_URL)
-  return null
   loadRequest(
     properties.SPOTIFY_LIKED_SONGS_ENDPOINT,
     function (req, identifier) {
       if (req.status != 401) {
         var response = JSON.parse(req.responseText)
         displayPlaylistInfo("Liked Songs", response["total"])
-        displayData(response["total"])
+        //displayData(response["total"])
       }
     },
     1
