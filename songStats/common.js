@@ -132,11 +132,11 @@ function timeShit(time) {
 function songAgeRange(age) {
     if (age < 3) {
         return "New"
-    } else if (age < 6) {
+    } else if (age < 7) {
         return "Young"
-    } else if (age < 10) {
+    } else if (age < 15) {
         return "Middle"
-    } else if (age < 18) {
+    } else if (age < 30) {
         return "Old"
     } else {
         return "Eternal"
