@@ -77,7 +77,7 @@ function plotGroupAgg(data, column, table_id) {
     })
     
    let data_table = grp.values.reduce(function (a, v, i, arr) {
-      a.push({ col1: arr[i][0], col2: arr[i][1], col3: arr[i][2], col4: arr[i][3], col5: arr[i][4] });
+      a.push({ col1: arr[i][0], col2: Math.floor(arr[i][1]), col3: arr[i][2], col4: Math.floor(arr[i][3]), col5: Math.floor(arr[i][4]) });
       return a
     }, [])
   
