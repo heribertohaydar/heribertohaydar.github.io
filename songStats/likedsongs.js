@@ -290,7 +290,7 @@ function plot(data) {
     },
     "Relationship between song age, popularity and durantion(ms)",
     "Popularity",
-    "Duration",
+    "Duration (min)",
     "Popularity",
     "Duration",
     "plot_div10"
