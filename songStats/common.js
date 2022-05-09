@@ -210,7 +210,7 @@ function unifyGenre(str) {
     } else if (str.includes('cuba')){
         str = 'cuba'
     } else if (str.includes('latino')){
-        str = 'latino'
+        str = 'latin'
     } else if (str.includes('latin')){
         str = 'latin'
     } else if (str.includes('funk')){
