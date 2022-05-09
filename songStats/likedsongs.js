@@ -68,7 +68,7 @@ function displayData(playlist_songs) {
       $table.bootstrapTable("hideLoading")
       $("#exploration_div").css("display", "block")
       //Plot data
-      //plot(formatted_data)
+      plot(formatted_data)
     }
   }
   getData(properties.SPOTIFY_LIKED_SONGS_ENDPOINT_INCREMENTAL, j)

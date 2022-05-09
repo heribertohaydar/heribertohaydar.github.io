@@ -111,7 +111,7 @@ function dismissAlert(id) {
     }}
 
 function getShortGenre(arr) {
-    return arr.reduce((a, b, i, arr) => arr[i].length < b.length ? arr[i] : b, "-");
+    return arr.reduce((a, b, i, arr) => arr[i].length <= b.length ? arr[i] : b, "-");
 }
 
 function timeShit(time) {
