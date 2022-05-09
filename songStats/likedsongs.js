@@ -289,7 +289,7 @@ function plot(data) {
       Popularity: data.map((x) => x.popularity),
     },
     "Relationship between song age, popularity and durantion(ms)",
-    "Song Duration",
+    "Popularity",
     "Duration",
     "Popularity",
     "Duration",
