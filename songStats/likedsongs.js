@@ -1,6 +1,6 @@
 function init() {
-  return null
   getParamsFromURL(properties.PATH_URL)
+  return null
   loadRequest(
     properties.SPOTIFY_LIKED_SONGS_ENDPOINT,
     function (req, identifier) {
