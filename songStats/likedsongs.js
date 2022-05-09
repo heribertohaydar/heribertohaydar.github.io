@@ -55,7 +55,7 @@ function displayData(playlist_songs) {
               j = j + increment
               properties.ENV == "dev"
                 ? getData(null, increment)
-                : getData(response["next"], 50)
+                : getData(response["next"], increment)
             },
             1
           )
@@ -71,7 +71,7 @@ function displayData(playlist_songs) {
       //plot(formatted_data)
     }
   }
-  getData(properties.SPOTIFY_LIKED_SONGS_ENDPOINT_INCREMENTAL, j)
+  getData(properties.SPOTIFY_LIKED_SONGS_ENDPOINT_INCREMENTAL, 50)
 }
 
 function doFeatureEngineering(data) {
