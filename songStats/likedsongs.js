@@ -48,7 +48,7 @@ function displayData(playlist_songs) {
               features = JSON.parse(feat_res.responseText)
               for (i in response["items"]) {
                 response["items"][i]["track"]["genres"] = {
-                  ...features["artists"][i]["genres"],
+                  ...features["artists"][i]["genres"]
                 }
                 data.push(response["items"][i])
               }
