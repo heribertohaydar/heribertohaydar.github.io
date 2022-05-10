@@ -64,12 +64,12 @@ function displayData(playlist_songs) {
       )
     } else {
       formatted_data = doFeatureEngineering(data)
-      //$table.bootstrapTable("load", formatted_data)
+      $table.bootstrapTable("load", formatted_data)
       $table.bootstrapTable("hideLoading")
       $("#exploration_div").css("display", "block")
 
       //Plot data
-      //plot(formatted_data)
+      plot(formatted_data)
     }
   }
   getData(properties.SPOTIFY_LIKED_SONGS_ENDPOINT_INCREMENTAL, 50)
