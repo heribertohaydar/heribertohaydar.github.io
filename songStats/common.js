@@ -68,7 +68,7 @@ function showAlert(message, type, time) {
 
 function showErrorMessage() {
     dismissAlert()
-    showAlert('<div id="error">Please login with your spotify account.  <a class="link" id="loginbutton" href="http://localhost:5500">Login here</a></div>', "alert-danger", 0)
+    showAlert('<div id="error">Please login with your spotify account.  <a class="link" id="loginbutton" href="' + properties.HOME_URL +'">Login here</a></div>', "alert-danger", 0)
 }
 
 function loadRequest(url, callbackFunction, identifier) {

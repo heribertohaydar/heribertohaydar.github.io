@@ -9,7 +9,7 @@ function init() {
         displayData(response["total"])
       }
     },
-    1
+    3
   )
 }
 
@@ -32,7 +32,8 @@ function displayData(playlist_songs) {
   function getData(url, increment) {
     $("#loadingmessage")[0].innerHTML =
       "API call: getting " + j + " of " + playlist_songs + " songs"
-    if (url != null) {
+    //if (url != null) {
+      if (j <= playlist_songs) {
       loadRequest(
         url,
         function (res, identifier) {
@@ -57,7 +58,7 @@ function displayData(playlist_songs) {
                 ? getData(null, increment)
                 : getData(response["next"], increment)
             },
-            1
+            2
           )
         },
         1
