@@ -32,8 +32,7 @@ function displayData(playlist_songs) {
   function getData(url, increment) {
     $("#loadingmessage")[0].innerHTML =
       "API call: getting " + j + " of " + playlist_songs + " songs"
-    //if (url != null) {
-      if (j <= playlist_songs) {
+    if (url != null) {
       loadRequest(
         url,
         function (res, identifier) {
