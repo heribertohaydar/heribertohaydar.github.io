@@ -53,7 +53,7 @@ function displayData(playlist_songs) {
                 data.push(response["items"][i])
               }
               j = j + increment
-              properties.ENV == "prod"
+              properties.ENV == "dev"
                 ? getData(null, increment)
                 : getData(response["next"], increment)
             },
