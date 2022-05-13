@@ -9,7 +9,7 @@ function init() {
         displayData(response["total"])
       }
     },
-    3
+    1
   )
 }
 
@@ -57,7 +57,7 @@ function displayData(playlist_songs) {
                 ? getData(null, increment)
                 : getData(response["next"], increment)
             },
-            2
+            1
           )
         },
         1
