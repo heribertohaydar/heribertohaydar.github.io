@@ -1,4 +1,13 @@
 function init() {
+  var $table = $("#table")
+  var spotify_songs = JSON.parse(sessionStorage.getItem('spotify_songs'))
+  if ( spotify_songs != null) {
+    $table.bootstrapTable("load", spotify_songs)
+    $("#exploration_div").css("display", "block")
+    //Plot data
+    plot(spotify_songs)
+
+  } else {
   getParamsFromURL(properties.PATH_URL)
   loadRequest(
     properties.SPOTIFY_LIKED_SONGS_ENDPOINT,
@@ -11,6 +20,7 @@ function init() {
     },
     1
   )
+  }
 }
 
 function loadingTemplate(message) {
@@ -65,6 +75,7 @@ function displayData(playlist_songs) {
     } else {
       formatted_data = doFeatureEngineering(data)
       data=null
+      sessionStorage.setItem('spotify_songs', JSON.stringify(formatted_data))
       $table.bootstrapTable("load", formatted_data)
       $table.bootstrapTable("hideLoading")
       $("#exploration_div").css("display", "block")
