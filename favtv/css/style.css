@@ -1,0 +1,58 @@
+img {
+  width:102px;
+  height:106px
+}
+
+.container {  display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    gap: 100px 0px; 
+    grid-auto-flow: row;
+    grid-template-areas:
+      "a1 a2 a3 a4 a5 a6 a7"
+      "b1 b2 b3 b4 b5 b6 b7"
+      "c1 c2 c3 c4 c5 c6 c7";
+  }
+  
+  .a1 { grid-area: a1; }
+  
+  .a2 { grid-area: a2; }
+  
+  .a3 { grid-area: a3; }
+  
+  .a4 { grid-area: a4; }
+  
+  .a5 { grid-area: a5; }
+  
+  .b1 { grid-area: b1; }
+  
+  .b2 { grid-area: b2; }
+  
+  .b3 { grid-area: b3; }
+  
+  .b4 { grid-area: b4; }
+  
+  .b5 { grid-area: b5; }
+  
+  .c1 { grid-area: c1; }
+  
+  .c2 { grid-area: c2; }
+  
+  .c3 { grid-area: c3; }
+  
+  .c4 { grid-area: c4; }
+  
+  .c5 { grid-area: c5; }
+  
+  .a6 { grid-area: a6; }
+  
+  .b6 { grid-area: b6; }
+  
+  .c6 { grid-area: c6; }
+  
+  .a7 { grid-area: a7; }
+  
+  .b7 { grid-area: b7; }
+  
+  .c7 { grid-area: c7; }
+  
