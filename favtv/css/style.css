@@ -2,12 +2,18 @@ body {
   background-color: #454444;
 }
 
+a:hover {
+  background-color: yellow;
+}
+
 img {
   width:102px;
   height:106px
 }
 
-.container {  display: grid;
+.container {  
+    display: grid;
+    grid-auto-flow: column dense;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
     grid-template-rows: 1fr 1fr 1fr;
     gap: 100px 0px; 
