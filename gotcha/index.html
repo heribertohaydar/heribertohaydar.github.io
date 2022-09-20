@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Just load url-image and click on it" />
+    <meta name="description" content="Convert image to text" />
     <link rel="stylesheet" href="styles.css" />
     <title>Gotcha!</title>
   </head>
@@ -12,18 +12,15 @@
       <div class="splash">
         <img src="" id="imageSrc" />
         <p class="splash-subhead">
-          Upload an image containing the url you want clickable
+          Upload an image with text
         </p>
         <p>
           <input type="file" id="fileInput" name="file" class="" />
         </p>
-        <a
-          id="convertedUrl"
-          href=""
-          target="_blank"
-          class="pure-button pure-button-primary"
-          hidden
-        ></a>
+        <div class="text-wrap">
+          <textarea id="textA"></textarea>
+          <div id="copyToClipboard-a" class="clipboard icon"></div>
+        </div>
       </div>
     </div>
     <script src="https://unpkg.com/tesseract.js@v2.1.0/dist/tesseract.min.js"></script>

@@ -2,13 +2,20 @@ let imgElement = document.getElementById("imageSrc");
 let inputElement = document.getElementById("fileInput");
 inputElement.addEventListener("change", ResizeImage);
 
+document.getElementById('copyToClipboard-a').addEventListener('click', function() {
+
+  var text = document.getElementById('textA');
+  text.select();
+  document.execCommand('copy');
+
+})
+
+
 function recognizeText(file) {
   Tesseract.recognize(file, "eng", {
     logger: (m) => console.log(m),
   }).then(({ data: { text } }) => {
-    document.getElementById("convertedUrl").href = text;
-    document.getElementById("convertedUrl").textContent = text;
-    document.getElementById("convertedUrl").style.display = "block";
+    document.getElementById("textA").innerHTML = text;
   });
 }
 

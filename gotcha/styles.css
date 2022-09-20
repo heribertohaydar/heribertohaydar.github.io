@@ -44,13 +44,6 @@ label {
   border-radius: 5px;
 }
 
-a.pure-button-primary {
-  background: rgb(217, 228, 71);
-  color: #5c59f3;
-  border-radius: 5px;
-  font-size: 120%;
-}
-
 .splash-container {
   background: #1f8dd6;
   z-index: 1;
@@ -65,11 +58,10 @@ a.pure-button-primary {
 
 .splash {
   /* absolute center .splash within .splash-container */
-  width: 80%;
+  width: 30%;
   height: 50%;
   margin: auto;
-  position: absolute;
-  top: 100px;
+  top: 150px;
   left: 0;
   bottom: 0;
   right: 0;
@@ -83,7 +75,7 @@ a.pure-button-primary {
   font-weight: bold;
   color: white;
   border: 3px solid white;
-  padding: 1em 1.6em;
+  padding: 1em 1.0em;
   font-weight: 100;
   border-radius: 5px;
   line-height: 1em;
@@ -96,4 +88,67 @@ a.pure-button-primary {
   opacity: 0.8;
   text-transform: uppercase;
   font-size: 130%;
+}
+
+
+.text-wrap {
+  position: relative;
+  background-color: #eee;
+  padding: 1em;
+}
+
+textarea {
+  min-width: 26vw;
+  max-width: 85vw;
+  min-height: 300px;
+  max-height: 100vh;
+  padding: 1.1em 1.1em;
+  font-size: 1em;
+  
+}
+textarea::-webkit-scrollbar {
+    width: 4px;
+}
+textarea::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+}
+textarea::-webkit-scrollbar-thumb {
+    background: #888; 
+}
+textarea::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+}
+
+.clipboard.icon {
+  position: absolute;
+    top: 2.3em;
+    right: 2.5em;
+  margin-top: 4px;
+  margin-left: 4px;
+  width: 11px;
+  height: 13px;
+  border: solid 1px #333333;
+  border-top: none;
+  border-radius: 1px; 
+  cursor: pointer;
+}
+.clipboard.icon:before {
+  top: -1px;
+  left: 2px;
+  width: 5px;
+  height: 1px;
+  border: solid 1px #333333;
+  border-radius: 1px; 
+}
+.clipboard.icon:after {
+  width: 3px;
+  height: 1px;
+  background-color: #333333;
+  box-shadow: 8px 0 0 0 #333333; 
+}
+
+.icon:before, .icon:after {
+  content: '';
+  position: absolute;
+  display: block;
 }
