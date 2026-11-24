@@ -1,0 +1,306 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#172554"><title>Club de Mentes Curiosas</title>
+<style>
+:root{--ink:#202b45;--navy:#172554;--blue:#4f72e8;--muted:#64718a;--line:#e4eaf5;--bg:#f5f8ff}*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 5% 5%,#dff6ff,transparent 25%),radial-gradient(circle at 95% 8%,#fff0d0,transparent 24%),var(--bg);font-family:system-ui,-apple-system,"Trebuchet MS",sans-serif;color:var(--ink)}button,input,textarea{font:inherit}.hero{background:var(--navy);color:white;padding:23px 18px}.wrap{max-width:950px;margin:auto}.eyebrow{font-size:11px;letter-spacing:.14em;color:#c5d2ff;font-weight:900}.hero h1{font-size:clamp(29px,5vw,43px);margin:8px 0}.hero p{margin:0;color:#e0e7ff;max-width:700px}.main{max-width:950px;margin:auto;padding:18px 14px 40px}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-bottom:14px}.stat,.card,.note{background:white;border:1px solid var(--line);border-radius:17px;padding:13px;box-shadow:0 5px 20px #1d31500b}.stat b{display:block;font-size:22px;color:var(--navy)}.stat span{font-size:12px;color:var(--muted)}.tabs{display:flex;gap:8px;overflow:auto;padding:3px 0 13px}.tab{border:1px solid #dce4f2;border-radius:30px;padding:10px 14px;background:white;color:#44516b;font-weight:800;white-space:nowrap}.tab.active{background:var(--navy);color:white}.card{padding:0;overflow:hidden;box-shadow:0 12px 32px #1d315012}.cardhead{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:16px 19px;border-bottom:1px solid var(--line)}.kicker{font-size:11px;color:var(--blue);font-weight:900;letter-spacing:.12em}.cardhead h2{margin:3px 0 0;font-size:20px}.level{background:#edf1ff;color:#3852a6;border-radius:30px;padding:7px 11px;font-size:12px;font-weight:900;white-space:nowrap}.inside{padding:18px}.mission{background:linear-gradient(135deg,#f0f4ff,#effaff);border-radius:17px;padding:20px}.emoji{font-size:34px}.question{font-size:clamp(20px,3.5vw,27px);font-weight:900;line-height:1.32;margin-top:9px}.sub{font-size:13px;color:#5e6b85;margin-top:9px}.answer{display:flex;gap:9px;margin:14px 0;flex-wrap:wrap}.answer input{flex:1;min-width:180px;border:2px solid #dce4f2;border-radius:12px;padding:13px;font-size:18px;outline:none}.answer input:focus,textarea:focus{border-color:var(--blue)}.btn{border:0;border-radius:12px;padding:12px 16px;font-weight:900}.primary{background:var(--blue);color:white}.secondary{background:#edf1ff;color:#3451ae}.plain{background:#f0f3f8;color:#46536b}.explain{border:1px solid var(--line);border-radius:14px;padding:14px}.explain label{font-weight:900}.explain p{font-size:13px;color:var(--muted);margin:4px 0 9px}textarea{width:100%;min-height:78px;padding:11px;border:2px solid #e0e6f2;border-radius:11px;resize:vertical;outline:none}.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}.chip{background:#f7f8fc;border:1px solid var(--line);border-radius:20px;padding:6px 9px;font-size:12px;color:#4c5870}.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:13px}.hint,.feedback{display:none;border-radius:12px;padding:12px 14px;margin-top:12px;font-size:14px;line-height:1.5}.hint.show,.feedback.show{display:block}.hint{background:#fff7df;border:1px solid #f0dfa7;color:#6c5112}.feedback.good{background:#e8f8ee;border:1px solid #bce8cb;color:#155a34}.feedback.try{background:#fff6dc;border:1px solid #f0dfa7;color:#6c5112}.lower{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px}.note h3{margin:0 0 5px;font-size:15px}.note p{font-size:13px;color:var(--muted);margin:0;line-height:1.5}.bar{height:8px;background:#edf0f7;border-radius:20px;margin-top:10px;overflow:hidden}.bar span{display:block;height:100%;width:0;background:linear-gradient(90deg,#4f72e8,#42c7d8)}.foot{text-align:center;font-size:12px;color:#778198;margin-top:17px}@media(max-width:620px){.lower{grid-template-columns:1fr}.inside{padding:13px}.answer input{min-width:100%}.answer .btn{flex:1}.stats{gap:6px}.stat{padding:9px}.stat b{font-size:19px}}
+
+.thinking-step{margin-top:12px;padding-top:10px;border-top:1px solid #edf0f7;display:grid;gap:7px}
+.choice-grid{display:grid;grid-template-columns:1fr;gap:8px;margin-top:5px}
+.choice{width:100%;text-align:left;border:2px solid #dfe6f3;background:#fff;border-radius:13px;padding:12px 13px;color:#293653;font-weight:650;line-height:1.4;cursor:pointer}
+.choice:hover{border-color:#8ea5ef;background:#f7f9ff}
+.choice:focus-visible{outline:3px solid #91a9ff;outline-offset:2px}
+.choice.selected{border-color:#4f72e8;background:#eef2ff}
+.choice.correct{border-color:#35a66b;background:#eaf8ef}
+.choice.incorrect{border-color:#d79b35;background:#fff8e7}
+.choice:disabled{cursor:default;opacity:1}
+.curiosity-card{display:flex;flex-direction:column;gap:8px}
+.curiosity-footer{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.curiosity-footer a{font-size:12px;color:#4965b7;text-decoration:underline}
+.curiosity-footer .btn{font-size:12px;padding:8px 11px}
+.oral-prompt{margin-top:10px;padding:12px 14px;border-radius:12px;background:#f1f7ff;color:#3e527a;font-size:13px;line-height:1.5}
+#planFeedback{display:none}
+#planFeedback.show{display:block}
+.thinking-step b{font-size:11px;letter-spacing:.08em;color:#3852a6}
+.thinking-step span{font-size:13px;color:#596780}
+.thinking-step textarea{min-height:54px}
+.hidden{display:none!important}
+</style></head><body>
+<noscript>
+  <div style="margin:12px auto;max-width:950px;padding:14px 18px;border:2px solid #b45309;border-radius:12px;background:#fff7ed;color:#7c2d12;font:600 14px/1.5 system-ui">
+    Este visor no está ejecutando JavaScript. La misión de ejemplo puede verse, pero los botones, las pistas y la comprobación no funcionarán aquí.
+    Abre el archivo en un navegador que permita ejecutar JavaScript; la vista previa de Archivos de iPhone puede bloquearlo.
+  </div>
+</noscript>
+
+<header class="hero"><div class="wrap"><div class="eyebrow">LABORATORIO DE IDEAS · APRENDER JUGANDO</div><h1>🚀 Club de Mentes Curiosas</h1><p>Cada día aparecen solo cinco misiones elegidas al azar de una biblioteca de 100 retos. Piensa, descubre patrones y explica cómo llegaste a una respuesta. ¡Aquí importa tanto el camino como el resultado!</p></div></header>
+<main class="main">
+<div class="stats"><div class="stat"><b id="done">0</b><span>misiones resueltas</span></div><div class="stat"><b id="stars">0 ⭐</b><span>estrellas ganadas</span></div><div class="stat"><b id="counter">1 / 5</b><span>misión de hoy</span></div></div>
+<div class="actions" style="margin:0 0 13px"><span style="font-size:13px;color:#5e6b85;font-weight:700;align-self:center">Cada día: 5 misiones diferentes, mezcladas al azar.</span><button class="btn secondary" id="newRound">🔀 Cambiar las 5 misiones</button></div>
+<section class="card"><div class="cardhead"><div><div class="kicker" id="category">MATEMÁTICAS · DESAFÍO</div><h2 id="title">Desafío matemático</h2></div><span class="level" id="level">Nivel explorador</span></div>
+<div class="inside"><div class="mission"><div class="emoji" id="emoji">🔢</div><div class="question" id="question">En una biblioteca había 36 libros de aventuras y 28 de ciencia. Prestaron 19. ¿Cuántos quedaron entre los dos grupos?</div><div class="sub" id="sub">Desafío de dos pasos. Si el programa se inicia, esta pregunta será reemplazada por una misión aleatoria.</div></div>
+<div class="explain" id="thinkingGuide">
+  <label>🕵️‍♀️ Primero, descubre cómo resolverlo</label>
+  <p>¿Qué harías primero? Puedes elegir una idea o resolver directamente. ¡Tú decides!</p>
+  <div class="thinking-step">
+    <b>ELIGE TU PLAN</b>
+    <span>¿Qué harías para empezar?</span>
+    <div id="planChoices" class="choice-grid" role="group" aria-label="Elige un plan para resolver la misión"></div>
+  </div>
+  <div id="planFeedback" class="feedback" aria-live="polite"></div>
+  <div class="thinking-step">
+    <b>AHORA RESUELVE</b>
+    <span>Ahora resuelve. No tienes que escribir cómo pensaste: puedes contarlo en voz alta al terminar.</span>
+  </div>
+</div>
+<div class="answer"><input id="answer" placeholder="Tu respuesta…" autocomplete="off" aria-label="Tu respuesta"><button class="btn primary" id="check">Comprobar</button></div>
+<div class="feedback" id="feedback" aria-live="polite"></div>
+<div class="oral-prompt" id="oralPrompt">🎙️ Cuando termines, cuéntale a alguien qué viste en el problema y cómo encontraste la respuesta.</div>
+<div class="actions"><button class="btn secondary" id="hintBtn">💡 Dame una pista</button><button class="btn plain" id="next">Siguiente misión →</button></div><div class="hint" id="hint"></div></div></section>
+<div class="lower"><div class="note"><h3>🎯 Habilidad en práctica</h3><p id="skill">Resolver y explicar: encontrar una respuesta y contar los pasos que te llevaron a ella.</p><div class="bar"><span id="bar"></span></div></div><div class="note curiosity-card">
+<h3>✨ Una curiosidad para explorar</h3>
+<p id="curiosityFact">En Venus, un día dura más que un año. ¡Ese planeta gira muy despacio!</p>
+<div class="curiosity-footer">
+<a id="curiositySource" href="https://science.nasa.gov/venus/venus-facts/" target="_blank" rel="noopener noreferrer">Descubre de dónde viene este dato ↗</a>
+<button class="btn secondary" id="nextFact" type="button">Otro dato curioso</button>
+</div>
+</div></div>
+
+<div class="foot">Equivocarse también enseña. Una buena explicación vale tanto como acertar.</div></main>
+<script>
+
+const $ = id => document.getElementById(id);
+const bank = [{"c":"math","t":"Desafío matemático","e":"🔢","q":"En una biblioteca había 36 libros de aventuras y 28 de ciencia. Prestaron 19. ¿Cuántos quedaron entre los dos grupos?","a":"45","h":"Suma primero los libros y después quita los prestados.","x":"Junté 36 y 28 para saber cuántos había. Después resté 19.","s":"Sumar y restar en dos pasos"},{"c":"math","t":"Desafío matemático","e":"🔢","q":"Un equipo consiguió 125 puntos y luego 38 más. Para ganar necesita 200. ¿Cuántos puntos le faltan?","a":"37","h":"Calcula el puntaje que ya tiene y compáralo con 200.","x":"Sumé los puntos de las dos rondas y calculé cuánto faltaba para 200.","s":"Calcular una cantidad faltante"},{"c":"math","t":"Desafío matemático","e":"🔢","q":"Hay 6 cajas con 8 lápices cada una. Se reparten 15 lápices. ¿Cuántos quedan?","a":"33","h":"Primero averigua cuántos lápices hay en las seis cajas.","x":"Multipliqué 6 por 8 y después resté los 15 repartidos.","s":"Multiplicar y restar"},{"c":"math","t":"Desafío matemático","e":"🔢","q":"Una granja recoge 48 huevos y los empaca en cajas de 6. Vende 5 cajas. ¿Cuántos huevos quedan?","a":"18","h":"Averigua cuántas cajas completas puede llenar y cuántos huevos vende.","x":"Dividí 48 entre 6 para saber las cajas. Vendió 5, así que quedaron 3 cajas: 18 huevos.","s":"Dividir y razonar con grupos"},{"c":"math","t":"Desafío matemático","e":"🔢","q":"Sara tenía 75 pegatinas. Regaló 18 y después compró 24. ¿Cuántas tiene ahora?","a":"81","h":"Haz las acciones en el orden en que ocurrieron.","x":"A 75 le quité 18 y luego sumé las 24 nuevas.","s":"Seguir cambios en orden"},{"c":"math","t":"Desafío matemático","e":"🔢","q":"En un teatro hay 9 filas con 7 sillas. Si 12 sillas están vacías, ¿cuántas están ocupadas?","a":"51","h":"Calcula primero todas las sillas del teatro.","x":"Multipliqué 9 por 7 y quité las 12 vacías.","s":"Multiplicar y restar"},{"c":"math","t":"Desafío matemático","e":"🔢","q":"Un libro tiene 96 páginas. Mateo leyó 28 el lunes y 35 el martes. ¿Cuántas páginas le faltan?","a":"33","h":"Suma lo que leyó en los dos días y compáralo con 96.","x":"Sumé 28 y 35. Después resté ese total a 96.","s":"Sumar y hallar diferencia"},{"c":"math","t":"Desafío matemático","e":"🔢","q":"Una cuerda mide 84 centímetros. Se corta en 4 partes iguales. ¿Cuánto mide cada parte?","a":"21","h":"Reparte los 84 centímetros en cuatro grupos iguales.","x":"Dividí 84 entre 4 porque las partes deben medir lo mismo.","s":"División exacta"},{"c":"math","t":"Desafío matemático","e":"🔢","q":"En una excursión van 37 niñas y 28 niños. En cada vehículo caben 9 personas. ¿Cuántos vehículos necesitan?","a":"8","h":"Cuenta primero a todas las personas. Comprueba si siete vehículos alcanzan.","x":"Son 65 personas. Siete vehículos llevan 63, así que hace falta un octavo.","s":"División con resto y decisión"},{"c":"math","t":"Desafío matemático","e":"🔢","q":"Una tienda tenía 150 globos. Vendió 46 por la mañana y 38 por la tarde. ¿Cuántos quedan?","a":"66","h":"Suma las dos ventas antes de restarlas del total.","x":"Vendió 84 globos en total; 150 menos 84 son 66.","s":"Combinar dos cantidades"},{"c":"math","t":"Desafío matemático","e":"🔢","q":"Hay 5 bolsas con 12 canicas cada una. Se pierden 9 canicas. ¿Cuántas quedan?","a":"51","h":"Calcula las canicas de todas las bolsas antes de quitar las perdidas.","x":"Multipliqué 5 por 12 y resté 9.","s":"Multiplicar y restar"},{"c":"math","t":"Desafío matemático","e":"🔢","q":"Pienso en un número. Si le sumo 17 obtengo 52. ¿Qué número pensé?","a":"35","h":"Busca qué operación deshace la suma de 17.","x":"Resté 17 a 52 para encontrar el número inicial.","s":"Razonar hacia atrás"},{"c":"math","t":"Desafío matemático","e":"🔢","q":"En una competencia, Julia estaba en el puesto 14 y avanzó 6 puestos hacia el primero. ¿En qué puesto quedó?","a":"8","h":"Avanzar hacia el primero hace que el número del puesto disminuya.","x":"Resté 6 a 14 porque se acercó al primer puesto.","s":"Interpretar posiciones"},{"c":"math","t":"Desafío matemático","e":"🔢","q":"Un pastel se divide en 8 porciones. Se comen 3 y después 2 más. ¿Cuántas porciones quedan?","a":"3","h":"Cuenta todas las porciones comidas antes de calcular las que quedan.","x":"Se comieron 5 porciones; 8 menos 5 son 3.","s":"Restar en dos momentos"},{"c":"math","t":"Desafío matemático","e":"🔢","q":"Una caja contiene 4 paquetes de 9 tarjetas. Se agregan 7 tarjetas sueltas. ¿Cuántas hay?","a":"43","h":"Calcula primero las tarjetas que vienen en paquetes.","x":"Multipliqué 4 por 9 y sumé las 7 sueltas.","s":"Multiplicar y sumar"},{"c":"math","t":"Desafío matemático","e":"🔢","q":"En el salón hay 32 estudiantes. Se forman equipos de 4. ¿Cuántos equipos completos se forman?","a":"8","h":"Forma grupos de cuatro hasta repartir a todos.","x":"Dividí 32 entre 4.","s":"Dividir en grupos iguales"},{"c":"math","t":"Desafío matemático","e":"🔢","q":"Un ciclista recorre 18 km el sábado y el doble el domingo. ¿Cuántos kilómetros recorre en total?","a":"54","h":"Calcula primero el doble de 18; luego suma el recorrido del sábado.","x":"El domingo recorrió 36 km. Sumé 18 y 36.","s":"Entender el doble"},{"c":"math","t":"Desafío matemático","e":"🔢","q":"Una botella tenía 2 litros de agua. Se sirven 5 vasos de 200 mililitros. ¿Cuántos mililitros quedan?","a":"1000","h":"Convierte los litros a mililitros antes de restar.","x":"Dos litros son 2000 mililitros. Serví 1000 y quedaron 1000.","s":"Unidades y resta"},{"c":"math","t":"Desafío matemático","e":"🔢","q":"En una caja hay 64 piezas. Una cuarta parte son rojas. ¿Cuántas piezas rojas hay?","a":"16","h":"Una cuarta parte significa dividir el total en cuatro grupos iguales.","x":"Dividí 64 entre 4.","s":"Comprender una fracción sencilla"},{"c":"math","t":"Desafío matemático","e":"🔢","q":"Un tren tiene 8 vagones con 25 pasajeros cada uno. En una estación bajan 37. ¿Cuántos siguen?","a":"163","h":"Calcula los pasajeros iniciales de los ocho vagones.","x":"Multipliqué 8 por 25 y resté 37.","s":"Multiplicar con números de dos cifras"},{"c":"math","t":"Desafío matemático","e":"🔢","q":"Pedro ahorra 3 monedas cada día durante 7 días y luego gasta 8. ¿Cuántas monedas le quedan?","a":"13","h":"Calcula primero cuánto ahorró durante toda la semana.","x":"Multipliqué 3 por 7 y resté las 8 que gastó.","s":"Multiplicar y restar"},{"c":"math","t":"Desafío matemático","e":"🔢","q":"Hay 72 flores para hacer ramos de 9. Se venden 5 ramos. ¿Cuántas flores quedan?","a":"27","h":"Averigua cuántos ramos se pueden formar y cuántas flores se vendieron.","x":"Cada ramo usa 9 flores. Cinco ramos usan 45; quedaron 27.","s":"Dividir y multiplicar"},{"c":"math","t":"Desafío matemático","e":"🔢","q":"Una mochila pesa 2 kg y 300 g. ¿Cuántos gramos pesa en total?","a":"2300","h":"Recuerda cuántos gramos tiene un kilogramo.","x":"Convertí 2 kg en 2000 g y sumé 300 g.","s":"Convertir unidades"},{"c":"math","t":"Desafío matemático","e":"🔢","q":"Un número es 4 veces 6 y luego se le suman 11. ¿Cuál es el resultado?","a":"35","h":"Resuelve primero la multiplicación y después la suma.","x":"Cuatro veces seis son 24; más 11 son 35.","s":"Respetar el orden de operaciones"},{"c":"math","t":"Desafío matemático","e":"🔢","q":"En un juego empiezas con 50 puntos, pierdes 17 y ganas 29. ¿Con cuántos terminas?","a":"62","h":"Representa los cambios en el orden en que suceden.","x":"A 50 le resté 17 y después sumé 29.","s":"Resolver cambios sucesivos"},{"c":"clock","t":"Reto contra el reloj","e":"⏰","q":"Una película empieza a las 2:35 p. m. y dura 1 hora y 45 minutos. ¿A qué hora termina?","a":"4:20|4:20 p. m.","h":"Suma primero una hora y después 45 minutos.","x":"Sumé una hora a las 2:35 y luego 45 minutos.","s":"Calcular hora de finalización"},{"c":"clock","t":"Reto contra el reloj","e":"⏰","q":"El bus sale a las 7:48 y el viaje dura 37 minutos. ¿A qué hora llega?","a":"8:25","h":"Completa primero los 12 minutos que faltan para las ocho.","x":"Llegué a las 8:00 después de 12 minutos; faltaban 25.","s":"Sumar minutos cruzando la hora"},{"c":"clock","t":"Reto contra el reloj","e":"⏰","q":"La clase comienza a las 9:15 y termina a las 10:05. ¿Cuántos minutos dura?","a":"50","h":"Cuenta hasta las diez y luego añade cinco minutos.","x":"De 9:15 a 10:00 son 45 minutos; más 5 son 50.","s":"Calcular duración"},{"c":"clock","t":"Reto contra el reloj","e":"⏰","q":"Son las 4:40. ¿Cuántos minutos faltan para las 5:25?","a":"45","h":"Cuenta de 4:40 a 5:00 y después hasta 5:25.","x":"Faltan 20 minutos para las cinco y 25 más: 45.","s":"Calcular tiempo restante"},{"c":"clock","t":"Reto contra el reloj","e":"⏰","q":"Un entrenamiento dura 1 hora y 20 minutos. Si termina a las 6:10, ¿a qué hora empezó?","a":"4:50","h":"Retrocede primero una hora y luego veinte minutos.","x":"Retrocedí una hora desde 6:10 y luego 20 minutos.","s":"Calcular hora de inicio"},{"c":"clock","t":"Reto contra el reloj","e":"⏰","q":"El reloj marca 3:50. ¿Cuántos minutos faltan para las 4:30?","a":"40","h":"Completa diez minutos hasta las cuatro y luego treinta.","x":"De 3:50 a 4:00 hay 10 minutos y de 4:00 a 4:30 hay 30.","s":"Sumar intervalos"},{"c":"clock","t":"Reto contra el reloj","e":"⏰","q":"Una receta tarda 15 minutos en prepararse y 28 en cocinarse. Si empiezas a las 11:35, ¿a qué hora estará lista?","a":"12:18","h":"Suma los tiempos: 15 más 28 minutos.","x":"La receta tarda 43 minutos. Desde 11:35, termina a las 12:18.","s":"Sumar duraciones"},{"c":"clock","t":"Reto contra el reloj","e":"⏰","q":"El partido empezó a las 10:25 y terminó a las 11:50. ¿Cuánto duró?","a":"1 hora y 25 minutos","h":"Cuenta de 10:25 a 11:25 y después hasta 11:50.","x":"Una hora hasta 11:25 y 25 minutos más.","s":"Calcular duración mayor a una hora"},{"c":"clock","t":"Reto contra el reloj","e":"⏰","q":"Son las 8:20. ¿Qué hora será dentro de 95 minutos?","a":"9:55","h":"Una hora son 60 minutos; aún quedan 35.","x":"Sumé 60 minutos y luego 35 más.","s":"Convertir y sumar minutos"},{"c":"clock","t":"Reto contra el reloj","e":"⏰","q":"Una caminata comienza a las 6:45 y termina a las 7:30. ¿Cuántos minutos caminaron?","a":"45","h":"Cuenta los minutos que faltan para las siete y luego los treinta.","x":"De 6:45 a 7:00 son 15; más 30 son 45.","s":"Calcular duración"},{"c":"clock","t":"Reto contra el reloj","e":"⏰","q":"El reloj marca 5:55. ¿Cuántos minutos faltan para las 6:40?","a":"45","h":"Completa cinco minutos hasta las seis y suma cuarenta.","x":"Cinco minutos hasta las seis y cuarenta más: 45.","s":"Calcular tiempo entre horas"},{"c":"clock","t":"Reto contra el reloj","e":"⏰","q":"Una obra tiene dos actos: uno de 35 minutos y otro de 50. Hay un descanso de 15 minutos. ¿Cuánto dura todo?","a":"1 hora y 40 minutos","h":"Suma los dos actos y el descanso.","x":"35 más 50 más 15 son 100 minutos, es decir, una hora y 40.","s":"Sumar varios intervalos"},{"c":"clock","t":"Reto contra el reloj","e":"⏰","q":"Son las 10:40 a. m. ¿Qué hora será 2 horas y 35 minutos después?","a":"1:15|1:15 p. m.","h":"Suma dos horas y luego 35 minutos, pasando por las doce.","x":"Llegué a 12:40 y sumé 35 minutos: 1:15 p. m.","s":"Cruzar el mediodía"},{"c":"clock","t":"Reto contra el reloj","e":"⏰","q":"Una clase dura 45 minutos y termina a las 8:05. ¿A qué hora comenzó?","a":"7:20","h":"Retrocede cinco minutos hasta las ocho y luego cuarenta.","x":"Retrocedí 45 minutos desde las 8:05.","s":"Calcular hora de inicio"},{"c":"clock","t":"Reto contra el reloj","e":"⏰","q":"Un tren debía salir a la 1:25, pero se retrasó 18 minutos. ¿A qué hora salió?","a":"1:43","h":"Añade 18 minutos a la hora programada.","x":"Sumé 18 minutos a la 1:25.","s":"Sumar minutos"},{"c":"clock","t":"Reto contra el reloj","e":"⏰","q":"Son las 9:38. ¿Cuántos minutos faltan para las 10:00?","a":"22","h":"Resta 38 a 60.","x":"Una hora tiene 60 minutos; 60 menos 38 son 22.","s":"Calcular tiempo restante"},{"c":"clock","t":"Reto contra el reloj","e":"⏰","q":"Un paseo empieza a las 8:50 y dura 2 horas y 25 minutos. ¿A qué hora termina?","a":"11:15","h":"Suma dos horas y después 25 minutos.","x":"A las 10:50 más 25 minutos son las 11:15.","s":"Sumar horas y minutos"},{"c":"clock","t":"Reto contra el reloj","e":"⏰","q":"La manecilla larga apunta al 8 y la corta está entre el 4 y el 5. ¿Qué hora es?","a":"4:40","h":"Cada número de la manecilla larga representa cinco minutos.","x":"Ocho grupos de cinco son 40 minutos; la hora es las cuatro.","s":"Leer reloj analógico"},{"c":"clock","t":"Reto contra el reloj","e":"⏰","q":"Una actividad empieza a las 3:10. Dura 50 minutos y luego hay un descanso de 10 minutos. ¿A qué hora termina el descanso?","a":"4:10","h":"Suma los 50 minutos y después los diez de descanso.","x":"La actividad termina a las cuatro y el descanso a las 4:10.","s":"Encadenar duración y descanso"},{"c":"clock","t":"Reto contra el reloj","e":"⏰","q":"Si faltan 25 minutos para las 7:00, ¿qué hora es?","a":"6:35","h":"Retrocede 25 minutos desde las siete.","x":"Una hora antes es 6:00; retroceder solo 25 deja 6:35.","s":"Razonar hacia atrás"},{"c":"clock","t":"Reto contra el reloj","e":"⏰","q":"Un viaje dura 2 horas y 15 minutos. Sale a las 9:55 a. m. ¿A qué hora llega?","a":"12:10|12:10 p. m.","h":"Suma dos horas y quince minutos; compara con las doce.","x":"A las 11:55 más 15 minutos son las 12:10.","s":"Cruzar el mediodía"},{"c":"clock","t":"Reto contra el reloj","e":"⏰","q":"Un episodio dura 24 minutos. Ves 3 episodios seguidos y empiezas a las 5:10. ¿A qué hora terminas?","a":"6:22","h":"Multiplica 24 por tres y suma el resultado a la hora inicial.","x":"Tres episodios duran 72 minutos: una hora y 12 minutos.","s":"Multiplicar duración y sumar"},{"c":"clock","t":"Reto contra el reloj","e":"⏰","q":"Son las 10:48 a. m. ¿Cuántos minutos faltan para las 12:00?","a":"72","h":"Cuenta hasta las once y luego hasta las doce.","x":"Faltan 12 minutos para las once y 60 más para las doce.","s":"Calcular intervalo"},{"c":"clock","t":"Reto contra el reloj","e":"⏰","q":"Un reloj adelanta 5 minutos cada hora. Estaba correcto a las 2:00. ¿Qué marcará cuando hayan pasado 3 horas reales?","a":"5:15","h":"En tres horas reales habrá adelantado quince minutos adicionales.","x":"A las cinco reales, el reloj habrá adelantado 15 minutos.","s":"Detectar desfase del reloj"},{"c":"clock","t":"Reto contra el reloj","e":"⏰","q":"La práctica empezó a las 4:25 y duró 1 hora y 55 minutos. ¿A qué hora terminó?","a":"6:20","h":"Suma una hora y luego 55 minutos.","x":"4:25 más una hora son 5:25; más 55 son 6:20.","s":"Sumar duración"},{"c":"calendar","t":"Detectives del calendario","e":"🌦️","q":"Una excursión será 3 semanas y 2 días después de un martes. ¿Qué día de la semana será?","a":"jueves","h":"Tres semanas completas conservan el mismo día; añade dos días.","x":"Tres semanas después sigue siendo martes; dos días más es jueves.","s":"Calcular días transcurridos"},{"c":"calendar","t":"Detectives del calendario","e":"🌦️","q":"Hoy es 27 de abril. ¿Qué fecha será dentro de 6 días?","a":"3 de mayo","h":"Cuenta los días que faltan de abril y continúa en mayo.","x":"Después del 27 vienen 28, 29 y 30; tres días más llevan al 3 de mayo.","s":"Cruzar de mes"},{"c":"calendar","t":"Detectives del calendario","e":"🌦️","q":"Un proyecto comienza el 28 de agosto y dura 9 días. Si el 28 cuenta como día 1, ¿qué fecha es el día 9?","a":"5 de septiembre","h":"Cuenta el 28 como primer día, no como día cero.","x":"Del 28 al 31 son cuatro días contando el 28; el día nueve es 5 de septiembre.","s":"Contar días incluyendo inicio"},{"c":"calendar","t":"Detectives del calendario","e":"🌦️","q":"Si el día 1 de un mes cae jueves, ¿qué día de la semana será el día 18?","a":"domingo","h":"Del día 1 al 18 hay 17 avances de día.","x":"Dos semanas completas llevan al jueves y tres días más al domingo.","s":"Usar ciclos de siete días"},{"c":"calendar","t":"Detectives del calendario","e":"🌦️","q":"Una planta se riega cada 3 días. Se regó un lunes. ¿Qué día toca el siguiente riego?","a":"jueves","h":"Avanza tres días desde el lunes.","x":"Martes es uno, miércoles dos y jueves tres.","s":"Contar intervalos"},{"c":"calendar","t":"Detectives del calendario","e":"🌦️","q":"En un calendario, el día 1 cae sábado. ¿Qué fecha cae el segundo martes?","a":"10","h":"El primer martes es el día 3; el siguiente, siete días después.","x":"El primer martes es 3 y el segundo martes es 10.","s":"Ubicar fechas por semana"},{"c":"calendar","t":"Detectives del calendario","e":"🌦️","q":"Si hoy es 30 de noviembre, ¿qué fecha será mañana?","a":"1 de diciembre","h":"Noviembre tiene 30 días.","x":"Después del último día de noviembre empieza diciembre.","s":"Cambio de mes"},{"c":"calendar","t":"Detectives del calendario","e":"🌦️","q":"Una estación dura aproximadamente tres meses. ¿Cuántos meses abarcan dos estaciones?","a":"6","h":"Multiplica tres meses por dos estaciones.","x":"Dos grupos de tres meses son seis meses.","s":"Multiplicar periodos"},{"c":"calendar","t":"Detectives del calendario","e":"🌦️","q":"En el hemisferio norte es invierno. ¿Qué estación suele ocurrir al mismo tiempo en el hemisferio sur?","a":"verano","h":"Las estaciones suelen ser opuestas entre los dos hemisferios.","x":"Cuando el norte recibe menos luz directa, el sur recibe más; allí suele ser verano.","s":"Relacionar hemisferios"},{"c":"calendar","t":"Detectives del calendario","e":"🌦️","q":"En una región cercana al ecuador, ¿por qué puede ser más útil hablar de temporadas lluviosas que de cuatro estaciones muy marcadas?","a":"porque la lluvia cambia más que la temperatura|porque cambia más la lluvia que la temperatura","h":"Relaciona la ubicación cercana al ecuador con los patrones de lluvia.","x":"Cerca del ecuador la temperatura cambia menos durante el año y las lluvias pueden marcar más las temporadas.","s":"Interpretar patrones climáticos"},{"c":"calendar","t":"Detectives del calendario","e":"🌦️","q":"Hoy es miércoles 29 y el mes tiene 30 días. ¿Qué día y fecha será pasado mañana?","a":"viernes 1","h":"Mañana es jueves 30; pasado mañana es viernes 1 del mes siguiente.","x":"Conté jueves 30 y luego viernes 1.","s":"Cruzar mes y día de semana"},{"c":"calendar","t":"Detectives del calendario","e":"🌦️","q":"El segundo sábado de un mes cae el día 13. ¿Qué fecha cae el tercer sábado?","a":"20","h":"Cada sábado está separado por siete días.","x":"Sumé siete días al 13.","s":"Reconocer repetición semanal"},{"c":"calendar","t":"Detectives del calendario","e":"🌦️","q":"Una semana de vacaciones empieza el 18 de junio y cuenta siete días incluyendo el 18. ¿Cuál es el último día?","a":"24 de junio","h":"El día 18 es el primero de los siete.","x":"Conté 18 como día uno; el séptimo es 24.","s":"Contar periodos inclusivos"},{"c":"calendar","t":"Detectives del calendario","e":"🌦️","q":"Un calendario muestra que el 1 de octubre es lunes. ¿Qué fecha será el segundo lunes del mes?","a":"8","h":"El segundo lunes está siete días después del primero.","x":"Sumé siete días al día 1.","s":"Ubicar una fecha recurrente"},{"c":"calendar","t":"Detectives del calendario","e":"🌦️","q":"Si faltan 10 días para el cumpleaños y hoy es 22 de febrero de un año no bisiesto, ¿qué fecha será el cumpleaños?","a":"4 de marzo","h":"Febrero termina el día 28; cuenta los días que faltan y sigue en marzo.","x":"Del 22 al 28 hay seis días de avance; cuatro días más llevan al 4 de marzo.","s":"Cruzar fin de febrero"},{"c":"calendar","t":"Detectives del calendario","e":"🌦️","q":"En una zona de montaña llueve por la tarde durante varios días. ¿Qué dato conviene registrar para descubrir si es un patrón?","a":"la hora y los días en que llueve","h":"Busca qué información se repite y se puede comparar.","x":"Registrar día y hora permite comparar si la lluvia suele llegar a una hora parecida.","s":"Pensamiento científico"},{"c":"calendar","t":"Detectives del calendario","e":"🌦️","q":"El pronóstico dice 70% de probabilidad de lluvia. ¿Significa que lloverá durante 70% del día?","a":"no","h":"El porcentaje habla de probabilidad, no de duración.","x":"Setenta por ciento indica posibilidad de que ocurra, no cuántas horas durará.","s":"Interpretar probabilidades"},{"c":"calendar","t":"Detectives del calendario","e":"🌦️","q":"Durante cuatro días las temperaturas máximas fueron 25, 27, 26 y 30 grados. ¿Cuál fue la más alta?","a":"30","h":"Compara las cuatro cantidades.","x":"Treinta es mayor que 25, 27 y 26.","s":"Comparar datos"},{"c":"calendar","t":"Detectives del calendario","e":"🌦️","q":"Durante tres días llovieron 4, 0 y 6 milímetros. ¿Cuántos milímetros llovieron en total?","a":"10","h":"Suma la lluvia registrada cada día.","x":"Sumé 4, 0 y 6: en total fueron 10 milímetros.","s":"Sumar datos de clima"},{"c":"calendar","t":"Detectives del calendario","e":"🌦️","q":"En una ciudad, enero y febrero son secos; marzo y abril son lluviosos. ¿Qué patrón se observa?","a":"la lluvia aumenta de febrero a marzo","h":"Compara los meses secos con los lluviosos.","x":"El cambio aparece entre febrero y marzo: empieza la temporada lluviosa.","s":"Identificar un cambio de patrón"},{"c":"calendar","t":"Detectives del calendario","e":"🌦️","q":"Si hoy es el último día de un mes de 31 días y mañana es jueves, ¿qué día fue ayer?","a":"martes","h":"El último día es miércoles; retrocede un día.","x":"Si mañana es jueves, hoy es miércoles y ayer fue martes.","s":"Razonar con días consecutivos"},{"c":"calendar","t":"Detectives del calendario","e":"🌦️","q":"Un campamento empieza el viernes y termina el lunes siguiente. ¿Cuántas noches pasan allí?","a":"3","h":"Cuenta las noches: viernes, sábado y domingo.","x":"Se duerme tres noches antes de salir el lunes.","s":"Distinguir días y noches"},{"c":"calendar","t":"Detectives del calendario","e":"🌦️","q":"En el calendario, el día 1 cae martes. ¿Qué día cae el 15?","a":"martes","h":"Entre el 1 y el 15 hay exactamente dos semanas.","x":"Catorce días son dos semanas, así que se repite el martes.","s":"Ciclos del calendario"},{"c":"calendar","t":"Detectives del calendario","e":"🌦️","q":"Una región registra más lluvia en abril que en marzo, y más en mayo que en abril. ¿En qué mes llovió más de esos tres?","a":"mayo","h":"Ordena las cantidades según la comparación.","x":"Cada mes llueve más que el anterior; mayo queda arriba.","s":"Inferir comparaciones"},{"c":"calendar","t":"Detectives del calendario","e":"🌦️","q":"Si una estación empieza el 21 de marzo y dura tres meses aproximados, ¿en qué mes empieza la siguiente?","a":"junio","h":"Avanza tres meses desde marzo.","x":"Marzo, abril, mayo: la siguiente comienza aproximadamente en junio.","s":"Ordenar estaciones y meses"},{"c":"logic","t":"Laboratorio de lógica","e":"🧩","q":"Completa la secuencia: 4, 7, 13, 22, 34, __. ¿Qué número sigue?","a":"49","h":"Observa cuánto aumenta cada vez: los saltos también cambian.","x":"Los saltos son 3, 6, 9 y 12; sigue sumar 15.","s":"Detectar patrón de diferencias"},{"c":"logic","t":"Laboratorio de lógica","e":"🧩","q":"Completa: 2, 6, 18, 54, __. ¿Qué número sigue?","a":"162","h":"Cada número se obtiene usando la misma operación con el anterior.","x":"Cada término se multiplica por 3.","s":"Reconocer multiplicación repetida"},{"c":"logic","t":"Laboratorio de lógica","e":"🧩","q":"Completa: 81, 72, 63, 54, __. ¿Qué número sigue?","a":"45","h":"Compara dos números consecutivos.","x":"Cada vez se resta 9.","s":"Patrón descendente"},{"c":"logic","t":"Laboratorio de lógica","e":"🧩","q":"En una fila, Ana está antes que Bruno. Carla está después de Bruno. Diego está antes que Ana. ¿Quién ocupa el segundo lugar?","a":"ana","h":"Ordena a las cuatro personas desde la primera hasta la última.","x":"El orden es Diego, Ana, Bruno, Carla; Ana queda segunda.","s":"Ordenar varias condiciones"},{"c":"logic","t":"Laboratorio de lógica","e":"🧩","q":"Tres cajas tienen etiquetas equivocadas: una dice manzanas, otra peras y otra mezcla. Todas las etiquetas están mal. ¿De qué caja debes sacar una fruta primero para descubrir todas?","a":"mezcla","h":"Si todas las etiquetas están mal, la caja llamada mezcla no puede contener mezcla.","x":"Al sacar de la caja etiquetada mezcla, sabrás qué fruta contiene y podrás deducir las otras dos.","s":"Deducción por descarte"},{"c":"logic","t":"Laboratorio de lógica","e":"🧩","q":"Un número tiene 4 decenas y 7 unidades. Si intercambias las cifras, ¿cuánto mayor o menor queda el nuevo número?","a":"mayor en 27|27 mayor","h":"Compara 47 con 74; no basta con mirar las cifras por separado.","x":"El nuevo número es 74, que es 27 mayor.","s":"Valor posicional"},{"c":"logic","t":"Laboratorio de lógica","e":"🧩","q":"Hay 5 niños. Cada uno saluda una sola vez a cada uno de los demás. ¿Cuántos saludos distintos ocurren?","a":"10","h":"No cuentes el saludo de A a B otra vez como uno diferente de B a A.","x":"Cada pareja se saluda una vez: hay 10 parejas posibles.","s":"Contar combinaciones sin repetir"},{"c":"logic","t":"Laboratorio de lógica","e":"🧩","q":"Una araña tiene 8 patas y un insecto tiene 6. ¿Cuántas patas tienen 2 arañas y 3 insectos juntos?","a":"34","h":"Calcula por separado las patas de arañas y de insectos.","x":"Dos arañas tienen 16 patas y tres insectos 18; total 34.","s":"Resolver dos grupos"},{"c":"logic","t":"Laboratorio de lógica","e":"🧩","q":"En una carrera, Luis llegó antes que Marta, pero después de Pablo. ¿Quién llegó primero?","a":"pablo","h":"Convierte las pistas en un orden.","x":"Pablo llegó antes que Luis, y Luis antes que Marta.","s":"Deducir un orden"},{"c":"logic","t":"Laboratorio de lógica","e":"🧩","q":"Tengo monedas de 5 y de 10. Hay 4 monedas y suman 30. ¿Cuántas son de 10?","a":"2","h":"Prueba qué pasa si todas fueran de 5 y calcula cuánto falta.","x":"Cuatro monedas de 5 suman 20; hacen falta 10 más, es decir, dos monedas de 10.","s":"Resolver con prueba razonada"},{"c":"logic","t":"Laboratorio de lógica","e":"🧩","q":"Una secuencia alterna círculo, triángulo, cuadrado, círculo, triángulo, __. ¿Qué figura sigue?","a":"cuadrado","h":"Busca el bloque que se repite.","x":"Se repite el grupo de tres figuras; sigue el cuadrado.","s":"Reconocer ciclos"},{"c":"logic","t":"Laboratorio de lógica","e":"🧩","q":"Un cubo tiene 6 caras. Si pintas todas sus caras y lo cortas en 8 cubitos iguales (2 por lado), ¿cuántos cubitos tienen tres caras pintadas?","a":"8","h":"Piensa en las esquinas del cubo grande.","x":"Cada una de las ocho esquinas pertenece a un cubito con tres caras pintadas.","s":"Visualización espacial"},{"c":"logic","t":"Laboratorio de lógica","e":"🧩","q":"En una bolsa hay 3 bolas rojas, 4 azules y 5 verdes. Sin mirar, ¿cuántas debes sacar como mínimo para asegurar que tienes dos del mismo color?","a":"4","h":"Piensa en el peor caso: cuántos colores distintos puedes sacar primero.","x":"Con tres bolas podrías sacar una de cada color; la cuarta repite un color.","s":"Razonamiento de casos"},{"c":"logic","t":"Laboratorio de lógica","e":"🧩","q":"Si todos los mip son lom y ningún lom es tas, ¿puede un mip ser tas?","a":"no","h":"Sigue las dos reglas sin inventar una excepción.","x":"Todo mip pertenece a los lom, y ningún lom puede ser tas; por eso un mip no puede ser tas.","s":"Deducción lógica"},{"c":"logic","t":"Laboratorio de lógica","e":"🧩","q":"Un número es mayor que 30, menor que 40 y termina en 6. ¿Cuál es?","a":"36","h":"Busca el único número de esa decena que termina en seis.","x":"Entre 30 y 40, el que termina en 6 es 36.","s":"Usar varias pistas"},{"c":"logic","t":"Laboratorio de lógica","e":"🧩","q":"Tienes 3 interruptores y una lámpara en otra habitación. Solo puedes entrar una vez a la habitación. ¿Qué puedes usar además de la luz para descubrir cuál interruptor la controla?","a":"el calor de la bombilla|si esta caliente|temperatura","h":"Piensa qué cambia en una bombilla aunque ya esté apagada.","x":"Enciendes uno un rato, lo apagas, enciendes otro y entras: la luz encendida identifica uno y el calor de la bombilla apagada identifica otro.","s":"Resolver un problema con información indirecta"},{"c":"logic","t":"Laboratorio de lógica","e":"🧩","q":"En una granja hay gallinas y conejos: 5 cabezas y 14 patas. ¿Cuántos conejos hay?","a":"2","h":"Imagina primero que los cinco animales fueran gallinas; luego revisa las patas que sobran.","x":"Cinco gallinas tendrían 10 patas. Sobran 4 patas, que corresponden a dos conejos en lugar de dos gallinas.","s":"Resolver con restricciones"},{"c":"logic","t":"Laboratorio de lógica","e":"🧩","q":"Una escalera tiene 12 escalones. Subes 5, bajas 2 y luego subes 4. ¿En qué escalón quedas?","a":"7","h":"Representa cada movimiento con avance o retroceso.","x":"Empecé en cero: avancé 5, retrocedí 2 y avancé 4. Quedé en 7.","s":"Seguir movimientos"},{"c":"logic","t":"Laboratorio de lógica","e":"🧩","q":"Completa: 1, 1, 2, 3, 5, 8, __. ¿Qué número sigue?","a":"13","h":"Cada término se forma sumando los dos anteriores.","x":"Ocho más cinco son trece.","s":"Patrón de suma de anteriores"},{"c":"logic","t":"Laboratorio de lógica","e":"🧩","q":"Una clave tiene tres cifras. La primera es 2 más que la segunda; la tercera es el doble de la segunda. Si la segunda es 3, ¿cuál es la clave?","a":"536","h":"Calcula cada cifra a partir de la segunda.","x":"La primera es 5, la segunda 3 y la tercera 6.","s":"Combinar condiciones"},{"c":"logic","t":"Laboratorio de lógica","e":"🧩","q":"Hay 10 calcetines negros y 10 blancos en un cajón oscuro. ¿Cuántos debes sacar como mínimo para asegurar un par del mismo color?","a":"3","h":"Con dos calcetines podrías tener uno de cada color.","x":"El tercer calcetín necesariamente coincide con uno de los dos primeros.","s":"Razonamiento del peor caso"},{"c":"logic","t":"Laboratorio de lógica","e":"🧩","q":"Un reloj da 1 campanada a la una, 2 a las dos y así sucesivamente. ¿Cuántas campanadas da en total desde la una hasta las cuatro, incluyendo ambas?","a":"10","h":"Suma las campanadas de cada hora: 1, 2, 3 y 4.","x":"Sumé 1 + 2 + 3 + 4 = 10.","s":"Sumar una secuencia"},{"c":"logic","t":"Laboratorio de lógica","e":"🧩","q":"En una mesa cuadrada se sienta una persona por lado. Luego se agrega una persona en cada esquina. ¿Cuántas personas hay en total si nadie comparte lugar?","a":"8","h":"Distingue los lados de las esquinas: son posiciones diferentes en el planteamiento.","x":"Hay cuatro lugares en los lados y cuatro en las esquinas: ocho.","s":"Interpretar una descripción espacial"},{"c":"logic","t":"Laboratorio de lógica","e":"🧩","q":"Un patrón de palitos usa 4 palitos para hacer un cuadrado. Cada nuevo cuadrado comparte un lado con el anterior. ¿Cuántos palitos se necesitan para hacer 5 cuadrados en fila?","a":"16","h":"El primer cuadrado usa cuatro; cada cuadrado nuevo agrega solo tres.","x":"Empecé con 4 y añadí 3 por cada uno de los otros cuatro cuadrados: 16.","s":"Generalizar un patrón"},{"c":"logic","t":"Laboratorio de lógica","e":"🧩","q":"Tienes dos recipientes: uno de 3 litros y otro de 5 litros, sin marcas. ¿Puedes medir exactamente 4 litros? Responde sí o no.","a":"si","h":"Llena el de 5 y vierte al de 3; piensa cuánto queda y qué puedes repetir.","x":"Sí: llena 5, vierte 3 y quedan 2; vacía el de 3, pasa los 2 al de 3, llena otra vez el de 5 y completa el de 3 con 1. Quedan 4 en el de 5.","s":"Planificar varios pasos"}];
+const curiosityFacts = [{"text":"En Venus, un día dura 243 días terrestres: ¡más que su año, que dura 225!","url":"https://science.nasa.gov/venus/venus-facts/"},{"text":"La luz del Sol tarda unos 8 minutos y 20 segundos en llegar hasta la Tierra.","url":"https://spaceplace.nasa.gov/all-about-the-sun/en/"},{"text":"La Luna se aleja de la Tierra unos 3,8 centímetros cada año, aproximadamente lo que crecen algunas uñas.","url":"https://science.nasa.gov/solar-system/moon/10-things-what-we-learn-about-earth-by-studying-the-moon/"},{"text":"Los flamencos no nacen rosados: el color de sus plumas viene de los pigmentos de los alimentos que comen.","url":"https://nationalzoo.si.edu/animals/news/why-are-flamingos-pink-and-other-flamingo-facts"},{"text":"Las jirafas tienen siete huesos en el cuello, igual que las personas. ¡Pero los suyos pueden medir más de 25 centímetros cada uno!","url":"https://animals.sandiegozoo.org/animals/giraffe"},{"text":"Los insectos ya vivían en la Tierra cientos de millones de años antes de que aparecieran los dinosaurios.","url":"https://www.amnh.org/explore/ology/entomology/what-is-entomology"},{"text":"Muchos animales de las profundidades del océano pueden producir su propia luz. Es como llevar una linterna incorporada.","url":"https://oceanservice.noaa.gov/facts/biolum.html"},{"text":"Un pulpo tiene tres corazones y sangre azul. Además, puede resolver algunos problemas y cambiar de color.","url":"https://www.si.edu/object/8-mind-boggling-facts-about-octopus%3Ayt_qeP2uWZt3fg"},{"text":"Los insectos adultos tienen seis patas, tres partes principales en el cuerpo y dos antenas.","url":"https://www.amnh.org/explore/ology/entomology/what-is-entomology"},{"text":"El Sol contiene casi el 99 % de toda la materia de nuestro sistema solar. ¡Los planetas juntos son una pequeña parte!","url":"https://spaceplace.nasa.gov/all-about-the-sun/en/"},{"text":"La Luna gira sobre sí misma en el mismo tiempo que tarda en dar una vuelta alrededor de la Tierra. Por eso vemos casi siempre la misma cara.","url":"https://science.nasa.gov/moon/facts/"},{"text":"Los flamencos pueden dormir de pie sobre una sola pata. Los científicos creen que esa postura también les ayuda a conservar el calor.","url":"https://nationalzoo.si.edu/animals/news/why-are-flamingos-pink-and-other-flamingo-facts"}];
+
+let lastFactIndex = -1;
+function showRandomFact() {
+  const textNode = $("curiosityFact");
+  const linkNode = $("curiositySource");
+  if (!textNode || !linkNode || !curiosityFacts.length) return;
+  let index = Math.floor(Math.random() * curiosityFacts.length);
+  if (curiosityFacts.length > 1) {
+    while (index === lastFactIndex) index = Math.floor(Math.random() * curiosityFacts.length);
+  }
+  lastFactIndex = index;
+  const fact = curiosityFacts[index];
+  textNode.textContent = fact.text;
+  linkNode.href = fact.url;
+}
+
+const DAILY_KEY = "club_mentes_curiosas_daily_v8";
+let session = [], position = 0, current = null;
+let solvedCount = 0, stars = 0, attempts = 0, hintLevel = 0;
+let planCorrect = false, planChosen = false, hasAnswered = false, planOptions = [];
+
+function setStatus(message, kind) {
+  // Los avisos técnicos no ocupan espacio; los errores se muestran junto a la misión.
+  if (kind === "error" && $("feedback")) {
+    $("feedback").className = "feedback show try";
+    $("feedback").textContent = "Ha ocurrido un problema al iniciar esta misión. " + message;
+  }
+}
+function norm(value) {
+  return String(value ?? "").trim().toLocaleLowerCase("es")
+    .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+    .replace(/[¿?¡!.,:;]/g, "").replace(/\s+/g, " ");
+}
+function shuffle(items) {
+  const copy = items.slice();
+  for (let i=copy.length-1;i>0;i--) {
+    const j=Math.floor(Math.random()*(i+1)); [copy[i],copy[j]]=[copy[j],copy[i]];
+  }
+  return copy;
+}
+function dateKey() {
+  const d=new Date();
+  return [d.getFullYear(),String(d.getMonth()+1).padStart(2,"0"),String(d.getDate()).padStart(2,"0")].join("-");
+}
+function chooseFive() {
+  const chosen=[];
+  ["math","math","clock","calendar","logic"].forEach(category=>{
+    const candidates=bank.map((item,index)=>({item,index}))
+      .filter(entry=>entry.item.c===category&&!chosen.includes(entry.index));
+    if(candidates.length)chosen.push(shuffle(candidates)[0].index);
+  });
+  return shuffle(chosen);
+}
+function saveSet(indices) {
+  try { localStorage.setItem(DAILY_KEY,JSON.stringify({date:dateKey(),indices})); }
+  catch(error) { /* La ronda sigue disponible aunque el navegador no guarde datos. */ }
+}
+function dailySet() {
+  try {
+    const stored=JSON.parse(localStorage.getItem(DAILY_KEY)||"null");
+    if(stored&&stored.date===dateKey()&&Array.isArray(stored.indices)&&stored.indices.length===5&&stored.indices.every(i=>Number.isInteger(i)&&bank[i]))return stored.indices;
+  } catch(error) {}
+  const fresh=chooseFive();saveSet(fresh);return fresh;
+}
+function feedback(kind,message,target="feedback") {
+  const node=$(target);node.className="feedback show "+kind;node.textContent=message;
+}
+function resetFeedback() {
+  ["hint","feedback","planFeedback"].forEach(id=>{
+    const n=$(id);n.className=id==="hint"?"hint":"feedback";n.textContent="";
+  });
+}
+function distractorPlans(item) {
+  const byCategory={
+    math:[
+      "Hacer una operación con todos los números sin fijarme en lo que ocurre.",
+      "Usar solo el primer número y tratar de adivinar el resultado."
+    ],
+    clock:[
+      "Mirar únicamente el número de la hora y olvidar los minutos.",
+      "Contar los minutos como si cada número del reloj fuera un minuto."
+    ],
+    calendar:[
+      "Contar todos los días como si cada mes tuviera la misma duración.",
+      "Fijarme solo en el nombre del mes y no en las fechas."
+    ],
+    logic:[
+      "Elegir una respuesta porque se parece a las anteriores.",
+      "Cambiar el orden de las pistas sin comprobar si sigue teniendo sentido."
+    ]
+  };
+  return byCategory[item.c] || byCategory.logic;
+}
+function buildPlanChoices() {
+  const correct=current.x;
+  const alternatives=distractorPlans(current);
+  // Avoid a distractor that accidentally repeats the correct explanation.
+  planOptions=shuffle([{text:correct,correct:true},...alternatives.map(text=>({text,correct:false}))]);
+  const host=$("planChoices");host.innerHTML="";
+  planOptions.forEach((option,index)=>{
+    const button=document.createElement("button");
+    button.type="button";button.className="choice";button.textContent=String.fromCharCode(65+index)+". "+option.text;
+    button.addEventListener("click",()=>choosePlan(index));
+    host.appendChild(button);
+  });
+}
+function choosePlan(index) {
+  if(planCorrect)return;
+  const buttons=[...$("planChoices").children];
+  buttons.forEach(button=>button.classList.remove("selected","incorrect","correct"));
+  const selected=buttons[index];
+  if(!selected)return;
+  selected.classList.add("selected");
+  planChosen=true;planCorrect=planOptions[index].correct;
+  if(planCorrect) {
+    buttons.forEach((button,i)=>{button.disabled=true;if(planOptions[i].correct)button.classList.add("correct");});
+    feedback("good","¡Buen plan! Esa idea encaja con lo que ocurre en el problema.","planFeedback");
+  } else {
+    selected.classList.add("incorrect");
+    feedback("try","Esa idea no encaja del todo. Puedes probar otra: fíjate en el orden de lo que ocurre.","planFeedback");
+  }
+}
+function renderQuestion() {
+  if(position>=session.length){finish();return;}
+  current=session[position];attempts=0;hintLevel=0;planCorrect=false;planChosen=false;hasAnswered=false;
+  $("category").textContent=({math:"MATEMÁTICAS",clock:"RELOJ Y TIEMPO",calendar:"CALENDARIO Y CLIMA",logic:"PATRONES Y LÓGICA"})[current.c]||"MISIÓN";
+  $("title").textContent=current.t;$("emoji").textContent=current.e;$("question").textContent=current.q;
+  $("level").textContent=["Detective de ideas","Exploradora de pistas","Inventora de soluciones"][position%3];
+  $("sub").textContent="Lee con calma. Primero descubre qué plan puede funcionar; después resuelve.";
+  $("answer").value="";$("answer").disabled=false;$("check").disabled=false;
+  $("counter").textContent=`${position+1} / ${session.length}`;
+  $("skill").textContent=current.s+". Primero elige un plan; luego resuelve y cuéntalo en voz alta.";
+  $("done").textContent=String(solvedCount);$("stars").textContent=`${stars} ⭐`;
+  $("bar").style.width=`${(solvedCount/session.length)*100}%`;
+  $("next").textContent=position===session.length-1?"Terminar ronda ✓":"Siguiente misión →";
+  $("hintBtn").disabled=false;$("hintBtn").textContent="💡 Dame una pista";
+  $("oralPrompt").textContent="🎙️ Reto de detective: explica en voz alta qué viste en el problema y por qué ese plan puede funcionar.";
+  $("planFeedback").className="feedback";$("planFeedback").textContent="";
+  $("hint").className="hint";$("hint").textContent="";
+  $("feedback").className="feedback";$("feedback").textContent="";
+  buildPlanChoices();
+}
+function checkAnswer() {
+  if(!current||hasAnswered)return;
+  const value=norm($("answer").value);
+  if(!value){feedback("try","Escribe tu respuesta para comprobarla.");return;}
+  attempts++;
+  const valid=String(current.a).split("|").map(norm);
+  if(valid.includes(value)){
+    const earned=(attempts===1&&hintLevel===0)?2:1;
+    stars+=earned;solvedCount++;hasAnswered=true;
+    $("done").textContent=String(solvedCount);$("stars").textContent=`${stars} ⭐`;
+    $("bar").style.width=`${(solvedCount/session.length)*100}%`;
+    $("check").disabled=true;$("answer").disabled=true;
+    const extra=planChosen
+      ? (planCorrect?" Tu plan también fue adecuado.":"Aunque elegiste otro plan, encontraste la respuesta. Revisa cuál de las ideas encaja mejor.")
+      : " Si quieres, elige ahora cómo habrías empezado.";
+    feedback("good",`¡Correcto! ${earned===2?"Ganaste 2 estrellas.":"Ganaste 1 estrella."}${extra} Cuéntale a alguien cómo encontraste la respuesta.`);
+  } else {
+    const nudge=planChosen
+      ? " Revisa si el plan que elegiste representa bien lo que ocurre."
+      : " Puedes elegir una idea en «Elige tu plan» antes de volver a intentarlo.";
+    feedback("try","Todavía no. Vuelve a mirar qué te están preguntando y qué cambia en la situación."+nudge);
+  }
+}
+function showHint() {
+  if(!current||hasAnswered)return;
+  hintLevel=Math.min(hintLevel+1,3);
+  const hints=[
+    "Pista 1 · Vuelve a leer la última pregunta. ¿Qué tienes que averiguar exactamente?",
+    "Pista 2 · Busca las palabras que cuentan lo que cambia, lo que se repite o el orden en que pasan las cosas.",
+    "Pista 3 · "+current.h
+  ];
+  $("hint").textContent=hints[hintLevel-1];$("hint").className="hint show";
+  $("hintBtn").textContent=hintLevel<3?"💡 Otra pista":"💡 Ya viste las 3 pistas";
+  $("hintBtn").disabled=hintLevel>=3;
+}
+function finish() {
+  current=null;
+  $("category").textContent="RONDA COMPLETADA";$("title").textContent="¡Misión cumplida!";
+  $("emoji").textContent="🏆";$("question").textContent=`Terminaste las ${session.length} misiones de esta ronda.`;
+  $("sub").textContent="Lo importante es que aprendiste a mirar el problema, elegir un camino y comprobar si funciona.";
+  $("counter").textContent=`${session.length} / ${session.length}`;
+  $("done").textContent=String(solvedCount);$("stars").textContent=`${stars} ⭐`;
+  $("bar").style.width="100%";
+  $("skill").textContent=`Resueltas: ${solvedCount} de ${session.length}. Cada reto te ayuda a pensar mejor.`;
+  ["answer","check","hintBtn","thinkingGuide","oralPrompt"].forEach(id=>$(id).classList.add("hidden"));
+  $("next").classList.add("hidden");
+  $("hint").className="hint";$("feedback").className="feedback";
+  $("planFeedback").className="feedback";
+}
+function newRound() {
+  ["answer","check","hintBtn","thinkingGuide","oralPrompt","next"].forEach(id=>$(id).classList.remove("hidden"));
+  $("next").disabled=false;
+  const indices=chooseFive();saveSet(indices);start(indices);
+}
+function start(indices) {
+  session=indices.map(i=>bank[i]).filter(Boolean);position=0;solvedCount=0;stars=0;
+  if(!session.length)throw new Error("No se encontraron misiones para iniciar.");
+  renderQuestion();
+}
+function bindEvents() {
+  $("check").addEventListener("click",checkAnswer);
+  $("answer").addEventListener("keydown",event=>{if(event.key==="Enter")checkAnswer();});
+  $("hintBtn").addEventListener("click",showHint);
+  $("next").addEventListener("click",()=>{
+    if(position<session.length-1){position++;renderQuestion();}else finish();
+  });
+  $("newRound").addEventListener("click",newRound);
+  $("nextFact").addEventListener("click",showRandomFact);
+}
+function boot() {
+  const expected={math:25,clock:25,calendar:25,logic:25};
+  const actual=Object.fromEntries(Object.keys(expected).map(c=>[c,bank.filter(item=>item.c===c).length]));
+  if(bank.length!==100||Object.keys(expected).some(c=>actual[c]!==expected[c])) {
+    throw new Error(`Banco incompleto: ${bank.length}/100 misiones.`);
+  }
+  bindEvents();start(dailySet());showRandomFact();
+}
+window.addEventListener("error",event=>{
+  setStatus(`Error de JavaScript: ${event.message||"no identificado"}. Línea ${event.lineno||"no disponible"}.`,"error");
+});
+window.addEventListener("unhandledrejection",event=>{
+  setStatus("Error en una operación: "+String(event.reason&&event.reason.message||event.reason),"error");
+});
+try{boot();}catch(error){
+  const message=error&&error.message?error.message:String(error);
+  if($("question"))$("question").textContent="No se pudo iniciar la actividad.";
+  if($("sub"))$("sub").textContent="Recarga la página. Si el problema continúa, comparte el archivo para revisarlo.";
+  setStatus("El programa se inició, pero encontró un problema: "+message,"error");
+  console.error("Club de Mentes Curiosas:",error);
+}
+
+</script></body></html>
