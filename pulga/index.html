@@ -16,6 +16,12 @@
 .curiosity-footer{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
 .curiosity-footer a{font-size:12px;color:#4965b7;text-decoration:underline}
 .curiosity-footer .btn{font-size:12px;padding:8px 11px}
+.concept-card{margin:12px 0 4px;padding:12px 14px;border:1.5px solid #d8e4fb;border-radius:14px;background:linear-gradient(135deg,#f4f8ff,#fbfdff);color:#304263}
+.concept-heading{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;color:#4565a8;margin-bottom:8px}
+.concept-item+.concept-item{border-top:1px solid #dce6f5;margin-top:9px;padding-top:9px}
+.concept-term{font-weight:800;font-size:15px;color:#263e70;margin-bottom:3px}
+.concept-definition{font-size:13px;line-height:1.5;color:#43536e}
+.concept-example{display:inline-block;margin-top:5px;padding:4px 8px;border-radius:8px;background:#e6efff;color:#314f8c;font-size:12px;font-weight:700}
 .oral-prompt{margin-top:10px;padding:12px 14px;border-radius:12px;background:#f1f7ff;color:#3e527a;font-size:13px;line-height:1.5}
 #planFeedback{display:none}
 #planFeedback.show{display:block}
@@ -36,7 +42,11 @@
 <div class="stats"><div class="stat"><b id="done">0</b><span>misiones resueltas</span></div><div class="stat"><b id="stars">0 ⭐</b><span>estrellas ganadas</span></div><div class="stat"><b id="counter">1 / 5</b><span>misión de hoy</span></div></div>
 <div class="actions" style="margin:0 0 13px"><span style="font-size:13px;color:#5e6b85;font-weight:700;align-self:center">Cada día: 5 misiones diferentes, mezcladas al azar.</span><button class="btn secondary" id="newRound">🔀 Cambiar las 5 misiones</button></div>
 <section class="card"><div class="cardhead"><div><div class="kicker" id="category">MATEMÁTICAS · DESAFÍO</div><h2 id="title">Desafío matemático</h2></div><span class="level" id="level">Nivel explorador</span></div>
-<div class="inside"><div class="mission"><div class="emoji" id="emoji">🔢</div><div class="question" id="question">En una biblioteca había 36 libros de aventuras y 28 de ciencia. Prestaron 19. ¿Cuántos quedaron entre los dos grupos?</div><div class="sub" id="sub">Desafío de dos pasos. Si el programa se inicia, esta pregunta será reemplazada por una misión aleatoria.</div></div>
+<div class="inside"><div class="mission"><div class="emoji" id="emoji">🔢</div><div class="question" id="question">En una biblioteca había 36 libros de aventuras y 28 de ciencia. Prestaron 19. ¿Cuántos quedaron entre los dos grupos?</div> 
+<div id="conceptCard" class="concept-card" hidden aria-live="polite">
+  <div class="concept-heading"><span class="concept-icon" id="conceptIcon">🔎</span><span>Una palabra para descubrir</span></div>
+  <div id="conceptItems"></div>
+</div><div class="sub" id="sub">Desafío de dos pasos. Si el programa se inicia, esta pregunta será reemplazada por una misión aleatoria.</div></div>
 <div class="explain" id="thinkingGuide">
   <label>🕵️‍♀️ Primero, descubre cómo resolverlo</label>
   <p>¿Qué harías primero? Puedes elegir una idea o resolver directamente. ¡Tú decides!</p>
@@ -192,11 +202,48 @@ function choosePlan(index) {
     feedback("try","Esa idea no encaja del todo. Puedes probar otra: fíjate en el orden de lo que ocurre.","planFeedback");
   }
 }
+
+const conceptGlossary = [
+  {key:"mililitro",re:/\bmililitros?\b|\bml\b/i,icon:"🥤",term:"Mililitro (mL)",definition:"Es una medida para saber cuánto líquido cabe en algo. Es una cantidad pequeña.",example:"1.000 mL = 1 litro. Un vasito pequeño puede tener 200 mL."},
+  {key:"litro",re:/\blitros?\b|\bL\b/i,icon:"🧃",term:"Litro (L)",definition:"Sirve para medir la cantidad de líquido, por ejemplo agua, leche o jugo.",example:"1 litro = 1.000 mililitros."},
+  {key:"kilogramo",re:/\bkilogramos?\b|\bkilos?\b|\bkg\b/i,icon:"⚖️",term:"Kilogramo (kg)",definition:"Es una unidad para medir cuánto pesa un objeto. Se usa para cosas como una mochila o una bolsa de frutas.",example:"1 kg = 1.000 gramos. Una bolsa grande de arroz puede pesar 1 kg."},
+  {key:"gramo",re:/\bgramos?\b|\bg\b/i,icon:"⚖️",term:"Gramo (g)",definition:"Es una unidad para medir masa. Se usa para objetos y cantidades más pequeñas que un kilogramo.",example:"1.000 g = 1 kg."},
+  {key:"centimetro",re:/\bcent[ií]metros?\b|\bcm\b/i,icon:"📏",term:"Centímetro (cm)",definition:"Es una medida de longitud. Sirve para medir objetos pequeños, como un lápiz o un cuaderno.",example:"100 cm = 1 metro."},
+  {key:"kilometro",re:/\bkil[oó]metros?\b|\bkm\b/i,icon:"🚲",term:"Kilómetro (km)",definition:"Es una medida para distancias largas, como el camino entre dos pueblos.",example:"1 km = 1.000 metros."},
+  {key:"metro",re:/\bmetros?\b|\bm\b/i,icon:"📐",term:"Metro (m)",definition:"Es una unidad para medir longitudes y distancias. Es más grande que un centímetro.",example:"1 metro = 100 centímetros."},
+  {key:"milimetro",re:/\bmil[ií]metros?\b|\bmm\b/i,icon:"🌧️",term:"Milímetro (mm)",definition:"Es una medida muy pequeña de longitud. Cuando hablamos de lluvia, indica la cantidad de agua que cayó.",example:"10 mm de lluvia equivalen a una capa de agua de 1 cm."},
+  {key:"probabilidad",re:/\bprobabilidad\b|\bpor ciento\b|%/i,icon:"🎲",term:"Probabilidad (%)",definition:"Indica qué tan posible es que ocurra algo. No dice cuánto tiempo durará.",example:"70 % significa 70 de cada 100 posibilidades en situaciones parecidas."},
+  {key:"doble",re:/\bdoble\b/i,icon:"✖️",term:"El doble",definition:"Es tener dos veces la misma cantidad. Puedes imaginar dos grupos iguales.",example:"El doble de 6 es 6 + 6 = 12."},
+  {key:"triple",re:/\btriple\b/i,icon:"✖️",term:"El triple",definition:"Es tener tres veces la misma cantidad: tres grupos iguales.",example:"El triple de 4 es 4 + 4 + 4 = 12."},
+  {key:"minuto",re:/\bminutos?\b/i,icon:"⏱️",term:"Minuto",definition:"Es una medida de tiempo. El reloj usa minutos para decir cuánto ha pasado.",example:"60 minutos = 1 hora."},
+  {key:"hora",re:/\bhoras?\b/i,icon:"🕒",term:"Hora",definition:"Es una unidad para medir el tiempo que pasa.",example:"1 hora = 60 minutos."}
+];
+function renderConceptCard(question) {
+  const card=$("conceptCard"), host=$("conceptItems");
+  const text=(question.q||"")+" "+(question.h||"");
+  const found=[];
+  for(const item of conceptGlossary) {
+    if(item.re.test(text) && !found.some(x=>x.key===item.key)) found.push(item);
+  }
+  // Avoid teaching too many terms at once. Show the most relevant first.
+  const selected=found.slice(0,2);
+  host.innerHTML="";
+  if(!selected.length){card.hidden=true;return;}
+  $("conceptIcon").textContent=selected[0].icon;
+  selected.forEach(item=>{
+    const block=document.createElement("div");block.className="concept-item";
+    const term=document.createElement("div");term.className="concept-term";term.textContent=item.icon+" "+item.term;
+    const definition=document.createElement("div");definition.className="concept-definition";definition.textContent=item.definition;
+    const example=document.createElement("div");example.className="concept-example";example.textContent=item.example;
+    block.append(term,definition,example);host.appendChild(block);
+  });
+  card.hidden=false;
+}
 function renderQuestion() {
   if(position>=session.length){finish();return;}
   current=session[position];attempts=0;hintLevel=0;planCorrect=false;planChosen=false;hasAnswered=false;
   $("category").textContent=({math:"MATEMÁTICAS",clock:"RELOJ Y TIEMPO",calendar:"CALENDARIO Y CLIMA",logic:"PATRONES Y LÓGICA"})[current.c]||"MISIÓN";
-  $("title").textContent=current.t;$("emoji").textContent=current.e;$("question").textContent=current.q;
+  $("title").textContent=current.t;$("emoji").textContent=current.e;$("question").textContent=current.q;renderConceptCard(current);
   $("level").textContent=["Detective de ideas","Exploradora de pistas","Inventora de soluciones"][position%3];
   $("sub").textContent="Lee con calma. Primero descubre qué plan puede funcionar; después resuelve.";
   $("answer").value="";$("answer").disabled=false;$("check").disabled=false;
@@ -249,6 +296,7 @@ function showHint() {
 }
 function finish() {
   current=null;
+  $("conceptCard").hidden=true;
   $("category").textContent="RONDA COMPLETADA";$("title").textContent="¡Misión cumplida!";
   $("emoji").textContent="🏆";$("question").textContent=`Terminaste las ${session.length} misiones de esta ronda.`;
   $("sub").textContent="Lo importante es que aprendiste a mirar el problema, elegir un camino y comprobar si funciona.";
