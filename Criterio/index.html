@@ -1,0 +1,249 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#111827">
+<title>Selector de herramientas cognitivas</title>
+<style>
+:root{--bg:#f5f7fb;--ink:#172033;--muted:#667085;--line:#e3e8f0;--accent:#2457d6;--card:#fff}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:18px}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif}
+header{background:#111827;color:#fff;padding:34px 20px 30px}
+.wrap{max-width:900px;margin:auto}
+.eyebrow{font-size:12px;letter-spacing:.12em;color:#aab9d7;font-weight:700}
+h1{font-size:clamp(27px,5vw,42px);line-height:1.12;margin:10px 0}
+header p{color:#d0d7e5;max-width:680px;margin:0}
+main{max-width:900px;margin:24px auto;padding:0 16px 60px}
+.intro{background:#eaf0ff;border:1px solid #d5e1ff;border-radius:14px;padding:16px 18px;margin-bottom:20px}
+.intro strong{display:block;margin-bottom:4px}
+.search{width:100%;padding:14px 15px;border:1px solid var(--line);border-radius:12px;font-size:16px;background:#fff;margin:0 0 12px}
+h2.section-title{font-size:20px;margin:24px 0 12px}
+.questions{display:grid;gap:9px}
+.question{display:flex;align-items:center;gap:13px;padding:14px;background:var(--card);border:1px solid var(--line);border-radius:12px;text-decoration:none;color:var(--ink);min-height:72px;transition:.15s}
+.question:hover,.question:focus{border-color:var(--accent);outline:2px solid #dce6ff}
+.num{flex:0 0 39px;height:39px;border-radius:10px;background:#edf2ff;color:#214db7;display:grid;place-items:center;font-weight:750;font-size:13px}
+.question strong{display:block;font-size:15px;line-height:1.35}
+.question small{display:block;color:var(--muted);font-size:12px;margin-top:4px;line-height:1.35}
+.arrow{margin-left:auto;color:var(--accent);font-size:19px}
+.prompt-card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:20px;margin:22px 0;scroll-margin-top:16px}
+.card-top{display:flex;justify-content:space-between;gap:10px;align-items:center}
+.tag{font-size:11px;letter-spacing:.1em;font-weight:800;color:#2457d6}
+.back{font-size:13px;color:#53627b;text-decoration:none}
+.prompt-card h2{font-size:24px;margin:12px 0 8px}
+.when{margin:0 0 8px;color:#24344e}
+.desc{color:var(--muted);margin:0 0 14px}
+pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#f5f7fa;border:1px solid #e7ebf1;border-radius:11px;padding:15px;font:14px/1.6 ui-monospace,SFMono-Regular,Consolas,monospace;color:#273449}
+.copy{border:0;background:#2457d6;color:white;border-radius:10px;padding:12px 17px;font-size:14px;font-weight:700;cursor:pointer;min-height:44px}
+.copy:hover{background:#1946b8}
+footer{text-align:center;color:var(--muted);font-size:12px;padding:20px}
+.hidden{display:none!important}
+@media(min-width:700px){.questions{grid-template-columns:1fr 1fr}.prompt-card{padding:26px}}
+</style>
+</head>
+<body id="inicio">
+<header><div class="wrap">
+<div class="eyebrow">GUÍA INTERACTIVA · 20 HERRAMIENTAS</div>
+<h1>¿Qué necesitas resolver?</h1>
+<p>Elige la pregunta que describe tu situación. El enlace te lleva directamente al prompt indicado. Después puedes copiarlo y completar los campos entre corchetes.</p>
+</div></header>
+<main>
+<div class="intro"><strong>No necesitas memorizar los nombres.</strong>Empieza por tu situación actual. Si no sabes cuál es el problema, elige “definir el problema”; si ya lo conoces, busca la herramienta para resolverlo.</div>
+<input id="filter" class="search" type="search" placeholder="Buscar una situación o necesidad…" aria-label="Buscar preguntas">
+<h2 class="section-title">Selecciona la pregunta que se parece a tu situación</h2>
+<nav class="questions" id="questions" aria-label="Preguntas para elegir una herramienta">
+<a class="question" href="#p01"><span class="num">01</span><span><strong>¿Tengo información, pero no entiendo qué está pasando?</strong><small>Análisis profundo · Investiga patrones, causas, riesgos y oportunidades. Separa hechos, inferencias e hipótesis.</small></span><span class="arrow">↗</span></a><a class="question" href="#p02"><span class="num">02</span><span><strong>¿Necesito comprobar si algo es cierto o conocer información actualizada?</strong><small>Investigación y verificación · Contrasta afirmaciones con fuentes fiables y muestra qué está confirmado y qué no.</small></span><span class="arrow">↗</span></a><a class="question" href="#p03"><span class="num">03</span><span><strong>¿Hay muchas partes conectadas y cambiar una puede afectar a las demás?</strong><small>Pensamiento de sistemas · Analiza relaciones, dependencias, ciclos y efectos secundarios.</small></span><span class="arrow">↗</span></a><a class="question" href="#p04"><span class="num">04</span><span><strong>¿Sé que algo está mal, pero no sé cuál es el verdadero problema?</strong><small>Definición del problema · Aclara qué ocurre antes de intentar solucionarlo.</small></span><span class="arrow">↗</span></a><a class="question" href="#p05"><span class="num">05</span><span><strong>¿Quiero encontrar un negocio que resuelva una necesidad real?</strong><small>Oportunidades de negocio · Descubre problemas de clientes que podrían convertirse en oportunidades comerciales.</small></span><span class="arrow">↗</span></a><a class="question" href="#p06"><span class="num">06</span><span><strong>¿Tengo un problema concreto y necesito encontrar cómo solucionarlo?</strong><small>Resolución de problemas · Descompón el problema, encuentra causas y compara soluciones prácticas.</small></span><span class="arrow">↗</span></a><a class="question" href="#p07"><span class="num">07</span><span><strong>¿Tengo una idea y quiero que alguien encuentre por qué podría estar equivocada?</strong><small>Pensamiento crítico · Busca supuestos débiles, errores lógicos y contraargumentos sólidos.</small></span><span class="arrow">↗</span></a><a class="question" href="#p08"><span class="num">08</span><span><strong>¿Tengo varias opciones y no sé cuál me conviene elegir?</strong><small>Evaluación de decisiones · Compara alternativas con criterios claros, costos, riesgos e incertidumbre.</small></span><span class="arrow">↗</span></a><a class="question" href="#p09"><span class="num">09</span><span><strong>¿Quiero saber qué ofrecen mis competidores y cómo diferenciarme?</strong><small>Inteligencia competitiva · Compara ofertas, clientes, precios, fortalezas y necesidades desatendidas.</small></span><span class="arrow">↗</span></a><a class="question" href="#p10"><span class="num">10</span><span><strong>¿Voy a lanzar algo, invertir o comprometer recursos y quiero anticipar fallos?</strong><small>Análisis de riesgos · Imagina cómo podría fracasar el plan y prepara prevención y contingencias.</small></span><span class="arrow">↗</span></a><a class="question" href="#p11"><span class="num">11</span><span><strong>¿Quiero entender por qué un cliente compraría o rechazaría mi oferta?</strong><small>Psicología del cliente · Investiga motivaciones, frustraciones, objeciones y señales de confianza.</small></span><span class="arrow">↗</span></a><a class="question" href="#p12"><span class="num">12</span><span><strong>¿Tengo un producto, pero no sé explicar por qué alguien debería elegirlo?</strong><small>Propuesta de valor · Convierte características en beneficios concretos y diferenciadores.</small></span><span class="arrow">↗</span></a><a class="question" href="#p13"><span class="num">13</span><span><strong>¿Necesito explicar algo complejo para que otra persona lo entienda?</strong><small>Comunicación clara · Ordena y simplifica el mensaje sin perder precisión.</small></span><span class="arrow">↗</span></a><a class="question" href="#p14"><span class="num">14</span><span><strong>¿Tengo que negociar precio, condiciones, plazos o responsabilidades?</strong><small>Negociación · Prepara objetivos, límites, alternativas y concesiones.</small></span><span class="arrow">↗</span></a><a class="question" href="#p15"><span class="num">15</span><span><strong>¿Ya sé qué quiero conseguir, pero necesito organizar el camino?</strong><small>Planificación estratégica · Convierte el objetivo en etapas, prioridades, recursos y métricas.</small></span><span class="arrow">↗</span></a><a class="question" href="#p16"><span class="num">16</span><span><strong>¿Tengo un objetivo y necesito saber qué hacer cada día para avanzar?</strong><small>Ejecución de 30 días · Construye un plan corto con tareas verificables y revisiones semanales.</small></span><span class="arrow">↗</span></a><a class="question" href="#p17"><span class="num">17</span><span><strong>¿Estoy perdiendo tiempo en tareas repetitivas o procesos lentos?</strong><small>Optimización de productividad · Identifica qué eliminar, simplificar, automatizar, delegar o mantener.</small></span><span class="arrow">↗</span></a><a class="question" href="#p18"><span class="num">18</span><span><strong>¿Necesito aprender una habilidad o tema desde cero y aplicarlo?</strong><small>Aprendizaje acelerado · Diseña una ruta de aprendizaje con práctica y comprobación de dominio.</small></span><span class="arrow">↗</span></a><a class="question" href="#p19"><span class="num">19</span><span><strong>¿Tengo un informe, propuesta o trabajo terminado y quiero encontrar errores?</strong><small>Revisión de calidad · Revisa requisitos, contradicciones, omisiones y casos límite.</small></span><span class="arrow">↗</span></a><a class="question" href="#p20"><span class="num">20</span><span><strong>¿Terminé un proyecto y quiero aprender qué funcionó y qué debo cambiar?</strong><small>Retrospectiva y mejora continua · Compara lo planeado con lo ocurrido y convierte las lecciones en acciones.</small></span><span class="arrow">↗</span></a>
+</nav>
+<p id="empty" class="hidden">No encontré coincidencias. Prueba con otra palabra.</p>
+<h2 class="section-title" style="margin-top:34px">Prompts</h2>
+
+    <section class="prompt-card" id="p01">
+      <div class="card-top"><span class="tag">HERRAMIENTA 01</span><a class="back" href="#inicio">↑ Volver a preguntas</a></div>
+      <h2>Análisis profundo</h2>
+      <p class="when"><strong>Úsalo cuando:</strong> ¿Tengo información, pero no entiendo qué está pasando?</p>
+      <p class="desc">Investiga patrones, causas, riesgos y oportunidades. Separa hechos, inferencias e hipótesis.</p>
+      <pre id="text01">Actúa como analista senior e independiente. Analiza [tema, situación o datos]. Resume los hechos; separa hechos comprobados, inferencias e hipótesis; identifica patrones, anomalías, causas posibles, riesgos y oportunidades. Busca explicaciones alternativas y evidencia que contradiga la primera interpretación. Señala qué información falta. Entrega un diagnóstico, cinco hallazgos priorizados por impacto, nivel de confianza, evidencia disponible y próximos pasos. No inventes datos ni afirmes causalidad sin evidencia.</pre>
+      <button class="copy" onclick="copyPrompt('text01', this)">Copiar prompt</button>
+    </section>
+    <section class="prompt-card" id="p02">
+      <div class="card-top"><span class="tag">HERRAMIENTA 02</span><a class="back" href="#inicio">↑ Volver a preguntas</a></div>
+      <h2>Investigación y verificación</h2>
+      <p class="when"><strong>Úsalo cuando:</strong> ¿Necesito comprobar si algo es cierto o conocer información actualizada?</p>
+      <p class="desc">Contrasta afirmaciones con fuentes fiables y muestra qué está confirmado y qué no.</p>
+      <pre id="text02">Actúa como investigador especializado en [tema]. Investiga [pregunta]. Prioriza fuentes primarias, documentos oficiales, estudios originales y datos públicos. Contrasta fuentes realmente independientes. Para cada afirmación importante, indica fuente, fecha y enlace. Distingue lo confirmado, lo probable, lo discutido y lo desconocido. Señala contradicciones y limitaciones. Entrega una respuesta directa, una tabla de afirmaciones y evidencias, y una conclusión limitada a lo que las fuentes permiten afirmar. No inventes fuentes ni citas.</pre>
+      <button class="copy" onclick="copyPrompt('text02', this)">Copiar prompt</button>
+    </section>
+    <section class="prompt-card" id="p03">
+      <div class="card-top"><span class="tag">HERRAMIENTA 03</span><a class="back" href="#inicio">↑ Volver a preguntas</a></div>
+      <h2>Pensamiento de sistemas</h2>
+      <p class="when"><strong>Úsalo cuando:</strong> ¿Hay muchas partes conectadas y cambiar una puede afectar a las demás?</p>
+      <p class="desc">Analiza relaciones, dependencias, ciclos y efectos secundarios.</p>
+      <pre id="text03">Actúa como especialista en pensamiento de sistemas. Analiza [sistema o problema]. Identifica actores, recursos, procesos, reglas, incentivos y restricciones. Explica cómo se relacionan, qué dependencias existen y qué ciclos de retroalimentación aparecen. Distingue efectos inmediatos y de largo plazo. Detecta cuellos de botella y consecuencias secundarias. Entrega un mapa textual del sistema, los factores de mayor influencia y tres puntos de intervención con sus riesgos.</pre>
+      <button class="copy" onclick="copyPrompt('text03', this)">Copiar prompt</button>
+    </section>
+    <section class="prompt-card" id="p04">
+      <div class="card-top"><span class="tag">HERRAMIENTA 04</span><a class="back" href="#inicio">↑ Volver a preguntas</a></div>
+      <h2>Definición del problema</h2>
+      <p class="when"><strong>Úsalo cuando:</strong> ¿Sé que algo está mal, pero no sé cuál es el verdadero problema?</p>
+      <p class="desc">Aclara qué ocurre antes de intentar solucionarlo.</p>
+      <pre id="text04">Actúa como facilitador de diagnóstico. Ayúdame a definir este problema: [descripción]. No propongas soluciones todavía. Identifica qué resultado no ocurre, quién se ve afectado, cuándo sucede, con qué frecuencia y qué consecuencias tiene. Separa observaciones de interpretaciones. Distingue síntomas de posibles causas. Formula definiciones alternativas y señala qué datos mínimos permitirían confirmarlas. Entrega una definición específica y medible. Si falta un dato esencial, hazme una pregunta concreta.</pre>
+      <button class="copy" onclick="copyPrompt('text04', this)">Copiar prompt</button>
+    </section>
+    <section class="prompt-card" id="p05">
+      <div class="card-top"><span class="tag">HERRAMIENTA 05</span><a class="back" href="#inicio">↑ Volver a preguntas</a></div>
+      <h2>Oportunidades de negocio</h2>
+      <p class="when"><strong>Úsalo cuando:</strong> ¿Quiero encontrar un negocio que resuelva una necesidad real?</p>
+      <p class="desc">Descubre problemas de clientes que podrían convertirse en oportunidades comerciales.</p>
+      <pre id="text05">Actúa como investigador de oportunidades de negocio. Explora [industria, segmento o problema]. Identifica clientes, situaciones problemáticas, soluciones actuales y costos que soportan. Busca señales de demanda, urgencia, frecuencia y disposición observable a pagar. Genera diez oportunidades distintas y compáralas por intensidad del problema, evidencia de demanda, competencia, inversión, complejidad, acceso a clientes e ingresos potenciales. Expón los supuestos y razones de fracaso. Recomienda tres oportunidades y diseña un experimento barato para validar cada una. Distingue datos observados de estimaciones.</pre>
+      <button class="copy" onclick="copyPrompt('text05', this)">Copiar prompt</button>
+    </section>
+    <section class="prompt-card" id="p06">
+      <div class="card-top"><span class="tag">HERRAMIENTA 06</span><a class="back" href="#inicio">↑ Volver a preguntas</a></div>
+      <h2>Resolución de problemas</h2>
+      <p class="when"><strong>Úsalo cuando:</strong> ¿Tengo un problema concreto y necesito encontrar cómo solucionarlo?</p>
+      <p class="desc">Descompón el problema, encuentra causas y compara soluciones prácticas.</p>
+      <pre id="text06">Actúa como solucionador de problemas con pensamiento desde primeros principios. Mi problema es [problema] y el resultado que necesito es [resultado]. Reformula el problema, divídelo en componentes, separa causas comprobadas de hipótesis y enumera restricciones reales. Cuestiona mis supuestos. Propón tres soluciones diferentes y compara impacto, costo, tiempo, dificultad, riesgos y reversibilidad. Recomienda una opción, explica sus sacrificios y define primeros pasos y una prueba pequeña antes de comprometer recursos.</pre>
+      <button class="copy" onclick="copyPrompt('text06', this)">Copiar prompt</button>
+    </section>
+    <section class="prompt-card" id="p07">
+      <div class="card-top"><span class="tag">HERRAMIENTA 07</span><a class="back" href="#inicio">↑ Volver a preguntas</a></div>
+      <h2>Pensamiento crítico</h2>
+      <p class="when"><strong>Úsalo cuando:</strong> ¿Tengo una idea y quiero que alguien encuentre por qué podría estar equivocada?</p>
+      <p class="desc">Busca supuestos débiles, errores lógicos y contraargumentos sólidos.</p>
+      <pre id="text07">Actúa como interlocutor crítico, respetuoso e intelectualmente honesto. Evalúa [idea o argumento]. Expón sus premisas, identifica supuestos explícitos e implícitos, saltos lógicos, sesgos y datos ausentes. Construye el contraargumento más sólido. Describe escenarios en los que funcionaría y en los que fracasaría. Indica qué evidencia la confirmaría o refutaría. Propón una versión más robusta si corresponde. Emite un veredicto provisional y explica su nivel de confianza. No me des la razón por complacerme ni me contradigas por sistema.</pre>
+      <button class="copy" onclick="copyPrompt('text07', this)">Copiar prompt</button>
+    </section>
+    <section class="prompt-card" id="p08">
+      <div class="card-top"><span class="tag">HERRAMIENTA 08</span><a class="back" href="#inicio">↑ Volver a preguntas</a></div>
+      <h2>Evaluación de decisiones</h2>
+      <p class="when"><strong>Úsalo cuando:</strong> ¿Tengo varias opciones y no sé cuál me conviene elegir?</p>
+      <p class="desc">Compara alternativas con criterios claros, costos, riesgos e incertidumbre.</p>
+      <pre id="text08">Actúa como asesor de decisiones. Debo elegir entre [opciones]. Mi objetivo es [objetivo] y mis restricciones son [restricciones]. Define criterios de buena decisión, asígnales importancia y compara todas las opciones con los mismos criterios. Distingue hechos, estimaciones y preferencias. Incluye costos ocultos, riesgos, costo de oportunidad y opción de no hacer nada. Evalúa reversibilidad y qué supuestos podrían cambiar la elección. Entrega una matriz comparativa, recomendación razonada y el dato que más convendría verificar antes de decidir.</pre>
+      <button class="copy" onclick="copyPrompt('text08', this)">Copiar prompt</button>
+    </section>
+    <section class="prompt-card" id="p09">
+      <div class="card-top"><span class="tag">HERRAMIENTA 09</span><a class="back" href="#inicio">↑ Volver a preguntas</a></div>
+      <h2>Inteligencia competitiva</h2>
+      <p class="when"><strong>Úsalo cuando:</strong> ¿Quiero saber qué ofrecen mis competidores y cómo diferenciarme?</p>
+      <p class="desc">Compara ofertas, clientes, precios, fortalezas y necesidades desatendidas.</p>
+      <pre id="text09">Actúa como analista de inteligencia competitiva. Analiza [competidores] frente a mi negocio [descripción]. Investiga segmentos, posicionamiento, productos, servicios, precios, canales, mensajes, fortalezas, debilidades y quejas recurrentes. Usa fuentes verificables y cita enlaces. Identifica necesidades desatendidas y ventajas difíciles de copiar. Propón tres formas realistas de diferenciación, indicando cliente objetivo, valor, recursos y cómo probar cada una. No inventes precios, características ni opiniones.</pre>
+      <button class="copy" onclick="copyPrompt('text09', this)">Copiar prompt</button>
+    </section>
+    <section class="prompt-card" id="p10">
+      <div class="card-top"><span class="tag">HERRAMIENTA 10</span><a class="back" href="#inicio">↑ Volver a preguntas</a></div>
+      <h2>Análisis de riesgos</h2>
+      <p class="when"><strong>Úsalo cuando:</strong> ¿Voy a lanzar algo, invertir o comprometer recursos y quiero anticipar fallos?</p>
+      <p class="desc">Imagina cómo podría fracasar el plan y prepara prevención y contingencias.</p>
+      <pre id="text10">Actúa como especialista en gestión de riesgos. Evalúa [plan]. Imagina que ha fracasado dentro de [plazo] y enumera causas plausibles. Examina riesgos comerciales, financieros, operativos, tecnológicos, legales y reputacionales cuando correspondan. Estima probabilidad e impacto explicando los supuestos. Identifica señales tempranas, medidas preventivas, contingencias y dependencias críticas. Entrega un registro priorizado de riesgos y señala cuáles deberían detener el proyecto.</pre>
+      <button class="copy" onclick="copyPrompt('text10', this)">Copiar prompt</button>
+    </section>
+    <section class="prompt-card" id="p11">
+      <div class="card-top"><span class="tag">HERRAMIENTA 11</span><a class="back" href="#inicio">↑ Volver a preguntas</a></div>
+      <h2>Psicología del cliente</h2>
+      <p class="when"><strong>Úsalo cuando:</strong> ¿Quiero entender por qué un cliente compraría o rechazaría mi oferta?</p>
+      <p class="desc">Investiga motivaciones, frustraciones, objeciones y señales de confianza.</p>
+      <pre id="text11">Actúa como investigador de comportamiento del consumidor. Mi público es [audiencia] y mi oferta es [producto o servicio]. Analiza situaciones que activan la búsqueda, problemas, consecuencias, resultados deseados, alternativas actuales, objeciones, temores y señales de confianza. Distingue usuario, comprador y autorizador del gasto si son personas distintas. Entrega cinco enfoques de comunicación con problema, beneficio, prueba necesaria y posible objeción. Separa hipótesis de evidencia real.</pre>
+      <button class="copy" onclick="copyPrompt('text11', this)">Copiar prompt</button>
+    </section>
+    <section class="prompt-card" id="p12">
+      <div class="card-top"><span class="tag">HERRAMIENTA 12</span><a class="back" href="#inicio">↑ Volver a preguntas</a></div>
+      <h2>Propuesta de valor</h2>
+      <p class="when"><strong>Úsalo cuando:</strong> ¿Tengo un producto, pero no sé explicar por qué alguien debería elegirlo?</p>
+      <p class="desc">Convierte características en beneficios concretos y diferenciadores.</p>
+      <pre id="text12">Actúa como estratega de producto. Mi cliente es [cliente], su problema es [problema] y mi solución es [solución]. Define qué resultado intenta conseguir el cliente, sus dificultades y qué valora. Explica cómo la solución mejora el resultado frente a las alternativas, incluida la opción de no hacer nada. Distingue características de beneficios. Detecta promesas difíciles de demostrar. Formula tres propuestas de valor y recomienda una con la evidencia necesaria para respaldarla.</pre>
+      <button class="copy" onclick="copyPrompt('text12', this)">Copiar prompt</button>
+    </section>
+    <section class="prompt-card" id="p13">
+      <div class="card-top"><span class="tag">HERRAMIENTA 13</span><a class="back" href="#inicio">↑ Volver a preguntas</a></div>
+      <h2>Comunicación clara</h2>
+      <p class="when"><strong>Úsalo cuando:</strong> ¿Necesito explicar algo complejo para que otra persona lo entienda?</p>
+      <p class="desc">Ordena y simplifica el mensaje sin perder precisión.</p>
+      <pre id="text13">Actúa como editor y asesor de comunicación. Necesito comunicar [tema] a [audiencia] para conseguir [resultado]. Identifica qué necesita saber la audiencia, define la idea central, ordena de lo simple a lo complejo, sustituye jerga o explica términos con ejemplos, anticipa malentendidos y elimina repeticiones. Entrega una versión clara y directa. Conserva hechos, matices y limitaciones; no simplifiques hasta distorsionar.</pre>
+      <button class="copy" onclick="copyPrompt('text13', this)">Copiar prompt</button>
+    </section>
+    <section class="prompt-card" id="p14">
+      <div class="card-top"><span class="tag">HERRAMIENTA 14</span><a class="back" href="#inicio">↑ Volver a preguntas</a></div>
+      <h2>Negociación</h2>
+      <p class="when"><strong>Úsalo cuando:</strong> ¿Tengo que negociar precio, condiciones, plazos o responsabilidades?</p>
+      <p class="desc">Prepara objetivos, límites, alternativas y concesiones.</p>
+      <pre id="text14">Actúa como asesor de negociación. Voy a negociar [acuerdo] con [contraparte]. Mi objetivo es [objetivo], mi límite es [mínimo aceptable] y mis alternativas son [alternativas]. Identifica intereses de ambas partes, puntos negociables y no negociables, mi mejor alternativa si no hay acuerdo, preguntas para descubrir información, concesiones que deben recibir algo a cambio y escenarios difíciles. Entrega estrategia, frases útiles y condiciones para aceptar, rechazar o pausar. No recomiendes engañar.</pre>
+      <button class="copy" onclick="copyPrompt('text14', this)">Copiar prompt</button>
+    </section>
+    <section class="prompt-card" id="p15">
+      <div class="card-top"><span class="tag">HERRAMIENTA 15</span><a class="back" href="#inicio">↑ Volver a preguntas</a></div>
+      <h2>Planificación estratégica</h2>
+      <p class="when"><strong>Úsalo cuando:</strong> ¿Ya sé qué quiero conseguir, pero necesito organizar el camino?</p>
+      <p class="desc">Convierte el objetivo en etapas, prioridades, recursos y métricas.</p>
+      <pre id="text15">Actúa como estratega y responsable de planificación. Mi objetivo es [objetivo], recursos [recursos], restricciones [restricciones] y fecha límite [fecha]. Comprueba que el objetivo sea medible. Divídelo en etapas y entregables, identifica dependencias, prioriza por impacto y esfuerzo, estima recursos y tiempos declarando supuestos, anticipa obstáculos y define indicadores de avance y resultado. Entrega una hoja de ruta con hitos, fechas, responsables sugeridos, riesgos y criterios para continuar o detenerse.</pre>
+      <button class="copy" onclick="copyPrompt('text15', this)">Copiar prompt</button>
+    </section>
+    <section class="prompt-card" id="p16">
+      <div class="card-top"><span class="tag">HERRAMIENTA 16</span><a class="back" href="#inicio">↑ Volver a preguntas</a></div>
+      <h2>Ejecución de 30 días</h2>
+      <p class="when"><strong>Úsalo cuando:</strong> ¿Tengo un objetivo y necesito saber qué hacer cada día para avanzar?</p>
+      <p class="desc">Construye un plan corto con tareas verificables y revisiones semanales.</p>
+      <pre id="text16">Actúa como socio de ejecución y gestor de proyectos. Quiero conseguir [resultado]. Mi situación actual es [situación], dispongo de [tiempo, presupuesto y recursos] y mi fecha objetivo es [fecha]. Si falta información esencial, haz hasta cinco preguntas. Define el resultado verificable del día 30, divide el trabajo en cuatro semanas, establece tareas diarias realistas, herramientas y recursos, métricas de actividad y resultado, bloqueos previsibles y revisiones semanales. Entrega un plan en tabla. Si 30 días no son realistas, dilo y propone un hito intermedio.</pre>
+      <button class="copy" onclick="copyPrompt('text16', this)">Copiar prompt</button>
+    </section>
+    <section class="prompt-card" id="p17">
+      <div class="card-top"><span class="tag">HERRAMIENTA 17</span><a class="back" href="#inicio">↑ Volver a preguntas</a></div>
+      <h2>Optimización de productividad</h2>
+      <p class="when"><strong>Úsalo cuando:</strong> ¿Estoy perdiendo tiempo en tareas repetitivas o procesos lentos?</p>
+      <p class="desc">Identifica qué eliminar, simplificar, automatizar, delegar o mantener.</p>
+      <pre id="text17">Actúa como analista de procesos. Este es mi flujo actual: [rutina o proceso]. Mi resultado prioritario es [resultado]. Descompón las actividades por tiempo, frecuencia y valor. Detecta esperas, duplicaciones, errores e interrupciones. Clasifica cada actividad como eliminar, simplificar, automatizar, delegar o mantener. Distingue decisiones que requieren criterio humano de tareas repetibles. Propón un flujo mejorado, costo, riesgos, ahorro estimado con supuestos y un experimento inicial. No automatices un proceso que aún no se entiende.</pre>
+      <button class="copy" onclick="copyPrompt('text17', this)">Copiar prompt</button>
+    </section>
+    <section class="prompt-card" id="p18">
+      <div class="card-top"><span class="tag">HERRAMIENTA 18</span><a class="back" href="#inicio">↑ Volver a preguntas</a></div>
+      <h2>Aprendizaje acelerado</h2>
+      <p class="when"><strong>Úsalo cuando:</strong> ¿Necesito aprender una habilidad o tema desde cero y aplicarlo?</p>
+      <p class="desc">Diseña una ruta de aprendizaje con práctica y comprobación de dominio.</p>
+      <pre id="text18">Actúa como tutor experto en [tema]. Mi nivel es [nivel], mi objetivo práctico [objetivo] y mi tiempo disponible [tiempo]. Identifica conocimientos previos, divide el tema en conceptos ordenados, explica cada uno con analogía y ejemplo antes de definirlo, diseña ejercicios progresivos y haz preguntas para comprobar comprensión. Corrige mis errores explicando el concepto que falta. Termina con una tarea práctica y criterios para demostrar dominio.</pre>
+      <button class="copy" onclick="copyPrompt('text18', this)">Copiar prompt</button>
+    </section>
+    <section class="prompt-card" id="p19">
+      <div class="card-top"><span class="tag">HERRAMIENTA 19</span><a class="back" href="#inicio">↑ Volver a preguntas</a></div>
+      <h2>Revisión de calidad</h2>
+      <p class="when"><strong>Úsalo cuando:</strong> ¿Tengo un informe, propuesta o trabajo terminado y quiero encontrar errores?</p>
+      <p class="desc">Revisa requisitos, contradicciones, omisiones y casos límite.</p>
+      <pre id="text19">Actúa como revisor independiente. Evalúa [trabajo] según [objetivo y criterios]. Comprueba requisitos explícitos, busca errores factuales, contradicciones, omisiones y ambigüedades. Identifica afirmaciones no justificadas y prueba casos límite. Prioriza defectos por gravedad y probabilidad. Entrega hallazgos con evidencia, impacto y corrección recomendada. Distingue defectos confirmados de riesgos posibles y no rediseñes todo si bastan correcciones puntuales.</pre>
+      <button class="copy" onclick="copyPrompt('text19', this)">Copiar prompt</button>
+    </section>
+    <section class="prompt-card" id="p20">
+      <div class="card-top"><span class="tag">HERRAMIENTA 20</span><a class="back" href="#inicio">↑ Volver a preguntas</a></div>
+      <h2>Retrospectiva y mejora continua</h2>
+      <p class="when"><strong>Úsalo cuando:</strong> ¿Terminé un proyecto y quiero aprender qué funcionó y qué debo cambiar?</p>
+      <p class="desc">Compara lo planeado con lo ocurrido y convierte las lecciones en acciones.</p>
+      <pre id="text20">Actúa como facilitador de retrospectivas. El objetivo era [objetivo], el plan [plan], los resultados [resultados] y los hechos relevantes [hechos]. Compara lo esperado con lo ocurrido. Identifica qué funcionó y qué no, con evidencia; analiza causas y distingue factores controlables y externos. Revisa qué supuestos fueron correctos. Define qué mantener, cambiar, dejar de hacer y probar. Entrega tres aprendizajes y acciones con responsable, fecha y una prueba para el siguiente ciclo.</pre>
+      <button class="copy" onclick="copyPrompt('text20', this)">Copiar prompt</button>
+    </section>
+</main>
+<footer>Selector de herramientas cognitivas · Guarda este archivo y ábrelo en tu navegador.</footer>
+<script>
+const filter=document.getElementById('filter');
+filter.addEventListener('input',()=>{
+ const q=filter.value.toLocaleLowerCase('es');
+ let count=0;
+ document.querySelectorAll('.question').forEach(a=>{
+  const show=a.innerText.toLocaleLowerCase('es').includes(q);
+  a.classList.toggle('hidden',!show);
+  if(show) count++;
+ });
+ document.getElementById('empty').classList.toggle('hidden',count!==0);
+});
+async function copyPrompt(id,button){
+ const text=document.getElementById(id).innerText;
+ try{
+  await navigator.clipboard.writeText(text);
+  button.textContent='Copiado';
+  setTimeout(()=>button.textContent='Copiar prompt',1600);
+ }catch(e){
+  const area=document.createElement('textarea');area.value=text;document.body.appendChild(area);area.select();
+  try{document.execCommand('copy');button.textContent='Copiado';}catch(err){button.textContent='Selecciona y copia el texto';}
+  area.remove();setTimeout(()=>button.textContent='Copiar prompt',1800);
+ }
+}
+</script>
+</body>
+</html>
