@@ -1,29 +1,205 @@
 
 let Typer = {
   text: "",
+  tokens: [],
   index: 0,
-  speed: 3,
-  file: "<span id=\"a\">heriberto</span>:<span id=\"b\">~/about-me</span><span id=\"c\"> $ </span> cd profile/now\r\n<span id=\"a\">heriberto</span>:<span id=\"b\">~/about-me</span><span id=\"c\"> $ </span> cat resume.json<br/><br/>\r\n<h2>Technology Leader | Software Architecture | AI Engineering</h2>\r\n<p>Technology professional with 30 years of experience across software engineering, enterprise architecture, data platforms, and technology leadership. Background in building software solutions, evolving enterprise systems, and leading engineering initiatives across banking, consulting, construction, and technology services.</p>\r\n<p>Focused on the evolution of software engineering, where AI, intelligent systems, and automation are reshaping how technology is designed, developed, and operated. Combines engineering experience, architectural judgment, and business understanding to evaluate emerging capabilities and turn them into practical, reliable solutions.</p>\r\n<h3>Areas of Expertise</h3>\r\n<ul>\r\n<li><strong>AI & Intelligent Systems:</strong> AI-enabled applications, LLM integration, agentic systems, and intelligent automation.</li>\r\n<li><strong>Software Engineering & Architecture:</strong> Modern application design, distributed systems, APIs, enterprise integration, and AI-assisted software development.</li>\r\n<li><strong>Data & Cloud Platforms:</strong> Data engineering, event-driven architectures, cloud platforms, and scalable systems.</li>\r\n<li><strong>Technical Leadership:</strong> Architecture decisions, engineering direction, technology evaluation, and complex problem solving.</li>\r\n</ul>\r\n<h3>Building & Exploring</h3>\r\n<p>Continuously building independent projects and exploring the practical application of AI, software engineering, APIs, data, and emerging technologies.</p>\r\n<p><a href=\"https://github.com/hhaydar?tab=repositories\">Explore my GitHub repositories</a>.</p>\r\n<h3>Connect</h3>\r\n<p>Interested in challenging engineering problems, AI-enabled products, and opportunities to contribute to the evolution of technology.</p>\r\n<p><a href=\"mailto:heriberto.haydar@gmail.com\">Get in touch</a> or connect with me on <a href=\"https://co.linkedin.com/in/hhaydar\">LinkedIn</a>.</p>\r\n",
+  speed: 220,
+  commaPause: 350,
+  sentencePause: 700,
+  output: "",
+  console: null,
+
+  file: `<span id="a">heriberto</span>:<span id="b">~/about-me</span><span id="c"> $ </span> cd profile/now<br/>
+<span id="a">heriberto</span>:<span id="b">~/about-me</span><span id="c"> $ </span> cat resume.json<br/><br/>
+
+<div class="engineering-signal">
+  <div class="signal-track">
+    <span class="signal-node"></span>
+    <span class="signal-node"></span>
+    <span class="signal-node"></span>
+    <span class="signal-pulse"></span>
+  </div>
+</div>
+
+<h2>Technology & Engineering Leader | Architecture | Applied AI</h2>
+
+<p>Technology professional with 30 years of experience across software engineering, enterprise architecture, and data platforms. Experienced in building and evolving enterprise systems and leading engineering initiatives across multiple industries.</p>
+
+<p>Focused on modern software architecture and practical AI integration, bringing intelligent capabilities into applications, data workflows, and existing platforms. Combining technical judgment and business understanding to address complex engineering challenges.</p>
+
+<p><a href="mailto:heriberto.haydar@gmail.com">Email</a> | <a href="https://co.linkedin.com/in/hhaydar">LinkedIn</a></p>`,
+
   init: function () {
-    Typer.text = Typer.file
-    Typer.text.slice(0, Typer.text.length - 1)
+    this.console = document.querySelector("#console");
+
+    if (!this.console) {
+      console.error("Typer: #console not found");
+      return;
+    }
+
+    this.injectStyles();
+
+    this.index = 0;
+    this.output = "";
+    this.tokens = [];
+
+    const fragments = this.file.match(/<[^>]*>|[^<]+/g) || [];
+
+    fragments.forEach(fragment => {
+      if (fragment.startsWith("<")) {
+        this.tokens.push(fragment);
+      } else {
+        fragment.split(/(\s+)/).forEach(part => {
+          if (part) this.tokens.push(part);
+        });
+      }
+    });
+
+    this.console.innerHTML = "";
+
+    setTimeout(() => this.addText(), 500);
   },
+
+  injectStyles: function () {
+    if (document.querySelector("#engineering-styles")) return;
+
+    const style = document.createElement("style");
+    style.id = "engineering-styles";
+
+    style.textContent = `
+      #console #a { color: #00ff66; }
+      #console #b { color: #ff0080; }
+      #console #c { color: #00d9ff; }
+
+      #console h2 {
+        color: #f5f5f5;
+        line-height: 1.35;
+        margin: 32px 0 20px;
+      }
+
+      #console p {
+        margin-bottom: 17px;
+      }
+
+      #console a {
+        color: #f5e500;
+        text-decoration: none;
+      }
+
+      #console a:hover {
+        text-decoration: underline;
+      }
+
+      .engineering-signal {
+        width: 230px;
+        height: 30px;
+        margin: 18px 0 8px;
+        display: flex;
+        align-items: center;
+      }
+
+      .signal-track {
+        position: relative;
+        width: 100%;
+        height: 2px;
+        background: #173c35;
+      }
+
+      .signal-node {
+        position: absolute;
+        top: -4px;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: #00cc77;
+        box-shadow: 0 0 7px #00cc77;
+        animation: nodePulse 2.8s infinite;
+      }
+
+      .signal-node:nth-child(1) { left: 5%; }
+      .signal-node:nth-child(2) {
+        left: 48%;
+        animation-delay: .9s;
+      }
+      .signal-node:nth-child(3) {
+        left: 92%;
+        animation-delay: 1.8s;
+      }
+
+      .signal-pulse {
+        position: absolute;
+        top: -3px;
+        left: 0;
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: #00eaff;
+        box-shadow: 0 0 12px #00eaff;
+        animation: dataFlow 3.5s linear infinite;
+      }
+
+      @keyframes nodePulse {
+        0%, 100% { opacity: .45; }
+        50% { opacity: 1; box-shadow: 0 0 12px #00ff99; }
+      }
+
+      @keyframes dataFlow {
+        from { left: 0; }
+        to { left: 100%; }
+      }
+
+      .typing-cursor {
+        display: inline-block;
+        width: 8px;
+        height: 16px;
+        background: #00ff88;
+        margin-left: 3px;
+        animation: cursorBlink 1s steps(2, start) infinite;
+      }
+
+      @keyframes cursorBlink {
+        to { visibility: hidden; }
+      }
+    `;
+
+    document.head.appendChild(style);
+  },
+
   addText: function () {
-    Typer.index += Typer.speed
-    let text = Typer.text.substring(0, Typer.index)
-    let rtn = new RegExp("\n", "g")
-    document.querySelector("#console").innerHTML= text.replace(rtn, "<br/>");
-    window.scrollBy(0, 50)
-  },
+    let delay = this.speed;
+
+    while (this.index < this.tokens.length) {
+      const token = this.tokens[this.index++];
+      this.output += token;
+
+      if (token.startsWith("<") || /^\s+$/.test(token)) {
+        continue;
+      }
+
+      if (/[.!?]$/.test(token)) {
+        delay = this.sentencePause;
+      } else if (/[,;:]$/.test(token)) {
+        delay = this.commaPause;
+      }
+
+      break;
+    }
+
+    this.console.innerHTML =
+      this.output + '<span class="typing-cursor"></span>';
+
+    if (this.index < this.tokens.length) {
+      setTimeout(() => this.addText(), delay);
+    }
+  }
 };
 
-Typer.init()
+function startTyper() {
+  Typer.init();
+}
 
-let timer = setInterval("t();", 30)
-
-function t() {
-  Typer.addText()
-  if (Typer.index > Typer.text.length) {
-    clearInterval(timer)
-  }
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", startTyper);
+} else {
+  startTyper();
 }
